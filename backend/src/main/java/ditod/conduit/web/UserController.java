@@ -20,20 +20,20 @@ public class UserController {
     private final AuthService authService;
     private final UserService userService;
 
-    public UserController(AuthService authService, UserService userService) {
+    UserController(AuthService authService, UserService userService) {
         this.authService = authService;
         this.userService = userService;
     }
 
     @PostMapping("/users/login")
-    public MeResponse login(@Valid @RequestBody LoginRequest loginRequest) {
+    MeResponse login(@Valid @RequestBody LoginRequest loginRequest) {
         var authenticated = authService.login(
                 loginRequest.user().email(), loginRequest.user().password());
         return MeResponse.from(authenticated.user(), authenticated.token());
     }
 
     @PostMapping("/users")
-    public ModelAndView register(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
+    ModelAndView register(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
         var user = registerRequest.user();
         userService.registerUser(user.email(), user.username(), user.password());
 
@@ -43,14 +43,13 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public MeResponse me(@AuthenticationPrincipal Jwt jwt) {
+    MeResponse me(@AuthenticationPrincipal Jwt jwt) {
         var user = userService.getUserByEmail(jwt.getSubject());
         return MeResponse.from(user, jwt.getTokenValue());
     }
 
     @PutMapping("/user")
-    public MeResponse updateUser(
-            @Valid @RequestBody UpdateUserRequest updateRequest, @AuthenticationPrincipal Jwt jwt) {
+    MeResponse updateUser(@Valid @RequestBody UpdateUserRequest updateRequest, @AuthenticationPrincipal Jwt jwt) {
         var user = userService.getUserByEmail(jwt.getSubject());
         var updatedUser = userService.updateUser(user, updateRequest);
         return MeResponse.from(updatedUser, jwt.getTokenValue());
