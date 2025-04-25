@@ -35,6 +35,12 @@ public class UserService {
                 .orElseThrow(() -> new EntityDoesNotExistException("user", "email", email));
     }
 
+    public User getUserByUsername(String username) {
+        return userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new EntityDoesNotExistException("user", "username", username));
+    }
+
     public User updateUser(User user, UpdateUserRequest updateUserRequest) {
         var userUpdate = updateUserRequest.user();
         if (!user.getUsername().equals(userUpdate.username())

@@ -13,4 +13,20 @@ public class UserFollow extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "following_id")
     private User following;
+
+    public User getFollower() {
+        return follower;
+    }
+
+    public void setFollower(User follower) {
+        this.follower = follower;
+    }
+
+    public User getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(User following) {
+        this.following = following;
+    }
 }
