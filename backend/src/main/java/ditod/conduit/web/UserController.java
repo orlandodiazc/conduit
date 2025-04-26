@@ -34,10 +34,10 @@ public class UserController {
 
     @PostMapping("/users")
     ModelAndView register(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
-        var user = registerRequest.user();
-        userService.registerUser(user.email(), user.username(), user.password());
+        var userRegister = registerRequest.user();
+        userService.registerUser(userRegister.email(), userRegister.username(), userRegister.password());
 
-        var loginRequest = new LoginRequest(user.username(), user.password());
+        var loginRequest = new LoginRequest(userRegister.username(), userRegister.password());
         request.setAttribute(View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
         return new ModelAndView("redirect:/users/login", "loginRequest", loginRequest);
     }
@@ -49,9 +49,9 @@ public class UserController {
     }
 
     @PutMapping("/user")
-    MeResponse updateUser(@Valid @RequestBody UpdateUserRequest updateRequest, @AuthenticationPrincipal Jwt jwt) {
-        var user = userService.getUserByEmail(jwt.getSubject());
-        var updatedUser = userService.updateUser(user, updateRequest);
+    MeResponse updateUser(@RequestBody UpdateUserRequest updateRequest, @AuthenticationPrincipal Jwt jwt) {
+        var me = userService.getUserByEmail(jwt.getSubject());
+        var updatedUser = userService.updateUser(me, updateRequest);
         return MeResponse.from(updatedUser, jwt.getTokenValue());
     }
 }
