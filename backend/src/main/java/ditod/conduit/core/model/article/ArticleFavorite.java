@@ -7,6 +7,13 @@ import jakarta.persistence.*;
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "article_id"})})
 public class ArticleFavorite extends BaseEntity {
+    public ArticleFavorite() {}
+
+    public ArticleFavorite(User user, Article article) {
+        this.user = user;
+        this.article = article;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

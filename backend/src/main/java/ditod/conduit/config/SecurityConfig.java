@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/users/**", "/profiles/{username}")
                         .permitAll()
                         .requestMatchers(
-                                HttpMethod.GET, "/article/{slug}", "/articles", "/articles/{slug}/comments", "/tags")
+                                HttpMethod.GET, "/articles/{slug}", "/articles", "/articles/{slug}/comments", "/tags")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

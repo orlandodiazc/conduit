@@ -42,34 +42,35 @@ public class UserService {
     }
 
     public User updateUser(User user, UpdateUserRequest updateUserRequest) {
-        var userUpdate = updateUserRequest.user();
-        if (!user.getUsername().equals(userUpdate.username())
-                && userRepository.existsByUsername(userUpdate.username())) {
+        var userDetails = updateUserRequest.user();
+        if (!user.getUsername().equals(userDetails.username())
+                && userRepository.existsByUsername(userDetails.username())) {
             throw new EntityAlreadyExistsException("user", "username");
         }
 
-        if (!user.getEmail().equals(userUpdate.email()) && userRepository.existsByEmail(userUpdate.email())) {
+        if (!user.getEmail().equals(userDetails.email()) && userRepository.existsByEmail(userDetails.email())) {
             throw new EntityAlreadyExistsException("user", "email");
         }
-        if (StringUtils.hasText(userUpdate.username())) {
-            user.setUsername(userUpdate.username());
+
+        if (StringUtils.hasText(userDetails.username())) {
+            user.setUsername(userDetails.username());
         }
 
-        if (StringUtils.hasText(userUpdate.email())) {
-            user.setEmail(userUpdate.email());
+        if (StringUtils.hasText(userDetails.email())) {
+            user.setEmail(userDetails.email());
         }
 
-        if (StringUtils.hasText(userUpdate.image())) {
-            user.setImage(userUpdate.image());
+        if (StringUtils.hasText(userDetails.image())) {
+            user.setImage(userDetails.image());
         }
 
-        if (StringUtils.hasText(userUpdate.bio())) {
-            user.setBio(userUpdate.bio());
+        if (StringUtils.hasText(userDetails.bio())) {
+            user.setBio(userDetails.bio());
         }
 
-        if (StringUtils.hasText(userUpdate.password())
-                && !passwordEncoder.matches(userUpdate.password(), user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(userUpdate.password()));
+        if (StringUtils.hasText(userDetails.password())
+                && !passwordEncoder.matches(userDetails.password(), user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(userDetails.password()));
         }
 
         return user;
