@@ -64,7 +64,7 @@ export function useUpdateArticle<TContext>(
   >(
     {
       mutationFn: async ({ slug, data }) => {
-        return updateArticle({ slug, data }, config)
+        return updateArticle(slug, data, config)
       },
       mutationKey,
       ...mutationOptions,

@@ -56,7 +56,7 @@ export function useLogin<TContext>(
   >(
     {
       mutationFn: async ({ data }) => {
-        return login({ data }, config)
+        return login(data, config)
       },
       mutationKey,
       ...mutationOptions,

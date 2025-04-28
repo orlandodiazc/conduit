@@ -76,22 +76,22 @@ importers:
         version: 3.24.3
     devDependencies:
       '@kubb/cli':
-        specifier: ^3.10.4
+        specifier: ^3.10.0
         version: 3.10.5(typescript@5.8.3)
       '@kubb/core':
-        specifier: ^3.10.4
+        specifier: ^3.10.0
         version: 3.10.5
       '@kubb/plugin-client':
-        specifier: ^3.10.4
+        specifier: ^3.10.0
         version: 3.10.5(@kubb/react@3.10.5)(axios@1.9.0)
       '@kubb/plugin-oas':
-        specifier: ^3.10.4
+        specifier: ^3.10.0
         version: 3.10.5(@kubb/react@3.10.5)
       '@kubb/plugin-react-query':
-        specifier: ^3.10.4
+        specifier: ^3.10.0
         version: 3.10.5(@kubb/react@3.10.5)
       '@kubb/plugin-ts':
-        specifier: ^3.10.4
+        specifier: ^3.10.0
         version: 3.10.5(@kubb/react@3.10.5)
       '@tanstack/eslint-config':
         specifier: ^0.1.0

@@ -62,7 +62,7 @@ export function useDeleteArticleComment<TContext>(
   >(
     {
       mutationFn: async ({ slug, id }) => {
-        return deleteArticleComment({ slug, id }, config)
+        return deleteArticleComment(slug, id, config)
       },
       mutationKey,
       ...mutationOptions,

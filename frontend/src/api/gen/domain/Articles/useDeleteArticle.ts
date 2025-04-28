@@ -55,7 +55,7 @@ export function useDeleteArticle<TContext>(
   >(
     {
       mutationFn: async ({ slug }) => {
-        return deleteArticle({ slug }, config)
+        return deleteArticle(slug, config)
       },
       mutationKey,
       ...mutationOptions,

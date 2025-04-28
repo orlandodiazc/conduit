@@ -56,7 +56,7 @@ export function useCreateArticleFavorite<TContext>(
   >(
     {
       mutationFn: async ({ slug }) => {
-        return createArticleFavorite({ slug }, config)
+        return createArticleFavorite(slug, config)
       },
       mutationKey,
       ...mutationOptions,

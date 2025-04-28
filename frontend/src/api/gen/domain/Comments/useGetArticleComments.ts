@@ -17,21 +17,19 @@ import type {
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
 
-export const getArticleCommentsQueryKey = ({
-  slug,
-}: {
-  slug: GetArticleCommentsPathParams['slug']
-}) => [{ url: '/articles/:slug/comments', params: { slug: slug } }] as const
+export const getArticleCommentsQueryKey = (
+  slug: GetArticleCommentsPathParams['slug'],
+) => [{ url: '/articles/:slug/comments', params: { slug: slug } }] as const
 
 export type GetArticleCommentsQueryKey = ReturnType<
   typeof getArticleCommentsQueryKey
 >
 
 export function getArticleCommentsQueryOptions(
-  { slug }: { slug: GetArticleCommentsPathParams['slug'] },
+  slug: GetArticleCommentsPathParams['slug'],
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
-  const queryKey = getArticleCommentsQueryKey({ slug })
+  const queryKey = getArticleCommentsQueryKey(slug)
   return queryOptions<
     GetArticleCommentsQueryResponse,
     ResponseErrorConfig<GetArticleComments401 | GetArticleComments422>,
@@ -42,7 +40,7 @@ export function getArticleCommentsQueryOptions(
     queryKey,
     queryFn: async ({ signal }) => {
       config.signal = signal
-      return getArticleComments({ slug }, config)
+      return getArticleComments(slug, config)
     },
   })
 }

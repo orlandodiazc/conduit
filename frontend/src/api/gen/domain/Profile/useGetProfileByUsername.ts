@@ -17,21 +17,19 @@ import type {
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
 
-export const getProfileByUsernameQueryKey = ({
-  username,
-}: {
-  username: GetProfileByUsernamePathParams['username']
-}) => [{ url: '/profiles/:username', params: { username: username } }] as const
+export const getProfileByUsernameQueryKey = (
+  username: GetProfileByUsernamePathParams['username'],
+) => [{ url: '/profiles/:username', params: { username: username } }] as const
 
 export type GetProfileByUsernameQueryKey = ReturnType<
   typeof getProfileByUsernameQueryKey
 >
 
 export function getProfileByUsernameQueryOptions(
-  { username }: { username: GetProfileByUsernamePathParams['username'] },
+  username: GetProfileByUsernamePathParams['username'],
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
-  const queryKey = getProfileByUsernameQueryKey({ username })
+  const queryKey = getProfileByUsernameQueryKey(username)
   return queryOptions<
     GetProfileByUsernameQueryResponse,
     ResponseErrorConfig<GetProfileByUsername401 | GetProfileByUsername422>,
@@ -42,7 +40,7 @@ export function getProfileByUsernameQueryOptions(
     queryKey,
     queryFn: async ({ signal }) => {
       config.signal = signal
-      return getProfileByUsername({ username }, config)
+      return getProfileByUsername(username, config)
     },
   })
 }

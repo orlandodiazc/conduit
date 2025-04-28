@@ -57,7 +57,7 @@ export function useUpdateCurrentUser<TContext>(
   >(
     {
       mutationFn: async ({ data }) => {
-        return updateCurrentUser({ data }, config)
+        return updateCurrentUser(data, config)
       },
       mutationKey,
       ...mutationOptions,

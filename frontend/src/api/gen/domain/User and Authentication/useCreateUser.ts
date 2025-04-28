@@ -54,7 +54,7 @@ export function useCreateUser<TContext>(
   >(
     {
       mutationFn: async ({ data }) => {
-        return createUser({ data }, config)
+        return createUser(data, config)
       },
       mutationKey,
       ...mutationOptions,

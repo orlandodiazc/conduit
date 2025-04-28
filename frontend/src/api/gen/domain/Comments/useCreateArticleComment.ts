@@ -65,7 +65,7 @@ export function useCreateArticleComment<TContext>(
   >(
     {
       mutationFn: async ({ slug, data }) => {
-        return createArticleComment({ slug, data }, config)
+        return createArticleComment(slug, data, config)
       },
       mutationKey,
       ...mutationOptions,

@@ -16,19 +16,16 @@ import type {
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
 
-export const getArticleQueryKey = ({
-  slug,
-}: {
-  slug: GetArticlePathParams['slug']
-}) => [{ url: '/articles/:slug', params: { slug: slug } }] as const
+export const getArticleQueryKey = (slug: GetArticlePathParams['slug']) =>
+  [{ url: '/articles/:slug', params: { slug: slug } }] as const
 
 export type GetArticleQueryKey = ReturnType<typeof getArticleQueryKey>
 
 export function getArticleQueryOptions(
-  { slug }: { slug: GetArticlePathParams['slug'] },
+  slug: GetArticlePathParams['slug'],
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
-  const queryKey = getArticleQueryKey({ slug })
+  const queryKey = getArticleQueryKey(slug)
   return queryOptions<
     GetArticleQueryResponse,
     ResponseErrorConfig<GetArticle422>,
@@ -39,7 +36,7 @@ export function getArticleQueryOptions(
     queryKey,
     queryFn: async ({ signal }) => {
       config.signal = signal
-      return getArticle({ slug }, config)
+      return getArticle(slug, config)
     },
   })
 }

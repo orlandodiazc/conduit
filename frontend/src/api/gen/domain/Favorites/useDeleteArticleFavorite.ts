@@ -56,7 +56,7 @@ export function useDeleteArticleFavorite<TContext>(
   >(
     {
       mutationFn: async ({ slug }) => {
-        return deleteArticleFavorite({ slug }, config)
+        return deleteArticleFavorite(slug, config)
       },
       mutationKey,
       ...mutationOptions,

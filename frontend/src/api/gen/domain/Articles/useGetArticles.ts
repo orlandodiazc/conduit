@@ -23,7 +23,7 @@ export const getArticlesQueryKey = (params?: GetArticlesQueryParams) =>
 export type GetArticlesQueryKey = ReturnType<typeof getArticlesQueryKey>
 
 export function getArticlesQueryOptions(
-  { params }: { params?: GetArticlesQueryParams },
+  params?: GetArticlesQueryParams,
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
   const queryKey = getArticlesQueryKey(params)
@@ -36,7 +36,7 @@ export function getArticlesQueryOptions(
     queryKey,
     queryFn: async ({ signal }) => {
       config.signal = signal
-      return getArticles({ params }, config)
+      return getArticles(params, config)
     },
   })
 }

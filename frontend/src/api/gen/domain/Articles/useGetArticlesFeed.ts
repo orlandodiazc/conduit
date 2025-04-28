@@ -23,7 +23,7 @@ export const getArticlesFeedQueryKey = (params?: GetArticlesFeedQueryParams) =>
 export type GetArticlesFeedQueryKey = ReturnType<typeof getArticlesFeedQueryKey>
 
 export function getArticlesFeedQueryOptions(
-  { params }: { params?: GetArticlesFeedQueryParams },
+  params?: GetArticlesFeedQueryParams,
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
   const queryKey = getArticlesFeedQueryKey(params)
@@ -36,7 +36,7 @@ export function getArticlesFeedQueryOptions(
     queryKey,
     queryFn: async ({ signal }) => {
       config.signal = signal
-      return getArticlesFeed({ params }, config)
+      return getArticlesFeed(params, config)
     },
   })
 }

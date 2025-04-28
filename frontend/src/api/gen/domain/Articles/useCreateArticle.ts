@@ -56,7 +56,7 @@ export function useCreateArticle<TContext>(
   >(
     {
       mutationFn: async ({ data }) => {
-        return createArticle({ data }, config)
+        return createArticle(data, config)
       },
       mutationKey,
       ...mutationOptions,

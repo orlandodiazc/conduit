@@ -56,7 +56,7 @@ export function useFollowUserByUsername<TContext>(
   >(
     {
       mutationFn: async ({ username }) => {
-        return followUserByUsername({ username }, config)
+        return followUserByUsername(username, config)
       },
       mutationKey,
       ...mutationOptions,

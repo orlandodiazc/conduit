@@ -1,20 +1,23 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
-
-import * as TanstackQuery from './integrations/tanstack-query/root-provider'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
+import { AuthProvider, useAuth } from './auth.tsx'
+
+const queryClient = new QueryClient()
 
 // Create a new router instance
-const router = createRouter({
+export const router = createRouter({
   routeTree,
   context: {
-    ...TanstackQuery.getContext(),
+    queryClient,
+    isAuthenticated: false,
   },
   defaultPreload: 'intent',
   scrollRestoration: true,
@@ -29,15 +32,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+function InnerApp() {
+  const { isAuthenticated } = useAuth()
+  return <RouterProvider router={router} context={{ isAuthenticated }} />
+}
+
 // Render the app
 const rootElement = document.getElementById('app')
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <TanstackQuery.Provider>
-        <RouterProvider router={router} />
-      </TanstackQuery.Provider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <InnerApp />
+        </AuthProvider>
+      </QueryClientProvider>
     </StrictMode>,
   )
 }

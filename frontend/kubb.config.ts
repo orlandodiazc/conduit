@@ -14,6 +14,7 @@ export default defineConfig(() => {
       path: './src/api/gen',
       clean: true,
     },
+    hooks: { done: 'pnpm format' },
     plugins: [
       pluginOas({ generators: [] }),
       pluginTs(),
@@ -28,8 +29,6 @@ export default defineConfig(() => {
         },
         query: false,
         suspense: false,
-        paramsType: 'object',
-        pathParamsType: 'object',
       }),
     ],
   }
