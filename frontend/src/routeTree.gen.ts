@@ -11,12 +11,35 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SettingsImport } from './routes/settings'
+import { Route as RegisterImport } from './routes/register'
+import { Route as LoginImport } from './routes/login'
 import { Route as IndexImport } from './routes/index'
-import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
-import { Route as DemoFormSimpleImport } from './routes/demo.form.simple'
-import { Route as DemoFormAddressImport } from './routes/demo.form.address'
+import { Route as ProfileUsernameImport } from './routes/profile.$username'
+import { Route as ArticlesCreateImport } from './routes/articles.create'
+import { Route as ArticlesSlugImport } from './routes/articles.$slug'
+import { Route as ProfileUsernameFavoritesImport } from './routes/profile.$username.favorites'
+import { Route as ArticlesSlugEditImport } from './routes/articles.$slug.edit'
 
 // Create/Update Routes
+
+const SettingsRoute = SettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RegisterRoute = RegisterImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginRoute = LoginImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -24,22 +47,34 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const DemoTanstackQueryRoute = DemoTanstackQueryImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
+const ProfileUsernameRoute = ProfileUsernameImport.update({
+  id: '/profile/$username',
+  path: '/profile/$username',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DemoFormSimpleRoute = DemoFormSimpleImport.update({
-  id: '/demo/form/simple',
-  path: '/demo/form/simple',
+const ArticlesCreateRoute = ArticlesCreateImport.update({
+  id: '/articles/create',
+  path: '/articles/create',
   getParentRoute: () => rootRoute,
 } as any)
 
-const DemoFormAddressRoute = DemoFormAddressImport.update({
-  id: '/demo/form/address',
-  path: '/demo/form/address',
+const ArticlesSlugRoute = ArticlesSlugImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
   getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileUsernameFavoritesRoute = ProfileUsernameFavoritesImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => ProfileUsernameRoute,
+} as any)
+
+const ArticlesSlugEditRoute = ArticlesSlugEditImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => ArticlesSlugRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -53,84 +88,183 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
     }
-    '/demo/form/address': {
-      id: '/demo/form/address'
-      path: '/demo/form/address'
-      fullPath: '/demo/form/address'
-      preLoaderRoute: typeof DemoFormAddressImport
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterImport
       parentRoute: typeof rootRoute
     }
-    '/demo/form/simple': {
-      id: '/demo/form/simple'
-      path: '/demo/form/simple'
-      fullPath: '/demo/form/simple'
-      preLoaderRoute: typeof DemoFormSimpleImport
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsImport
       parentRoute: typeof rootRoute
+    }
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugImport
+      parentRoute: typeof rootRoute
+    }
+    '/articles/create': {
+      id: '/articles/create'
+      path: '/articles/create'
+      fullPath: '/articles/create'
+      preLoaderRoute: typeof ArticlesCreateImport
+      parentRoute: typeof rootRoute
+    }
+    '/profile/$username': {
+      id: '/profile/$username'
+      path: '/profile/$username'
+      fullPath: '/profile/$username'
+      preLoaderRoute: typeof ProfileUsernameImport
+      parentRoute: typeof rootRoute
+    }
+    '/articles/$slug/edit': {
+      id: '/articles/$slug/edit'
+      path: '/edit'
+      fullPath: '/articles/$slug/edit'
+      preLoaderRoute: typeof ArticlesSlugEditImport
+      parentRoute: typeof ArticlesSlugImport
+    }
+    '/profile/$username/favorites': {
+      id: '/profile/$username/favorites'
+      path: '/favorites'
+      fullPath: '/profile/$username/favorites'
+      preLoaderRoute: typeof ProfileUsernameFavoritesImport
+      parentRoute: typeof ProfileUsernameImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface ArticlesSlugRouteChildren {
+  ArticlesSlugEditRoute: typeof ArticlesSlugEditRoute
+}
+
+const ArticlesSlugRouteChildren: ArticlesSlugRouteChildren = {
+  ArticlesSlugEditRoute: ArticlesSlugEditRoute,
+}
+
+const ArticlesSlugRouteWithChildren = ArticlesSlugRoute._addFileChildren(
+  ArticlesSlugRouteChildren,
+)
+
+interface ProfileUsernameRouteChildren {
+  ProfileUsernameFavoritesRoute: typeof ProfileUsernameFavoritesRoute
+}
+
+const ProfileUsernameRouteChildren: ProfileUsernameRouteChildren = {
+  ProfileUsernameFavoritesRoute: ProfileUsernameFavoritesRoute,
+}
+
+const ProfileUsernameRouteWithChildren = ProfileUsernameRoute._addFileChildren(
+  ProfileUsernameRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/settings': typeof SettingsRoute
+  '/articles/$slug': typeof ArticlesSlugRouteWithChildren
+  '/articles/create': typeof ArticlesCreateRoute
+  '/profile/$username': typeof ProfileUsernameRouteWithChildren
+  '/articles/$slug/edit': typeof ArticlesSlugEditRoute
+  '/profile/$username/favorites': typeof ProfileUsernameFavoritesRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/settings': typeof SettingsRoute
+  '/articles/$slug': typeof ArticlesSlugRouteWithChildren
+  '/articles/create': typeof ArticlesCreateRoute
+  '/profile/$username': typeof ProfileUsernameRouteWithChildren
+  '/articles/$slug/edit': typeof ArticlesSlugEditRoute
+  '/profile/$username/favorites': typeof ProfileUsernameFavoritesRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/settings': typeof SettingsRoute
+  '/articles/$slug': typeof ArticlesSlugRouteWithChildren
+  '/articles/create': typeof ArticlesCreateRoute
+  '/profile/$username': typeof ProfileUsernameRouteWithChildren
+  '/articles/$slug/edit': typeof ArticlesSlugEditRoute
+  '/profile/$username/favorites': typeof ProfileUsernameFavoritesRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/demo/tanstack-query'
-    | '/demo/form/address'
-    | '/demo/form/simple'
+    | '/login'
+    | '/register'
+    | '/settings'
+    | '/articles/$slug'
+    | '/articles/create'
+    | '/profile/$username'
+    | '/articles/$slug/edit'
+    | '/profile/$username/favorites'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo/tanstack-query' | '/demo/form/address' | '/demo/form/simple'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/settings'
+    | '/articles/$slug'
+    | '/articles/create'
+    | '/profile/$username'
+    | '/articles/$slug/edit'
+    | '/profile/$username/favorites'
   id:
     | '__root__'
     | '/'
-    | '/demo/tanstack-query'
-    | '/demo/form/address'
-    | '/demo/form/simple'
+    | '/login'
+    | '/register'
+    | '/settings'
+    | '/articles/$slug'
+    | '/articles/create'
+    | '/profile/$username'
+    | '/articles/$slug/edit'
+    | '/profile/$username/favorites'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
-  DemoFormAddressRoute: typeof DemoFormAddressRoute
-  DemoFormSimpleRoute: typeof DemoFormSimpleRoute
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
+  SettingsRoute: typeof SettingsRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRouteWithChildren
+  ArticlesCreateRoute: typeof ArticlesCreateRoute
+  ProfileUsernameRoute: typeof ProfileUsernameRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
-  DemoFormAddressRoute: DemoFormAddressRoute,
-  DemoFormSimpleRoute: DemoFormSimpleRoute,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
+  SettingsRoute: SettingsRoute,
+  ArticlesSlugRoute: ArticlesSlugRouteWithChildren,
+  ArticlesCreateRoute: ArticlesCreateRoute,
+  ProfileUsernameRoute: ProfileUsernameRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -144,22 +278,48 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/demo/tanstack-query",
-        "/demo/form/address",
-        "/demo/form/simple"
+        "/login",
+        "/register",
+        "/settings",
+        "/articles/$slug",
+        "/articles/create",
+        "/profile/$username"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/demo/tanstack-query": {
-      "filePath": "demo.tanstack-query.tsx"
+    "/login": {
+      "filePath": "login.tsx"
     },
-    "/demo/form/address": {
-      "filePath": "demo.form.address.tsx"
+    "/register": {
+      "filePath": "register.tsx"
     },
-    "/demo/form/simple": {
-      "filePath": "demo.form.simple.tsx"
+    "/settings": {
+      "filePath": "settings.tsx"
+    },
+    "/articles/$slug": {
+      "filePath": "articles.$slug.tsx",
+      "children": [
+        "/articles/$slug/edit"
+      ]
+    },
+    "/articles/create": {
+      "filePath": "articles.create.tsx"
+    },
+    "/profile/$username": {
+      "filePath": "profile.$username.tsx",
+      "children": [
+        "/profile/$username/favorites"
+      ]
+    },
+    "/articles/$slug/edit": {
+      "filePath": "articles.$slug.edit.tsx",
+      "parent": "/articles/$slug"
+    },
+    "/profile/$username/favorites": {
+      "filePath": "profile.$username.favorites.tsx",
+      "parent": "/profile/$username"
     }
   }
 }

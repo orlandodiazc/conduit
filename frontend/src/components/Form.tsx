@@ -1,6 +1,7 @@
 import { useStore } from '@tanstack/react-form'
 
-import { useFieldContext, useFormContext } from '../hooks/demo.form-context'
+import { Loader2 } from 'lucide-react'
+import { useFieldContext, useFormContext } from '../hooks/form-context'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -16,6 +17,7 @@ export function SubscribeButton({ label }: { label: string }) {
     <form.Subscribe selector={(state) => state.isSubmitting}>
       {(isSubmitting) => (
         <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting && <Loader2 className="animate-spin" />}
           {label}
         </Button>
       )}
@@ -54,7 +56,7 @@ export function TextField({
 
   return (
     <div>
-      <Label htmlFor={label} className="mb-2 text-xl font-bold">
+      <Label htmlFor={label} className="mb-1 text-lg font-bold">
         {label}
       </Label>
       <Input
@@ -62,6 +64,33 @@ export function TextField({
         placeholder={placeholder}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}
+      />
+      {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
+    </div>
+  )
+}
+
+export function PasswordField({
+  label,
+  placeholder,
+}: {
+  label: string
+  placeholder?: string
+}) {
+  const field = useFieldContext<string>()
+  const errors = useStore(field.store, (state) => state.meta.errors)
+
+  return (
+    <div>
+      <Label htmlFor={label} className="mb-1 text-lg font-bold">
+        {label}
+      </Label>
+      <Input
+        value={field.state.value}
+        placeholder={placeholder}
+        onBlur={field.handleBlur}
+        onChange={(e) => field.handleChange(e.target.value)}
+        type="password"
       />
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
     </div>

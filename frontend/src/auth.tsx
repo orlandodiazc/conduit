@@ -36,16 +36,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     staleTime: 10 * 60 * 1000,
   })
 
+  function invalidateCurrentUserQuery() {
+    queryClient.invalidateQueries({
+      queryKey: getCurrentUserQueryOptions().queryKey,
+    })
+  }
+
   const logout = React.useCallback(() => {
     setStoredToken(null)
     setHasToken(false)
-    queryClient.clear()
+    invalidateCurrentUserQuery()
   }, [queryClient])
 
-  const setTokenValue = React.useCallback((token: string) => {
-    setStoredToken(token)
-    setHasToken(true)
-  }, [])
+  const setTokenValue = React.useCallback(
+    (token: string) => {
+      setStoredToken(token)
+      setHasToken(true)
+      invalidateCurrentUserQuery()
+    },
+    [queryClient],
+  )
 
   useEffect(() => {
     if (isError && error.status === 401) {
