@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   GetProfileByUsername401,
   GetProfileByUsername422,
   GetProfileByUsernamePathParams,
   GetProfileByUsernameQueryResponse,
 } from '../types/GetProfileByUsername.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getGetProfileByUsernameUrl(
   username: GetProfileByUsernamePathParams['username'],

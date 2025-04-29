@@ -3,16 +3,13 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   GetCurrentUser401,
   GetCurrentUser422,
   GetCurrentUserQueryResponse,
 } from '../types/GetCurrentUser.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getGetCurrentUserUrl() {
   return `http://localhost:8080/user` as const

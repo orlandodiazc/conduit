@@ -3,7 +3,8 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   UpdateArticle401,
   UpdateArticle422,
@@ -11,10 +12,6 @@ import type {
   UpdateArticleMutationResponse,
   UpdateArticlePathParams,
 } from '../types/UpdateArticle.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getUpdateArticleUrl(slug: UpdateArticlePathParams['slug']) {
   return `http://localhost:8080/articles/${slug}` as const

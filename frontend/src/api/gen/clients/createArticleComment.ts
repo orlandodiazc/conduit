@@ -3,7 +3,8 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   CreateArticleComment401,
   CreateArticleComment422,
@@ -11,10 +12,6 @@ import type {
   CreateArticleCommentMutationResponse,
   CreateArticleCommentPathParams,
 } from '../types/CreateArticleComment.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getCreateArticleCommentUrl(
   slug: CreateArticleCommentPathParams['slug'],

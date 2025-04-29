@@ -3,12 +3,9 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type { GetTags422, GetTagsQueryResponse } from '../types/GetTags.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getGetTagsUrl() {
   return `http://localhost:8080/tags` as const

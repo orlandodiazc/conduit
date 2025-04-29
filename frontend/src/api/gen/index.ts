@@ -1,22 +1,22 @@
-export type { CreateArticleMutationKey } from './domain/Articles/useCreateArticle.ts'
-export type { DeleteArticleMutationKey } from './domain/Articles/useDeleteArticle.ts'
-export type { GetArticleQueryKey } from './domain/Articles/useGetArticle.ts'
-export type { GetArticlesQueryKey } from './domain/Articles/useGetArticles.ts'
-export type { GetArticlesFeedQueryKey } from './domain/Articles/useGetArticlesFeed.ts'
-export type { UpdateArticleMutationKey } from './domain/Articles/useUpdateArticle.ts'
-export type { CreateArticleCommentMutationKey } from './domain/Comments/useCreateArticleComment.ts'
-export type { DeleteArticleCommentMutationKey } from './domain/Comments/useDeleteArticleComment.ts'
-export type { GetArticleCommentsQueryKey } from './domain/Comments/useGetArticleComments.ts'
-export type { CreateArticleFavoriteMutationKey } from './domain/Favorites/useCreateArticleFavorite.ts'
-export type { DeleteArticleFavoriteMutationKey } from './domain/Favorites/useDeleteArticleFavorite.ts'
-export type { FollowUserByUsernameMutationKey } from './domain/Profile/useFollowUserByUsername.ts'
-export type { GetProfileByUsernameQueryKey } from './domain/Profile/useGetProfileByUsername.ts'
-export type { UnfollowUserByUsernameMutationKey } from './domain/Profile/useUnfollowUserByUsername.ts'
-export type { GetTagsQueryKey } from './domain/Tags/useGetTags.ts'
-export type { CreateUserMutationKey } from './domain/User and Authentication/useCreateUser.ts'
-export type { GetCurrentUserQueryKey } from './domain/User and Authentication/useGetCurrentUser.ts'
-export type { LoginMutationKey } from './domain/User and Authentication/useLogin.ts'
-export type { UpdateCurrentUserMutationKey } from './domain/User and Authentication/useUpdateCurrentUser.ts'
+export type { CreateArticleMutationKey } from './hooks/useCreateArticle.ts'
+export type { CreateArticleCommentMutationKey } from './hooks/useCreateArticleComment.ts'
+export type { CreateArticleFavoriteMutationKey } from './hooks/useCreateArticleFavorite.ts'
+export type { CreateUserMutationKey } from './hooks/useCreateUser.ts'
+export type { DeleteArticleMutationKey } from './hooks/useDeleteArticle.ts'
+export type { DeleteArticleCommentMutationKey } from './hooks/useDeleteArticleComment.ts'
+export type { DeleteArticleFavoriteMutationKey } from './hooks/useDeleteArticleFavorite.ts'
+export type { FollowUserByUsernameMutationKey } from './hooks/useFollowUserByUsername.ts'
+export type { GetArticleQueryKey } from './hooks/useGetArticle.ts'
+export type { GetArticleCommentsQueryKey } from './hooks/useGetArticleComments.ts'
+export type { GetArticlesQueryKey } from './hooks/useGetArticles.ts'
+export type { GetArticlesFeedQueryKey } from './hooks/useGetArticlesFeed.ts'
+export type { GetCurrentUserQueryKey } from './hooks/useGetCurrentUser.ts'
+export type { GetProfileByUsernameQueryKey } from './hooks/useGetProfileByUsername.ts'
+export type { GetTagsQueryKey } from './hooks/useGetTags.ts'
+export type { LoginMutationKey } from './hooks/useLogin.ts'
+export type { UnfollowUserByUsernameMutationKey } from './hooks/useUnfollowUserByUsername.ts'
+export type { UpdateArticleMutationKey } from './hooks/useUpdateArticle.ts'
+export type { UpdateCurrentUserMutationKey } from './hooks/useUpdateCurrentUser.ts'
 export type { Article } from './types/Article.ts'
 export type { Comment } from './types/Comment.ts'
 export type {
@@ -210,79 +210,245 @@ export { login } from './clients/login.ts'
 export { unfollowUserByUsername } from './clients/unfollowUserByUsername.ts'
 export { updateArticle } from './clients/updateArticle.ts'
 export { updateCurrentUser } from './clients/updateCurrentUser.ts'
+export { createArticleCommentHandler } from './handlers/createArticleCommentHandler.ts'
+export { createArticleFavoriteHandler } from './handlers/createArticleFavoriteHandler.ts'
+export { createArticleHandler } from './handlers/createArticleHandler.ts'
+export { createUserHandler } from './handlers/createUserHandler.ts'
+export { deleteArticleCommentHandler } from './handlers/deleteArticleCommentHandler.ts'
+export { deleteArticleFavoriteHandler } from './handlers/deleteArticleFavoriteHandler.ts'
+export { deleteArticleHandler } from './handlers/deleteArticleHandler.ts'
+export { followUserByUsernameHandler } from './handlers/followUserByUsernameHandler.ts'
+export { getArticleCommentsHandler } from './handlers/getArticleCommentsHandler.ts'
+export { getArticleHandler } from './handlers/getArticleHandler.ts'
+export { getArticlesFeedHandler } from './handlers/getArticlesFeedHandler.ts'
+export { getArticlesHandler } from './handlers/getArticlesHandler.ts'
+export { getCurrentUserHandler } from './handlers/getCurrentUserHandler.ts'
+export { getProfileByUsernameHandler } from './handlers/getProfileByUsernameHandler.ts'
+export { getTagsHandler } from './handlers/getTagsHandler.ts'
+export { handlers } from './handlers/handlers.ts'
+export { loginHandler } from './handlers/loginHandler.ts'
+export { unfollowUserByUsernameHandler } from './handlers/unfollowUserByUsernameHandler.ts'
+export { updateArticleHandler } from './handlers/updateArticleHandler.ts'
+export { updateCurrentUserHandler } from './handlers/updateCurrentUserHandler.ts'
 export {
   createArticleMutationKey,
   useCreateArticle,
-} from './domain/Articles/useCreateArticle.ts'
-export {
-  deleteArticleMutationKey,
-  useDeleteArticle,
-} from './domain/Articles/useDeleteArticle.ts'
-export {
-  getArticleQueryKey,
-  getArticleQueryOptions,
-} from './domain/Articles/useGetArticle.ts'
-export {
-  getArticlesQueryKey,
-  getArticlesQueryOptions,
-} from './domain/Articles/useGetArticles.ts'
-export {
-  getArticlesFeedQueryKey,
-  getArticlesFeedQueryOptions,
-} from './domain/Articles/useGetArticlesFeed.ts'
-export {
-  updateArticleMutationKey,
-  useUpdateArticle,
-} from './domain/Articles/useUpdateArticle.ts'
+} from './hooks/useCreateArticle.ts'
 export {
   createArticleCommentMutationKey,
   useCreateArticleComment,
-} from './domain/Comments/useCreateArticleComment.ts'
-export {
-  deleteArticleCommentMutationKey,
-  useDeleteArticleComment,
-} from './domain/Comments/useDeleteArticleComment.ts'
-export {
-  getArticleCommentsQueryKey,
-  getArticleCommentsQueryOptions,
-} from './domain/Comments/useGetArticleComments.ts'
+} from './hooks/useCreateArticleComment.ts'
 export {
   createArticleFavoriteMutationKey,
   useCreateArticleFavorite,
-} from './domain/Favorites/useCreateArticleFavorite.ts'
+} from './hooks/useCreateArticleFavorite.ts'
+export { createUserMutationKey, useCreateUser } from './hooks/useCreateUser.ts'
+export {
+  deleteArticleMutationKey,
+  useDeleteArticle,
+} from './hooks/useDeleteArticle.ts'
+export {
+  deleteArticleCommentMutationKey,
+  useDeleteArticleComment,
+} from './hooks/useDeleteArticleComment.ts'
 export {
   deleteArticleFavoriteMutationKey,
   useDeleteArticleFavorite,
-} from './domain/Favorites/useDeleteArticleFavorite.ts'
+} from './hooks/useDeleteArticleFavorite.ts'
 export {
   followUserByUsernameMutationKey,
   useFollowUserByUsername,
-} from './domain/Profile/useFollowUserByUsername.ts'
+} from './hooks/useFollowUserByUsername.ts'
 export {
-  getProfileByUsernameQueryKey,
-  getProfileByUsernameQueryOptions,
-} from './domain/Profile/useGetProfileByUsername.ts'
+  getArticleQueryKey,
+  getArticleQueryOptions,
+} from './hooks/useGetArticle.ts'
 export {
-  unfollowUserByUsernameMutationKey,
-  useUnfollowUserByUsername,
-} from './domain/Profile/useUnfollowUserByUsername.ts'
+  getArticleCommentsQueryKey,
+  getArticleCommentsQueryOptions,
+} from './hooks/useGetArticleComments.ts'
 export {
-  getTagsQueryKey,
-  getTagsQueryOptions,
-} from './domain/Tags/useGetTags.ts'
+  getArticlesQueryKey,
+  getArticlesQueryOptions,
+} from './hooks/useGetArticles.ts'
 export {
-  createUserMutationKey,
-  useCreateUser,
-} from './domain/User and Authentication/useCreateUser.ts'
+  getArticlesFeedQueryKey,
+  getArticlesFeedQueryOptions,
+} from './hooks/useGetArticlesFeed.ts'
 export {
   getCurrentUserQueryKey,
   getCurrentUserQueryOptions,
-} from './domain/User and Authentication/useGetCurrentUser.ts'
+} from './hooks/useGetCurrentUser.ts'
 export {
-  loginMutationKey,
-  useLogin,
-} from './domain/User and Authentication/useLogin.ts'
+  getProfileByUsernameQueryKey,
+  getProfileByUsernameQueryOptions,
+} from './hooks/useGetProfileByUsername.ts'
+export { getTagsQueryKey, getTagsQueryOptions } from './hooks/useGetTags.ts'
+export { loginMutationKey, useLogin } from './hooks/useLogin.ts'
+export {
+  unfollowUserByUsernameMutationKey,
+  useUnfollowUserByUsername,
+} from './hooks/useUnfollowUserByUsername.ts'
+export {
+  updateArticleMutationKey,
+  useUpdateArticle,
+} from './hooks/useUpdateArticle.ts'
 export {
   updateCurrentUserMutationKey,
   useUpdateCurrentUser,
-} from './domain/User and Authentication/useUpdateCurrentUser.ts'
+} from './hooks/useUpdateCurrentUser.ts'
+export { createArticleFakeData } from './mocks/createArticle.ts'
+export { createCommentFakeData } from './mocks/createComment.ts'
+export {
+  createCreateArticle201FakeData,
+  createCreateArticle401FakeData,
+  createCreateArticle422FakeData,
+  createCreateArticleMutationRequestFakeData,
+  createCreateArticleMutationResponseFakeData,
+} from './mocks/createCreateArticle.ts'
+export {
+  createCreateArticleCommentPathParamsFakeData,
+  createCreateArticleComment200FakeData,
+  createCreateArticleComment401FakeData,
+  createCreateArticleComment422FakeData,
+  createCreateArticleCommentMutationRequestFakeData,
+  createCreateArticleCommentMutationResponseFakeData,
+} from './mocks/createCreateArticleComment.ts'
+export {
+  createCreateArticleFavoritePathParamsFakeData,
+  createCreateArticleFavorite200FakeData,
+  createCreateArticleFavorite401FakeData,
+  createCreateArticleFavorite422FakeData,
+  createCreateArticleFavoriteMutationResponseFakeData,
+} from './mocks/createCreateArticleFavorite.ts'
+export {
+  createCreateUser201FakeData,
+  createCreateUser422FakeData,
+  createCreateUserMutationRequestFakeData,
+  createCreateUserMutationResponseFakeData,
+} from './mocks/createCreateUser.ts'
+export {
+  createDeleteArticlePathParamsFakeData,
+  createDeleteArticle200FakeData,
+  createDeleteArticle401FakeData,
+  createDeleteArticle422FakeData,
+  createDeleteArticleMutationResponseFakeData,
+} from './mocks/createDeleteArticle.ts'
+export {
+  createDeleteArticleCommentPathParamsFakeData,
+  createDeleteArticleComment200FakeData,
+  createDeleteArticleComment401FakeData,
+  createDeleteArticleComment422FakeData,
+  createDeleteArticleCommentMutationResponseFakeData,
+} from './mocks/createDeleteArticleComment.ts'
+export {
+  createDeleteArticleFavoritePathParamsFakeData,
+  createDeleteArticleFavorite200FakeData,
+  createDeleteArticleFavorite401FakeData,
+  createDeleteArticleFavorite422FakeData,
+  createDeleteArticleFavoriteMutationResponseFakeData,
+} from './mocks/createDeleteArticleFavorite.ts'
+export {
+  createFollowUserByUsernamePathParamsFakeData,
+  createFollowUserByUsername200FakeData,
+  createFollowUserByUsername401FakeData,
+  createFollowUserByUsername422FakeData,
+  createFollowUserByUsernameMutationResponseFakeData,
+} from './mocks/createFollowUserByUsername.ts'
+export { createGenericErrorFakeData } from './mocks/createGenericError.ts'
+export { createGenericErrorModelFakeData } from './mocks/createGenericErrorModel.ts'
+export {
+  createGetArticlePathParamsFakeData,
+  createGetArticle200FakeData,
+  createGetArticle422FakeData,
+  createGetArticleQueryResponseFakeData,
+} from './mocks/createGetArticle.ts'
+export {
+  createGetArticleCommentsPathParamsFakeData,
+  createGetArticleComments200FakeData,
+  createGetArticleComments401FakeData,
+  createGetArticleComments422FakeData,
+  createGetArticleCommentsQueryResponseFakeData,
+} from './mocks/createGetArticleComments.ts'
+export {
+  createGetArticlesQueryParamsFakeData,
+  createGetArticles200FakeData,
+  createGetArticles401FakeData,
+  createGetArticles422FakeData,
+  createGetArticlesQueryResponseFakeData,
+} from './mocks/createGetArticles.ts'
+export {
+  createGetArticlesFeedQueryParamsFakeData,
+  createGetArticlesFeed200FakeData,
+  createGetArticlesFeed401FakeData,
+  createGetArticlesFeed422FakeData,
+  createGetArticlesFeedQueryResponseFakeData,
+} from './mocks/createGetArticlesFeed.ts'
+export {
+  createGetCurrentUser200FakeData,
+  createGetCurrentUser401FakeData,
+  createGetCurrentUser422FakeData,
+  createGetCurrentUserQueryResponseFakeData,
+} from './mocks/createGetCurrentUser.ts'
+export {
+  createGetProfileByUsernamePathParamsFakeData,
+  createGetProfileByUsername200FakeData,
+  createGetProfileByUsername401FakeData,
+  createGetProfileByUsername422FakeData,
+  createGetProfileByUsernameQueryResponseFakeData,
+} from './mocks/createGetProfileByUsername.ts'
+export {
+  createGetTags200FakeData,
+  createGetTags422FakeData,
+  createGetTagsQueryResponseFakeData,
+} from './mocks/createGetTags.ts'
+export {
+  createLogin200FakeData,
+  createLogin401FakeData,
+  createLogin422FakeData,
+  createLoginMutationRequestFakeData,
+  createLoginMutationResponseFakeData,
+} from './mocks/createLogin.ts'
+export { createLoginUserFakeData } from './mocks/createLoginUser.ts'
+export { createLoginUserRequestFakeData } from './mocks/createLoginUserRequest.ts'
+export { createMultipleArticlesResponseFakeData } from './mocks/createMultipleArticlesResponse.ts'
+export { createMultipleCommentsResponseFakeData } from './mocks/createMultipleCommentsResponse.ts'
+export { createNewArticleFakeData } from './mocks/createNewArticle.ts'
+export { createNewArticleRequestFakeData } from './mocks/createNewArticleRequest.ts'
+export { createNewCommentFakeData } from './mocks/createNewComment.ts'
+export { createNewCommentRequestFakeData } from './mocks/createNewCommentRequest.ts'
+export { createNewUserFakeData } from './mocks/createNewUser.ts'
+export { createNewUserRequestFakeData } from './mocks/createNewUserRequest.ts'
+export { createProfileFakeData } from './mocks/createProfile.ts'
+export { createProfileResponseFakeData } from './mocks/createProfileResponse.ts'
+export { createSingleArticleResponseFakeData } from './mocks/createSingleArticleResponse.ts'
+export { createSingleCommentResponseFakeData } from './mocks/createSingleCommentResponse.ts'
+export { createTagsResponseFakeData } from './mocks/createTagsResponse.ts'
+export {
+  createUnfollowUserByUsernamePathParamsFakeData,
+  createUnfollowUserByUsername200FakeData,
+  createUnfollowUserByUsername401FakeData,
+  createUnfollowUserByUsername422FakeData,
+  createUnfollowUserByUsernameMutationResponseFakeData,
+} from './mocks/createUnfollowUserByUsername.ts'
+export {
+  createUpdateArticleFakeData,
+  createUpdateArticlePathParamsFakeData,
+  createUpdateArticle200FakeData,
+  createUpdateArticle401FakeData,
+  createUpdateArticle422FakeData,
+  createUpdateArticleMutationRequestFakeData,
+  createUpdateArticleMutationResponseFakeData,
+} from './mocks/createUpdateArticle.ts'
+export { createUpdateArticleRequestFakeData } from './mocks/createUpdateArticleRequest.ts'
+export {
+  createUpdateCurrentUser200FakeData,
+  createUpdateCurrentUser401FakeData,
+  createUpdateCurrentUser422FakeData,
+  createUpdateCurrentUserMutationRequestFakeData,
+  createUpdateCurrentUserMutationResponseFakeData,
+} from './mocks/createUpdateCurrentUser.ts'
+export { createUpdateUserFakeData } from './mocks/createUpdateUser.ts'
+export { createUpdateUserRequestFakeData } from './mocks/createUpdateUserRequest.ts'
+export { createUserFakeData } from './mocks/createUser.ts'
+export { createUserResponseFakeData } from './mocks/createUserResponse.ts'

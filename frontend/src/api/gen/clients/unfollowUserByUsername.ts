@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   UnfollowUserByUsername401,
   UnfollowUserByUsername422,
   UnfollowUserByUsernameMutationResponse,
   UnfollowUserByUsernamePathParams,
 } from '../types/UnfollowUserByUsername.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getUnfollowUserByUsernameUrl(
   username: UnfollowUserByUsernamePathParams['username'],

@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   FollowUserByUsername401,
   FollowUserByUsername422,
   FollowUserByUsernameMutationResponse,
   FollowUserByUsernamePathParams,
 } from '../types/FollowUserByUsername.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getFollowUserByUsernameUrl(
   username: FollowUserByUsernamePathParams['username'],

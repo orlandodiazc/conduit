@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   Login401,
   Login422,
   LoginMutationRequest,
   LoginMutationResponse,
 } from '../types/Login.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getLoginUrl() {
   return `http://localhost:8080/users/login` as const

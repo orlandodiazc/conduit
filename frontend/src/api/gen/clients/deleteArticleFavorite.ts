@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   DeleteArticleFavorite401,
   DeleteArticleFavorite422,
   DeleteArticleFavoriteMutationResponse,
   DeleteArticleFavoritePathParams,
 } from '../types/DeleteArticleFavorite.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getDeleteArticleFavoriteUrl(
   slug: DeleteArticleFavoritePathParams['slug'],

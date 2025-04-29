@@ -3,16 +3,13 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   CreateUser422,
   CreateUserMutationRequest,
   CreateUserMutationResponse,
 } from '../types/CreateUser.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getCreateUserUrl() {
   return `http://localhost:8080/users` as const

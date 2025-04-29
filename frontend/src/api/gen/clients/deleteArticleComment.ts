@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   DeleteArticleComment401,
   DeleteArticleComment422,
   DeleteArticleCommentMutationResponse,
   DeleteArticleCommentPathParams,
 } from '../types/DeleteArticleComment.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getDeleteArticleCommentUrl(
   slug: DeleteArticleCommentPathParams['slug'],

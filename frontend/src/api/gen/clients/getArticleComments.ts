@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   GetArticleComments401,
   GetArticleComments422,
   GetArticleCommentsPathParams,
   GetArticleCommentsQueryResponse,
 } from '../types/GetArticleComments.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getGetArticleCommentsUrl(slug: GetArticleCommentsPathParams['slug']) {
   return `http://localhost:8080/articles/${slug}/comments` as const

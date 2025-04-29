@@ -3,16 +3,13 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   GetArticle422,
   GetArticlePathParams,
   GetArticleQueryResponse,
 } from '../types/GetArticle.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getGetArticleUrl(slug: GetArticlePathParams['slug']) {
   return `http://localhost:8080/articles/${slug}` as const

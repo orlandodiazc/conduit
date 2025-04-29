@@ -3,17 +3,14 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import client from '../../client.ts'
+import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
   CreateArticleFavorite401,
   CreateArticleFavorite422,
   CreateArticleFavoriteMutationResponse,
   CreateArticleFavoritePathParams,
 } from '../types/CreateArticleFavorite.ts'
-import type {
-  RequestConfig,
-  ResponseErrorConfig,
-} from '@kubb/plugin-client/clients/axios'
 
 function getCreateArticleFavoriteUrl(
   slug: CreateArticleFavoritePathParams['slug'],
