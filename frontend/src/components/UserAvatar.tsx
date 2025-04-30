@@ -8,7 +8,6 @@ export default function UserAvatar({
   src: User['image']
   fallbackName: User['username']
 }) {
-  console.log(src)
   return (
     <Avatar className="rounded-md">
       <AvatarImage src={src} />
