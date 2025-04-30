@@ -6,7 +6,7 @@ import UserAvatar from './UserAvatar'
 export default function Header() {
   const { user } = useAuth()
   return (
-    <header className="flex justify-between py-5 px-10">
+    <header className="flex justify-between py-5">
       <Link to="/" className="font-bold text-lg">
         Conduit
       </Link>

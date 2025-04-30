@@ -11,9 +11,9 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   component: () => (
-    <>
+    <div className="container m-auto">
       <Header />
       <Outlet />
-    </>
+    </div>
   ),
 })
