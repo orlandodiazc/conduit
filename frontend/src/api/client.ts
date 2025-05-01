@@ -62,7 +62,6 @@ export const axiosInstance = axios.create(getConfig())
 
 axiosInstance.interceptors.request.use((request) => {
   const token = getStoredToken()
-  console.log(token)
   if (token) {
     request.headers.Authorization = 'Bearer ' + token
   }

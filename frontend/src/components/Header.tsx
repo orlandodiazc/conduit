@@ -1,7 +1,7 @@
-import { useAuth } from '@/auth'
 import { Link } from '@tanstack/react-router'
 import { Newspaper, Settings } from 'lucide-react'
 import UserAvatar from './UserAvatar'
+import { useAuth } from '@/auth'
 
 export default function Header() {
   const { user } = useAuth()

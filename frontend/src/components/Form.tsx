@@ -14,8 +14,8 @@ import { Label } from '@/components/ui/label'
 export function SubscribeButton({ label }: { label: string }) {
   const form = useFormContext()
   return (
-    <form.Subscribe selector={(state) => state.isSubmitting}>
-      {(isSubmitting) => (
+    <form.Subscribe selector={(state) => [state.isSubmitting]}>
+      {([isSubmitting]) => (
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting && <Loader2 className="animate-spin" />}
           {label}
@@ -53,13 +53,13 @@ export function TextField({
 }) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
-
   return (
     <div>
-      <Label htmlFor={label} className="mb-1 text-lg font-bold">
+      <Label htmlFor={field.name} className="mb-1 text-lg font-bold">
         {label}
       </Label>
       <Input
+        id={field.name}
         value={field.state.value}
         placeholder={placeholder}
         onBlur={field.handleBlur}
@@ -82,10 +82,11 @@ export function PasswordField({
 
   return (
     <div>
-      <Label htmlFor={label} className="mb-1 text-lg font-bold">
+      <Label htmlFor={field.name} className="mb-1 text-lg font-bold">
         {label}
       </Label>
       <Input
+        id={field.name}
         value={field.state.value}
         placeholder={placeholder}
         onBlur={field.handleBlur}
@@ -109,11 +110,11 @@ export function TextArea({
 
   return (
     <div>
-      <Label htmlFor={label} className="mb-2 text-xl font-bold">
+      <Label htmlFor={field.name} className="mb-2 text-xl font-bold">
         {label}
       </Label>
       <ShadcnTextarea
-        id={label}
+        id={field.name}
         value={field.state.value}
         onBlur={field.handleBlur}
         rows={rows}
@@ -168,11 +169,11 @@ export function Slider({ label }: { label: string }) {
 
   return (
     <div>
-      <Label htmlFor={label} className="mb-2 text-xl font-bold">
+      <Label htmlFor={field.name} className="mb-2 text-xl font-bold">
         {label}
       </Label>
       <ShadcnSlider
-        id={label}
+        id={field.name}
         onBlur={field.handleBlur}
         value={[field.state.value]}
         onValueChange={(value) => field.handleChange(value[0])}
@@ -190,12 +191,12 @@ export function Switch({ label }: { label: string }) {
     <div>
       <div className="flex items-center gap-2">
         <ShadcnSwitch
-          id={label}
+          id={field.name}
           onBlur={field.handleBlur}
           checked={field.state.value}
           onCheckedChange={(checked) => field.handleChange(checked)}
         />
-        <Label htmlFor={label}>{label}</Label>
+        <Label htmlFor={field.name}>{label}</Label>
       </div>
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}
     </div>

@@ -1,7 +1,7 @@
-import { getArticlesQueryOptions } from '@/api/gen'
-import ArticleList from '@/components/Articles'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
+import { getArticlesQueryOptions } from '@/api/gen'
+import ArticleList from '@/components/Articles'
 
 export const Route = createFileRoute('/_homeLayout/')({
   component: App,

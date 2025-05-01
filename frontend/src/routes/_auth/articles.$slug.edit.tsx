@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import type { UpdateArticleMutationRequest } from '@/api/gen'
 import { useAppForm } from '@/hooks/form'
 
-export const Route = createFileRoute('/articles/$slug/edit')({
+export const Route = createFileRoute('/_auth/articles/$slug/edit')({
   component: RouteComponent,
 })
 

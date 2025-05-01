@@ -5,7 +5,7 @@ import { useAppForm } from '@/hooks/form'
 import { getCurrentUserQueryOptions, useUpdateCurrentUser } from '@/api/gen'
 import { useAuth } from '@/auth'
 
-export const Route = createFileRoute('/settings')({
+export const Route = createFileRoute('/_auth/settings')({
   component: RouteComponent,
 })
 

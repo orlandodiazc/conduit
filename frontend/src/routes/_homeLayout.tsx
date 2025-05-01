@@ -1,13 +1,13 @@
+import { useSuspenseQuery } from '@tanstack/react-query'
+import {
+  Link,
+  Outlet,
+  createFileRoute,
+  useParams,
+} from '@tanstack/react-router'
 import { getTagsQueryOptions } from '@/api/gen'
 import { useAuth } from '@/auth'
 import { Badge } from '@/components/ui/badge'
-import { useSuspenseQuery } from '@tanstack/react-query'
-import {
-  createFileRoute,
-  Link,
-  Outlet,
-  useParams,
-} from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_homeLayout')({
   component: RouteComponent,
@@ -57,7 +57,7 @@ function RouteComponent() {
           <h2 className="text-h3 mb-2">Popular tags</h2>
           <div className="flex flex-wrap gap-2">
             {tags.map((tagName) => (
-              <Badge asChild variant="outline">
+              <Badge asChild variant="outline" key={tagName}>
                 <Link
                   to="/tag-feed/$tag"
                   params={{ tag: tagName }}
