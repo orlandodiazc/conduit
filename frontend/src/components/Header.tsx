@@ -11,7 +11,12 @@ export default function Header() {
         Conduit
       </Link>
       <nav className="flex gap-4 items-center">
-        <Link to="/">Home</Link>
+        <Link
+          to="/"
+          className="text-muted-foreground [&.active]:text-foreground"
+        >
+          Home
+        </Link>
         {user ? (
           <>
             <Link
@@ -19,7 +24,7 @@ export default function Header() {
               to="/articles/create"
             >
               <Newspaper size={18} />
-              Create article
+              New article
             </Link>
             <Link
               className="text-muted-foreground [&.active]:text-foreground flex gap-1 items-center"
