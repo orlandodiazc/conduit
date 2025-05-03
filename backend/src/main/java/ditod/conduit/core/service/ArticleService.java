@@ -49,7 +49,7 @@ public class ArticleService {
         var favoritesCount = articleFavoriteRepository.countByArticle(article);
         var isFavorited = articleFavoriteRepository.existsByUserAndArticle(me, article);
         var isMeAFollower = userFollowService.isFollowing(me, article.getAuthor());
-        return ArticleDto.from(article, isFavorited, favoritesCount, AuthorDto.from(me, isMeAFollower));
+        return ArticleDto.from(article, isFavorited, favoritesCount, AuthorDto.from(article.getAuthor(), isMeAFollower));
     }
 
     public ArticleDto getArticleDetails(Article article, User me, boolean isFavorited) {
@@ -61,12 +61,6 @@ public class ArticleService {
     public ArticleDto getArticleDetails(Article article) {
         var favoritesCount = articleFavoriteRepository.countByArticle(article);
         return ArticleDto.from(article, favoritesCount);
-    }
-
-    public Article getArticleBySlug(String slug) {
-        return articleRepository
-                .findBySlug(slug)
-                .orElseThrow(() -> new EntityDoesNotExistException("article", "slug", slug));
     }
 
     public Article create(CreateArticleRequest createArticleRequest, User me) {
@@ -125,5 +119,11 @@ public class ArticleService {
 
     public Page<Article> findFollowedArticles(List<User> following, OffsetPageRequest pageable) {
         return articleRepository.findByAuthorIn(following, pageable);
+    }
+
+    public Article getArticleById(Integer id) {
+        return articleRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityDoesNotExistException("article", id));
     }
 }

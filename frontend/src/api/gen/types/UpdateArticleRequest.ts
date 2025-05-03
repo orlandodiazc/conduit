@@ -3,11 +3,11 @@
  * Do not edit manually.
  */
 
-import type { UpdateArticle } from './UpdateArticle.ts'
+import type { UpdateArticleDto } from './UpdateArticleDto.ts'
 
 export type UpdateArticleRequest = {
   /**
    * @type object
    */
-  article: UpdateArticle
+  article: UpdateArticleDto
 }

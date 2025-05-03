@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 public class Article extends DateTimeAudit {
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String slug;
 
     @Column(nullable = false)

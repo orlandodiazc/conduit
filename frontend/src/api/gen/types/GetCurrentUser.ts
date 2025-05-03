@@ -3,32 +3,27 @@
  * Do not edit manually.
  */
 
-import type { GenericErrorModel } from './GenericErrorModel.ts'
-import type { User } from './User.ts'
+import type { CurrentUserResponse } from './CurrentUserResponse.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
 
 /**
- * @description User
+ * @description OK
  */
-export type GetCurrentUser200 = {
-  /**
-   * @type object
-   */
-  user: User
-}
+export type GetCurrentUser200 = CurrentUserResponse
 
 /**
- * @description Unauthorized
+ * @description Bad Request
  */
-export type GetCurrentUser401 = any
+export type GetCurrentUser400 = ProblemDetail
 
 /**
- * @description Unexpected error
+ * @description Not Found
  */
-export type GetCurrentUser422 = GenericErrorModel
+export type GetCurrentUser404 = ProblemDetail
 
 export type GetCurrentUserQueryResponse = GetCurrentUser200
 
 export type GetCurrentUserQuery = {
   Response: GetCurrentUser200
-  Errors: GetCurrentUser401 | GetCurrentUser422
+  Errors: GetCurrentUser400 | GetCurrentUser404
 }

@@ -5,15 +5,17 @@
 
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
-import type { GetTags422, GetTagsQueryResponse } from '../types/GetTags.ts'
+import type {
+  GetTagsQueryResponse,
+  GetTags400,
+  GetTags404,
+} from '../types/GetTags.ts'
 
 function getGetTagsUrl() {
   return `http://localhost:8080/tags` as const
 }
 
 /**
- * @description Get tags. Auth not required
- * @summary Get tags
  * {@link /tags}
  */
 export async function getTags(
@@ -23,7 +25,7 @@ export async function getTags(
 
   const res = await request<
     GetTagsQueryResponse,
-    ResponseErrorConfig<GetTags422>,
+    ResponseErrorConfig<GetTags400 | GetTags404>,
     unknown
   >({
     method: 'GET',

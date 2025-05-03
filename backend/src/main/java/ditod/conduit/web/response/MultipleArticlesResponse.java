@@ -1,8 +1,10 @@
 package ditod.conduit.web.response;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
-public record MultipleArticlesResponse(List<ArticleDto> articles, int articlesCount) {
+public record MultipleArticlesResponse(@NotNull List<ArticleDto> articles, @NotNull int articlesCount) {
     public MultipleArticlesResponse {
         articlesCount = articles.size();
     }

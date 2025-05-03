@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  Login401,
-  Login422,
   LoginMutationRequest,
   LoginMutationResponse,
+  Login400,
+  Login404,
 } from '../types/Login.ts'
 
 function getLoginUrl() {
@@ -17,12 +17,10 @@ function getLoginUrl() {
 }
 
 /**
- * @description Login for existing user
- * @summary Existing user login
  * {@link /users/login}
  */
 export async function login(
-  data: LoginMutationRequest,
+  data?: LoginMutationRequest,
   config: Partial<RequestConfig<LoginMutationRequest>> & {
     client?: typeof client
   } = {},
@@ -31,7 +29,7 @@ export async function login(
 
   const res = await request<
     LoginMutationResponse,
-    ResponseErrorConfig<Login401 | Login422>,
+    ResponseErrorConfig<Login400 | Login404>,
     LoginMutationRequest
   >({
     method: 'POST',

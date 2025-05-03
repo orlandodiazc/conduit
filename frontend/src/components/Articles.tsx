@@ -1,5 +1,6 @@
 import { Link, useNavigate } from '@tanstack/react-router'
 import { Heart } from 'lucide-react'
+import { Fragment } from 'react/jsx-runtime'
 import UserAvatar from './UserAvatar'
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
@@ -12,22 +13,22 @@ import {
   CardTitle,
 } from './ui/card'
 import { Separator } from './ui/separator'
-import type { GetArticlesQueryResponse } from '@/api/gen'
+
+import { useFavoriteArticle, type MultipleArticlesResponse } from '@/api/gen'
 import { useAuth } from '@/auth'
-import { useCreateArticleFavorite } from '@/api/gen'
 
 export default function ArticleList({
   articlePage,
 }: {
-  articlePage: GetArticlesQueryResponse
+  articlePage: MultipleArticlesResponse
 }) {
   return (
     <>
       {articlePage.articles.map((article) => (
-        <>
-          <ArticleCard article={article} key={article.slug} />
+        <Fragment key={article.id}>
+          <ArticleCard article={article} />
           <Separator />
-        </>
+        </Fragment>
       ))}
     </>
   )
@@ -36,7 +37,7 @@ export default function ArticleList({
 export function ArticleAuthorInfo({
   article,
 }: {
-  article: GetArticlesQueryResponse['articles'][number]
+  article: MultipleArticlesResponse['articles'][number]
 }) {
   return (
     <div className="flex items-center gap-2">
@@ -74,16 +75,16 @@ export function ArticleAuthorInfo({
 function ArticleCard({
   article,
 }: {
-  article: GetArticlesQueryResponse['articles'][number]
+  article: MultipleArticlesResponse['articles'][number]
 }) {
   const { isAuthenticated } = useAuth()
-  const { mutate, isPending } = useCreateArticleFavorite()
+  const { mutate, isPending } = useFavoriteArticle()
   const navigate = useNavigate()
   function handleFavorite() {
     if (!isAuthenticated) {
       navigate({ to: '/login' })
     } else {
-      mutate({ slug: article.slug })
+      mutate({ id: Number(article.id) })
     }
   }
   return (
@@ -105,22 +106,25 @@ function ArticleCard({
         </Button>
       </CardHeader>
       <CardContent className="mb-2 px-0">
-        <Link to="/articles/$slug" params={{ slug: article.slug }}>
+        <Link
+          to="/articles/$id/$slug"
+          params={{ slug: article.slug, id: String(article.id) }}
+        >
           <CardTitle className="mb-1">{article.title}</CardTitle>
         </Link>
         <CardDescription>{article.description}</CardDescription>
       </CardContent>
       <CardFooter className="justify-between items-center px-0">
         <Link
-          to="/articles/$slug"
-          params={{ slug: article.slug }}
+          to="/articles/$id/$slug"
+          params={{ slug: article.slug, id: String(article.id) }}
           className="text-sm text-muted-foreground"
         >
           Read more...
         </Link>
         <div className="flex gap-2">
           {article.tagList.map((tagName) => (
-            <Badge variant="secondary">{tagName}</Badge>
+            <Badge key={tagName}>{tagName}</Badge>
           ))}
         </div>
       </CardFooter>

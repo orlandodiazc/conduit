@@ -14,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/articles/{articleSlug}/comments")
 public class CommentController {
     private final CommentService commentService;
     private final ArticleService articleService;
@@ -35,18 +34,18 @@ public class CommentController {
         this.authService = authService;
     }
 
-    @PostMapping
+    @PostMapping("/articles/{articleId}/comments")
     CommentResponse createComment(
-            @PathVariable String articleSlug, @RequestBody CreateCommentRequest commentRequest, Authentication auth) {
-        var article = articleService.getArticleBySlug(articleSlug);
+            @PathVariable Integer articleId, @RequestBody CreateCommentRequest commentRequest, Authentication auth) {
+        var article = articleService.getArticleById(articleId);
         var me = userService.getUserByEmail(auth.getName());
         var createdComment = commentService.create(commentRequest.comment().body(), article, me);
         return CommentResponse.from(createdComment);
     }
 
-    @GetMapping
-    MultipleCommentsResponse getComments(@PathVariable String articleSlug, Authentication auth) {
-        var comments = commentService.findByArticleSlug(articleSlug);
+    @GetMapping("/articles/{articleId}/comments")
+    MultipleCommentsResponse getComments(@PathVariable Integer articleId, Authentication auth) {
+        var comments = commentService.findByArticleId(articleId);
         if (authService.isAnonymous(auth)) {
             return new MultipleCommentsResponse(
                     comments.stream().map(CommentDto::from).toList());
@@ -59,10 +58,10 @@ public class CommentController {
                 .toList());
     }
 
-    @DeleteMapping("/{commentId}")
-    void deleteComment(@PathVariable Integer commentId, Authentication auth) {
+    @DeleteMapping("/comments/{id}")
+    void deleteComment(@PathVariable Integer id, Authentication auth) {
         var me = userService.getUserByEmail(auth.getName());
-        var comment = commentService.getById(commentId);
+        var comment = commentService.getById(id);
         commentService.delete(comment, me);
     }
 }

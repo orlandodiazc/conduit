@@ -1,5 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { createFileRoute, useRouter } from '@tanstack/react-router'
+import { Separator } from '@radix-ui/react-select'
 import { Button } from '@/components/ui/button'
 import { useAppForm } from '@/hooks/form'
 import { getCurrentUserQueryOptions, useUpdateCurrentUser } from '@/api/gen'
@@ -48,14 +49,15 @@ function RouteComponent() {
   }
 
   return (
-    <>
+    <div className="max-w-md m-auto py-8">
+      <h1 className="text-h1 mb-6">Edit your profile</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault()
           e.stopPropagation()
           form.handleSubmit()
         }}
-        className="space-y-3 max-w-sm m-auto py-8"
+        className="space-y-3"
       >
         <form.AppField name="email">
           {(field) => <field.TextField label="Email" />}
@@ -77,7 +79,10 @@ function RouteComponent() {
           <form.SubscribeButton label="Submit" />
         </form.AppForm>
       </form>
-      <Button onClick={handleLogout}>Logout</Button>
-    </>
+      <Separator className="my-4" />
+      <Button onClick={handleLogout} variant="destructive">
+        Or click here to logout.
+      </Button>
+    </div>
   )
 }

@@ -3,18 +3,18 @@
  * Do not edit manually.
  */
 
-import { queryOptions } from '@tanstack/react-query'
-import { getCurrentUser } from '../clients/getCurrentUser.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  GetCurrentUser401,
-  GetCurrentUser422,
   GetCurrentUserQueryResponse,
+  GetCurrentUser400,
+  GetCurrentUser404,
 } from '../types/GetCurrentUser.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
+import { getCurrentUser } from '../clients/getCurrentUser.ts'
+import { queryOptions } from '@tanstack/react-query'
 
 export const getCurrentUserQueryKey = () => [{ url: '/user' }] as const
 
@@ -26,7 +26,7 @@ export function getCurrentUserQueryOptions(
   const queryKey = getCurrentUserQueryKey()
   return queryOptions<
     GetCurrentUserQueryResponse,
-    ResponseErrorConfig<GetCurrentUser401 | GetCurrentUser422>,
+    ResponseErrorConfig<GetCurrentUser400 | GetCurrentUser404>,
     GetCurrentUserQueryResponse,
     typeof queryKey
   >({

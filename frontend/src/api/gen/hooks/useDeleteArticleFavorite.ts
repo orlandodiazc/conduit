@@ -3,39 +3,37 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { deleteArticleFavorite } from '../clients/deleteArticleFavorite.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  DeleteArticleFavorite401,
-  DeleteArticleFavorite422,
   DeleteArticleFavoriteMutationResponse,
   DeleteArticleFavoritePathParams,
+  DeleteArticleFavorite400,
+  DeleteArticleFavorite404,
 } from '../types/DeleteArticleFavorite.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { deleteArticleFavorite } from '../clients/deleteArticleFavorite.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const deleteArticleFavoriteMutationKey = () =>
-  [{ url: '/articles/{slug}/favorite' }] as const
+  [{ url: '/articles/{id}/favorite' }] as const
 
 export type DeleteArticleFavoriteMutationKey = ReturnType<
   typeof deleteArticleFavoriteMutationKey
 >
 
 /**
- * @description Unfavorite an article. Auth is required
- * @summary Unfavorite an article
- * {@link /articles/:slug/favorite}
+ * {@link /articles/:id/favorite}
  */
 export function useDeleteArticleFavorite<TContext>(
   options: {
     mutation?: UseMutationOptions<
       DeleteArticleFavoriteMutationResponse,
-      ResponseErrorConfig<DeleteArticleFavorite401 | DeleteArticleFavorite422>,
-      { slug: DeleteArticleFavoritePathParams['slug'] },
+      ResponseErrorConfig<DeleteArticleFavorite400 | DeleteArticleFavorite404>,
+      { id: DeleteArticleFavoritePathParams['id'] },
       TContext
     > & { client?: QueryClient }
     client?: Partial<RequestConfig> & { client?: typeof client }
@@ -46,17 +44,17 @@ export function useDeleteArticleFavorite<TContext>(
     client: config = {},
   } = options ?? {}
   const mutationKey =
-    mutationOptions.mutationKey ?? deleteArticleFavoriteMutationKey()
+    mutationOptions?.mutationKey ?? deleteArticleFavoriteMutationKey()
 
   return useMutation<
     DeleteArticleFavoriteMutationResponse,
-    ResponseErrorConfig<DeleteArticleFavorite401 | DeleteArticleFavorite422>,
-    { slug: DeleteArticleFavoritePathParams['slug'] },
+    ResponseErrorConfig<DeleteArticleFavorite400 | DeleteArticleFavorite404>,
+    { id: DeleteArticleFavoritePathParams['id'] },
     TContext
   >(
     {
-      mutationFn: async ({ slug }) => {
-        return deleteArticleFavorite(slug, config)
+      mutationFn: async ({ id }) => {
+        return deleteArticleFavorite(id, config)
       },
       mutationKey,
       ...mutationOptions,

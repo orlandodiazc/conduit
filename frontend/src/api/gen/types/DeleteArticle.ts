@@ -3,35 +3,34 @@
  * Do not edit manually.
  */
 
-import type { GenericErrorModel } from './GenericErrorModel.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
 
 export type DeleteArticlePathParams = {
   /**
-   * @description Slug of the article to delete
-   * @type string
+   * @type integer, int32
    */
-  slug: string
+  id: number
 }
 
 /**
- * @description No content
+ * @description OK
  */
 export type DeleteArticle200 = any
 
 /**
- * @description Unauthorized
+ * @description Bad Request
  */
-export type DeleteArticle401 = any
+export type DeleteArticle400 = ProblemDetail
 
 /**
- * @description Unexpected error
+ * @description Not Found
  */
-export type DeleteArticle422 = GenericErrorModel
+export type DeleteArticle404 = ProblemDetail
 
 export type DeleteArticleMutationResponse = DeleteArticle200
 
 export type DeleteArticleMutation = {
   Response: DeleteArticle200
   PathParams: DeleteArticlePathParams
-  Errors: DeleteArticle401 | DeleteArticle422
+  Errors: DeleteArticle400 | DeleteArticle404
 }

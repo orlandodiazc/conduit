@@ -9,6 +9,7 @@ import { routeTree } from './routeTree.gen'
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
 import { AuthProvider, useAuth } from './auth.tsx'
+import ThemeProvider from './components/ThemeProvider.tsx'
 
 const queryClient = new QueryClient()
 
@@ -57,7 +58,9 @@ enableMocking().then(() => {
       <StrictMode>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <InnerApp />
+            <ThemeProvider defaultTheme="dark">
+              <InnerApp />
+            </ThemeProvider>
           </AuthProvider>
         </QueryClientProvider>
       </StrictMode>,

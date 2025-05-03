@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createLoginMutationResponseFakeData } from '../mocks/createLogin.ts'
 import type { LoginMutationResponse } from '../types/Login.ts'
+import { generateLoginMutationResponseFakeData } from '../mocks/generateLogin.ts'
+import { http } from 'msw'
 
 export function loginHandler(
   data?:
@@ -16,7 +16,7 @@ export function loginHandler(
     if (typeof data === 'function') return data(info)
 
     return new Response(
-      JSON.stringify(data || createLoginMutationResponseFakeData(data)),
+      JSON.stringify(data || generateLoginMutationResponseFakeData(data)),
       {
         headers: {
           'Content-Type': 'application/json',

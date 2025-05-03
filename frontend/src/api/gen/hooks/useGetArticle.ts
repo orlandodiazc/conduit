@@ -3,40 +3,41 @@
  * Do not edit manually.
  */
 
-import { queryOptions } from '@tanstack/react-query'
-import { getArticle } from '../clients/getArticle.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  GetArticle422,
-  GetArticlePathParams,
   GetArticleQueryResponse,
+  GetArticlePathParams,
+  GetArticle400,
+  GetArticle404,
 } from '../types/GetArticle.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
+import { getArticle } from '../clients/getArticle.ts'
+import { queryOptions } from '@tanstack/react-query'
 
-export const getArticleQueryKey = (slug: GetArticlePathParams['slug']) =>
-  [{ url: '/articles/:slug', params: { slug: slug } }] as const
+export const getArticleQueryKey = (id: GetArticlePathParams['id']) =>
+  [{ url: '/articles/:id', params: { id: id } }] as const
 
 export type GetArticleQueryKey = ReturnType<typeof getArticleQueryKey>
 
 export function getArticleQueryOptions(
-  slug: GetArticlePathParams['slug'],
+  id: GetArticlePathParams['id'],
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
-  const queryKey = getArticleQueryKey(slug)
+  const queryKey = getArticleQueryKey(id)
   return queryOptions<
     GetArticleQueryResponse,
-    ResponseErrorConfig<GetArticle422>,
+    ResponseErrorConfig<GetArticle400 | GetArticle404>,
     GetArticleQueryResponse,
     typeof queryKey
   >({
-    enabled: !!slug,
+    enabled: !!id,
     queryKey,
     queryFn: async ({ signal }) => {
       config.signal = signal
-      return getArticle(slug, config)
+      return getArticle(id, config)
     },
   })
 }

@@ -3,39 +3,37 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { deleteArticle } from '../clients/deleteArticle.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  DeleteArticle401,
-  DeleteArticle422,
   DeleteArticleMutationResponse,
   DeleteArticlePathParams,
+  DeleteArticle400,
+  DeleteArticle404,
 } from '../types/DeleteArticle.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { deleteArticle } from '../clients/deleteArticle.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const deleteArticleMutationKey = () =>
-  [{ url: '/articles/{slug}' }] as const
+  [{ url: '/articles/{id}' }] as const
 
 export type DeleteArticleMutationKey = ReturnType<
   typeof deleteArticleMutationKey
 >
 
 /**
- * @description Delete an article. Auth is required
- * @summary Delete an article
- * {@link /articles/:slug}
+ * {@link /articles/:id}
  */
 export function useDeleteArticle<TContext>(
   options: {
     mutation?: UseMutationOptions<
       DeleteArticleMutationResponse,
-      ResponseErrorConfig<DeleteArticle401 | DeleteArticle422>,
-      { slug: DeleteArticlePathParams['slug'] },
+      ResponseErrorConfig<DeleteArticle400 | DeleteArticle404>,
+      { id: DeleteArticlePathParams['id'] },
       TContext
     > & { client?: QueryClient }
     client?: Partial<RequestConfig> & { client?: typeof client }
@@ -45,17 +43,17 @@ export function useDeleteArticle<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions.mutationKey ?? deleteArticleMutationKey()
+  const mutationKey = mutationOptions?.mutationKey ?? deleteArticleMutationKey()
 
   return useMutation<
     DeleteArticleMutationResponse,
-    ResponseErrorConfig<DeleteArticle401 | DeleteArticle422>,
-    { slug: DeleteArticlePathParams['slug'] },
+    ResponseErrorConfig<DeleteArticle400 | DeleteArticle404>,
+    { id: DeleteArticlePathParams['id'] },
     TContext
   >(
     {
-      mutationFn: async ({ slug }) => {
-        return deleteArticle(slug, config)
+      mutationFn: async ({ id }) => {
+        return deleteArticle(id, config)
       },
       mutationKey,
       ...mutationOptions,

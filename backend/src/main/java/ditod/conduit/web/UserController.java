@@ -5,7 +5,7 @@ import ditod.conduit.security.AuthService;
 import ditod.conduit.web.request.LoginRequest;
 import ditod.conduit.web.request.RegisterRequest;
 import ditod.conduit.web.request.UpdateUserRequest;
-import ditod.conduit.web.response.MeResponse;
+import ditod.conduit.web.response.CurrentUserResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -26,32 +26,31 @@ public class UserController {
     }
 
     @PostMapping("/users/login")
-    MeResponse login(@Valid @RequestBody LoginRequest loginRequest) {
+    CurrentUserResponse login(@Valid @RequestBody LoginRequest loginRequest) {
         var authenticated = authService.login(
                 loginRequest.user().email(), loginRequest.user().password());
-        return MeResponse.from(authenticated.user(), authenticated.token());
+        return CurrentUserResponse.from(authenticated.user(), authenticated.token());
     }
 
     @PostMapping("/users")
-    ModelAndView register(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
+    CurrentUserResponse register(@Valid @RequestBody RegisterRequest registerRequest, HttpServletRequest request) {
         var userRegister = registerRequest.user();
         userService.registerUser(userRegister.email(), userRegister.username(), userRegister.password());
-
-        var loginRequest = new LoginRequest(userRegister.username(), userRegister.password());
-        request.setAttribute(View.RESPONSE_STATUS_ATTRIBUTE, HttpStatus.TEMPORARY_REDIRECT);
-        return new ModelAndView("redirect:/users/login", "loginRequest", loginRequest);
+        var authenticated = authService.login(userRegister.email(), userRegister.password());
+        return CurrentUserResponse.from(authenticated.user(), authenticated.token());
     }
 
     @GetMapping("/user")
-    MeResponse me(@AuthenticationPrincipal Jwt jwt) {
+    CurrentUserResponse getCurrentUser(@AuthenticationPrincipal Jwt jwt) {
         var user = userService.getUserByEmail(jwt.getSubject());
-        return MeResponse.from(user, jwt.getTokenValue());
+        return CurrentUserResponse.from(user, jwt.getTokenValue());
     }
 
     @PutMapping("/user")
-    MeResponse updateUser(@RequestBody UpdateUserRequest updateRequest, @AuthenticationPrincipal Jwt jwt) {
+    CurrentUserResponse updateCurrentUser(
+            @RequestBody UpdateUserRequest updateRequest, @AuthenticationPrincipal Jwt jwt) {
         var me = userService.getUserByEmail(jwt.getSubject());
         var updatedUser = userService.updateUser(me, updateRequest);
-        return MeResponse.from(updatedUser, jwt.getTokenValue());
+        return CurrentUserResponse.from(updatedUser, jwt.getTokenValue());
     }
 }

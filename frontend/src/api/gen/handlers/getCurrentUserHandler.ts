@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createGetCurrentUserQueryResponseFakeData } from '../mocks/createGetCurrentUser.ts'
 import type { GetCurrentUserQueryResponse } from '../types/GetCurrentUser.ts'
+import { generateGetCurrentUserQueryResponseFakeData } from '../mocks/generateGetCurrentUser.ts'
+import { http } from 'msw'
 
 export function getCurrentUserHandler(
   data?:
@@ -16,7 +16,7 @@ export function getCurrentUserHandler(
     if (typeof data === 'function') return data(info)
 
     return new Response(
-      JSON.stringify(data || createGetCurrentUserQueryResponseFakeData(data)),
+      JSON.stringify(data || generateGetCurrentUserQueryResponseFakeData(data)),
       {
         headers: {
           'Content-Type': 'application/json',

@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { createArticle } from '../clients/createArticle.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  CreateArticle401,
-  CreateArticle422,
   CreateArticleMutationRequest,
   CreateArticleMutationResponse,
+  CreateArticle400,
+  CreateArticle404,
 } from '../types/CreateArticle.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { createArticle } from '../clients/createArticle.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const createArticleMutationKey = () => [{ url: '/articles' }] as const
 
@@ -25,15 +25,13 @@ export type CreateArticleMutationKey = ReturnType<
 >
 
 /**
- * @description Create an article. Auth is required
- * @summary Create an article
  * {@link /articles}
  */
 export function useCreateArticle<TContext>(
   options: {
     mutation?: UseMutationOptions<
       CreateArticleMutationResponse,
-      ResponseErrorConfig<CreateArticle401 | CreateArticle422>,
+      ResponseErrorConfig<CreateArticle400 | CreateArticle404>,
       { data: CreateArticleMutationRequest },
       TContext
     > & { client?: QueryClient }
@@ -46,11 +44,11 @@ export function useCreateArticle<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions.mutationKey ?? createArticleMutationKey()
+  const mutationKey = mutationOptions?.mutationKey ?? createArticleMutationKey()
 
   return useMutation<
     CreateArticleMutationResponse,
-    ResponseErrorConfig<CreateArticle401 | CreateArticle422>,
+    ResponseErrorConfig<CreateArticle400 | CreateArticle404>,
     { data: CreateArticleMutationRequest },
     TContext
   >(

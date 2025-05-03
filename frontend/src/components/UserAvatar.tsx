@@ -13,7 +13,7 @@ export default function UserAvatar({
   return (
     <Avatar {...props}>
       <AvatarImage src={src} />
-      <AvatarFallback className="rounded-md">{fallbackName[0]}</AvatarFallback>
+      <AvatarFallback>{fallbackName[0]}</AvatarFallback>
     </Avatar>
   )
 }

@@ -3,30 +3,27 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createUpdateArticleMutationResponseFakeData } from '../mocks/createUpdateArticle.ts'
 import type { UpdateArticleMutationResponse } from '../types/UpdateArticle.ts'
+import { generateUpdateArticleMutationResponseFakeData } from '../mocks/generateUpdateArticle.ts'
+import { http } from 'msw'
 
 export function updateArticleHandler(
   data?:
     | UpdateArticleMutationResponse
     | ((info: Parameters<Parameters<typeof http.put>[1]>[0]) => Response),
 ) {
-  return http.put(
-    'http://localhost:8080/articles/:slug',
-    function handler(info) {
-      if (typeof data === 'function') return data(info)
+  return http.put('http://localhost:8080/articles/:id', function handler(info) {
+    if (typeof data === 'function') return data(info)
 
-      return new Response(
-        JSON.stringify(
-          data || createUpdateArticleMutationResponseFakeData(data),
-        ),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+    return new Response(
+      JSON.stringify(
+        data || generateUpdateArticleMutationResponseFakeData(data),
+      ),
+      {
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
-    },
-  )
+      },
+    )
+  })
 }

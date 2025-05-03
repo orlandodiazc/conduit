@@ -3,11 +3,11 @@
  * Do not edit manually.
  */
 
-import type { Comment } from './Comment.ts'
+import type { CommentDto } from './CommentDto.ts'
 
 export type MultipleCommentsResponse = {
   /**
    * @type array
    */
-  comments: Array<Comment>
+  comments: CommentDto[]
 }

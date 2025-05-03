@@ -3,44 +3,31 @@
  * Do not edit manually.
  */
 
-import type { GenericErrorModel } from './GenericErrorModel.ts'
-import type { LoginUser } from './LoginUser.ts'
-import type { User } from './User.ts'
+import type { CurrentUserResponse } from './CurrentUserResponse.ts'
+import type { LoginRequest } from './LoginRequest.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
 
 /**
- * @description User
+ * @description OK
  */
-export type Login200 = {
-  /**
-   * @type object
-   */
-  user: User
-}
+export type Login200 = CurrentUserResponse
 
 /**
- * @description Unauthorized
+ * @description Bad Request
  */
-export type Login401 = any
+export type Login400 = ProblemDetail
 
 /**
- * @description Unexpected error
+ * @description Not Found
  */
-export type Login422 = GenericErrorModel
+export type Login404 = ProblemDetail
 
-/**
- * @description Credentials to use
- */
-export type LoginMutationRequest = {
-  /**
-   * @type object
-   */
-  user: LoginUser
-}
+export type LoginMutationRequest = LoginRequest
 
 export type LoginMutationResponse = Login200
 
 export type LoginMutation = {
   Response: Login200
   Request: LoginMutationRequest
-  Errors: Login401 | Login422
+  Errors: Login400 | Login404
 }

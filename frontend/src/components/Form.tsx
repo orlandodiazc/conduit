@@ -101,9 +101,13 @@ export function PasswordField({
 export function TextArea({
   label,
   rows = 3,
+  placeholder,
+  className,
 }: {
-  label: string
+  label?: string
   rows?: number
+  placeholder?: string
+  className?: string
 }) {
   const field = useFieldContext<string>()
   const errors = useStore(field.store, (state) => state.meta.errors)
@@ -114,10 +118,12 @@ export function TextArea({
         {label}
       </Label>
       <ShadcnTextarea
+        placeholder={placeholder}
         id={field.name}
         value={field.state.value}
         onBlur={field.handleBlur}
         rows={rows}
+        className={className}
         onChange={(e) => field.handleChange(e.target.value)}
       />
       {field.state.meta.isTouched && <ErrorMessages errors={errors} />}

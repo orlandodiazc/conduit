@@ -39,7 +39,7 @@ public class ArticleController {
     }
 
     @GetMapping
-    MultipleArticlesResponse listArticle(
+    MultipleArticlesResponse listArticles(
             @RequestParam(value = "tag", required = false) String tag,
             @RequestParam(value = "author", required = false) String author,
             @RequestParam(value = "favorited", required = false) String favorited,
@@ -76,9 +76,9 @@ public class ArticleController {
                 .toList());
     }
 
-    @GetMapping("/{slug}")
-    ArticleResponse getArticle(@PathVariable String slug, Authentication auth) {
-        var article = articleService.getArticleBySlug(slug);
+    @GetMapping("/{id}")
+    ArticleResponse getArticle(@PathVariable Integer id, Authentication auth) {
+        var article = articleService.getArticleById(id);
         if (authService.isAnonymous(auth)) {
             return new ArticleResponse(articleService.getArticleDetails(article));
         }
@@ -93,19 +93,19 @@ public class ArticleController {
         return new ArticleResponse(articleService.getArticleDetails(createdArticle));
     }
 
-    @PutMapping("/{slug}")
+    @PutMapping("/{id}")
     ArticleResponse updateArticle(
-            @PathVariable String slug, @RequestBody UpdateArticleRequest updateArticleRequest, Authentication auth) {
-        var article = articleService.getArticleBySlug(slug);
+            @PathVariable Integer id, @RequestBody UpdateArticleRequest updateArticleRequest, Authentication auth) {
+        var article = articleService.getArticleById(id);
         var me = userService.getUserByEmail(auth.getName());
         Article updatedArticle = articleService.update(article, updateArticleRequest, me);
         return new ArticleResponse(articleService.getArticleDetails(updatedArticle));
     }
 
-    @DeleteMapping("/{slug}")
-    void deleteArticle(@PathVariable String slug, Authentication auth) {
+    @DeleteMapping("/{id}")
+    void deleteArticle(@PathVariable Integer id, Authentication auth) {
         var author = userService.getUserByEmail(auth.getName());
-        var article = articleService.getArticleBySlug(slug);
+        var article = articleService.getArticleById(id);
         articleService.delete(article, author);
     }
 }

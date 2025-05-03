@@ -3,28 +3,25 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createGetArticleQueryResponseFakeData } from '../mocks/createGetArticle.ts'
 import type { GetArticleQueryResponse } from '../types/GetArticle.ts'
+import { generateGetArticleQueryResponseFakeData } from '../mocks/generateGetArticle.ts'
+import { http } from 'msw'
 
 export function getArticleHandler(
   data?:
     | GetArticleQueryResponse
     | ((info: Parameters<Parameters<typeof http.get>[1]>[0]) => Response),
 ) {
-  return http.get(
-    'http://localhost:8080/articles/:slug',
-    function handler(info) {
-      if (typeof data === 'function') return data(info)
+  return http.get('http://localhost:8080/articles/:id', function handler(info) {
+    if (typeof data === 'function') return data(info)
 
-      return new Response(
-        JSON.stringify(data || createGetArticleQueryResponseFakeData(data)),
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+    return new Response(
+      JSON.stringify(data || generateGetArticleQueryResponseFakeData(data)),
+      {
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
-    },
-  )
+      },
+    )
+  })
 }

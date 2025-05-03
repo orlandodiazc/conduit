@@ -3,36 +3,35 @@
  * Do not edit manually.
  */
 
-import type { Article } from './Article.ts'
-import type { GenericErrorModel } from './GenericErrorModel.ts'
+import type { ArticleResponse } from './ArticleResponse.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
 
 export type GetArticlePathParams = {
   /**
-   * @description Slug of the article to get
-   * @type string
+   * @type integer, int32
    */
-  slug: string
+  id: number
 }
 
 /**
- * @description Single article
+ * @description OK
  */
-export type GetArticle200 = {
-  /**
-   * @type object
-   */
-  article: Article
-}
+export type GetArticle200 = ArticleResponse
 
 /**
- * @description Unexpected error
+ * @description Bad Request
  */
-export type GetArticle422 = GenericErrorModel
+export type GetArticle400 = ProblemDetail
+
+/**
+ * @description Not Found
+ */
+export type GetArticle404 = ProblemDetail
 
 export type GetArticleQueryResponse = GetArticle200
 
 export type GetArticleQuery = {
   Response: GetArticle200
   PathParams: GetArticlePathParams
-  Errors: GetArticle422
+  Errors: GetArticle400 | GetArticle404
 }

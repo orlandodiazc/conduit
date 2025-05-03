@@ -24,8 +24,8 @@ public class CommentService {
         return commentRepository.save(new Comment(body, article, user));
     }
 
-    public List<Comment> findByArticleSlug(String slug) {
-        return commentRepository.findByArticleSlug(slug);
+    public List<Comment> findByArticleId(Integer id) {
+        return commentRepository.findByArticleId(id);
     }
 
     public Comment getById(Integer commentId) {

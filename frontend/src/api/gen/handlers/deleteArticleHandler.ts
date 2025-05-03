@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createDeleteArticleMutationResponseFakeData } from '../mocks/createDeleteArticle.ts'
 import type { DeleteArticleMutationResponse } from '../types/DeleteArticle.ts'
+import { generateDeleteArticleMutationResponseFakeData } from '../mocks/generateDeleteArticle.ts'
+import { http } from 'msw'
 
 export function deleteArticleHandler(
   data?:
@@ -13,13 +13,13 @@ export function deleteArticleHandler(
     | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Response),
 ) {
   return http.delete(
-    'http://localhost:8080/articles/:slug',
+    'http://localhost:8080/articles/:id',
     function handler(info) {
       if (typeof data === 'function') return data(info)
 
       return new Response(
         JSON.stringify(
-          data || createDeleteArticleMutationResponseFakeData(data),
+          data || generateDeleteArticleMutationResponseFakeData(data),
         ),
         {
           headers: {

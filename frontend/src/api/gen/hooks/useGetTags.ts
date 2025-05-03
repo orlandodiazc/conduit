@@ -3,14 +3,18 @@
  * Do not edit manually.
  */
 
-import { queryOptions } from '@tanstack/react-query'
-import { getTags } from '../clients/getTags.ts'
-import type client from '@kubb/plugin-client/clients/axios'
-import type { GetTags422, GetTagsQueryResponse } from '../types/GetTags.ts'
+import client from '@kubb/plugin-client/clients/axios'
+import type {
+  GetTagsQueryResponse,
+  GetTags400,
+  GetTags404,
+} from '../types/GetTags.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
+import { getTags } from '../clients/getTags.ts'
+import { queryOptions } from '@tanstack/react-query'
 
 export const getTagsQueryKey = () => [{ url: '/tags' }] as const
 
@@ -22,7 +26,7 @@ export function getTagsQueryOptions(
   const queryKey = getTagsQueryKey()
   return queryOptions<
     GetTagsQueryResponse,
-    ResponseErrorConfig<GetTags422>,
+    ResponseErrorConfig<GetTags400 | GetTags404>,
     GetTagsQueryResponse,
     typeof queryKey
   >({

@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createUpdateCurrentUserMutationResponseFakeData } from '../mocks/createUpdateCurrentUser.ts'
 import type { UpdateCurrentUserMutationResponse } from '../types/UpdateCurrentUser.ts'
+import { generateUpdateCurrentUserMutationResponseFakeData } from '../mocks/generateUpdateCurrentUser.ts'
+import { http } from 'msw'
 
 export function updateCurrentUserHandler(
   data?:
@@ -17,7 +17,7 @@ export function updateCurrentUserHandler(
 
     return new Response(
       JSON.stringify(
-        data || createUpdateCurrentUserMutationResponseFakeData(data),
+        data || generateUpdateCurrentUserMutationResponseFakeData(data),
       ),
       {
         headers: {

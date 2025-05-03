@@ -7,8 +7,8 @@ export default function Header() {
   const { user } = useAuth()
   return (
     <header className="flex justify-between py-5">
-      <Link to="/" className="font-bold text-lg">
-        Conduit
+      <Link to="/" className="font-extrabold text-2xl">
+        conduit
       </Link>
       <nav className="flex gap-4 items-center">
         <Link
@@ -35,12 +35,18 @@ export default function Header() {
             </Link>
             <div className="ms-4">
               <Link
-                className="[&.active]:text-foreground flex gap-2 items-center"
+                className="flex gap-2 items-center"
                 to="/profile/$username"
                 params={{ username: user.username }}
               >
-                <UserAvatar src={user.image} fallbackName={user.username} />
-                <span className="text-sm">{user.username}</span>
+                <UserAvatar
+                  src={user.image}
+                  fallbackName={user.username}
+                  className="size-7"
+                />
+                <span className="text-sm text-foreground/90">
+                  {user.username}
+                </span>
               </Link>
             </div>
           </>

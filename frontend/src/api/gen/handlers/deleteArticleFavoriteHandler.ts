@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createDeleteArticleFavoriteMutationResponseFakeData } from '../mocks/createDeleteArticleFavorite.ts'
 import type { DeleteArticleFavoriteMutationResponse } from '../types/DeleteArticleFavorite.ts'
+import { generateDeleteArticleFavoriteMutationResponseFakeData } from '../mocks/generateDeleteArticleFavorite.ts'
+import { http } from 'msw'
 
 export function deleteArticleFavoriteHandler(
   data?:
@@ -13,13 +13,13 @@ export function deleteArticleFavoriteHandler(
     | ((info: Parameters<Parameters<typeof http.delete>[1]>[0]) => Response),
 ) {
   return http.delete(
-    'http://localhost:8080/articles/:slug/favorite',
+    'http://localhost:8080/articles/:id/favorite',
     function handler(info) {
       if (typeof data === 'function') return data(info)
 
       return new Response(
         JSON.stringify(
-          data || createDeleteArticleFavoriteMutationResponseFakeData(data),
+          data || generateDeleteArticleFavoriteMutationResponseFakeData(data),
         ),
         {
           headers: {

@@ -3,44 +3,31 @@
  * Do not edit manually.
  */
 
-import type { Article } from './Article.ts'
-import type { GenericErrorModel } from './GenericErrorModel.ts'
-import type { NewArticle } from './NewArticle.ts'
+import type { ArticleResponse } from './ArticleResponse.ts'
+import type { CreateArticleRequest } from './CreateArticleRequest.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
 
 /**
- * @description Single article
+ * @description OK
  */
-export type CreateArticle201 = {
-  /**
-   * @type object
-   */
-  article: Article
-}
+export type CreateArticle200 = ArticleResponse
 
 /**
- * @description Unauthorized
+ * @description Bad Request
  */
-export type CreateArticle401 = any
+export type CreateArticle400 = ProblemDetail
 
 /**
- * @description Unexpected error
+ * @description Not Found
  */
-export type CreateArticle422 = GenericErrorModel
+export type CreateArticle404 = ProblemDetail
 
-/**
- * @description Article to create
- */
-export type CreateArticleMutationRequest = {
-  /**
-   * @type object
-   */
-  article: NewArticle
-}
+export type CreateArticleMutationRequest = CreateArticleRequest
 
-export type CreateArticleMutationResponse = CreateArticle201
+export type CreateArticleMutationResponse = CreateArticle200
 
 export type CreateArticleMutation = {
-  Response: CreateArticle201
+  Response: CreateArticle200
   Request: CreateArticleMutationRequest
-  Errors: CreateArticle401 | CreateArticle422
+  Errors: CreateArticle400 | CreateArticle404
 }

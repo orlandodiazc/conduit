@@ -3,41 +3,35 @@
  * Do not edit manually.
  */
 
-import type { Article } from './Article.ts'
-import type { GenericErrorModel } from './GenericErrorModel.ts'
+import type { ArticleResponse } from './ArticleResponse.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
 
 export type DeleteArticleFavoritePathParams = {
   /**
-   * @description Slug of the article that you want to unfavorite
-   * @type string
+   * @type integer, int32
    */
-  slug: string
+  id: number
 }
 
 /**
- * @description Single article
+ * @description OK
  */
-export type DeleteArticleFavorite200 = {
-  /**
-   * @type object
-   */
-  article: Article
-}
+export type DeleteArticleFavorite200 = ArticleResponse
 
 /**
- * @description Unauthorized
+ * @description Bad Request
  */
-export type DeleteArticleFavorite401 = any
+export type DeleteArticleFavorite400 = ProblemDetail
 
 /**
- * @description Unexpected error
+ * @description Not Found
  */
-export type DeleteArticleFavorite422 = GenericErrorModel
+export type DeleteArticleFavorite404 = ProblemDetail
 
 export type DeleteArticleFavoriteMutationResponse = DeleteArticleFavorite200
 
 export type DeleteArticleFavoriteMutation = {
   Response: DeleteArticleFavorite200
   PathParams: DeleteArticleFavoritePathParams
-  Errors: DeleteArticleFavorite401 | DeleteArticleFavorite422
+  Errors: DeleteArticleFavorite400 | DeleteArticleFavorite404
 }

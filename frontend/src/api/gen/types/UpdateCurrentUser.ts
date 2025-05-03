@@ -3,44 +3,31 @@
  * Do not edit manually.
  */
 
-import type { GenericErrorModel } from './GenericErrorModel.ts'
-import type { UpdateUser } from './UpdateUser.ts'
-import type { User } from './User.ts'
+import type { CurrentUserResponse } from './CurrentUserResponse.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
+import type { UpdateUserRequest } from './UpdateUserRequest.ts'
 
 /**
- * @description User
+ * @description OK
  */
-export type UpdateCurrentUser200 = {
-  /**
-   * @type object
-   */
-  user: User
-}
+export type UpdateCurrentUser200 = CurrentUserResponse
 
 /**
- * @description Unauthorized
+ * @description Bad Request
  */
-export type UpdateCurrentUser401 = any
+export type UpdateCurrentUser400 = ProblemDetail
 
 /**
- * @description Unexpected error
+ * @description Not Found
  */
-export type UpdateCurrentUser422 = GenericErrorModel
+export type UpdateCurrentUser404 = ProblemDetail
 
-/**
- * @description User details to update. At least **one** field is required.
- */
-export type UpdateCurrentUserMutationRequest = {
-  /**
-   * @type object
-   */
-  user: UpdateUser
-}
+export type UpdateCurrentUserMutationRequest = UpdateUserRequest
 
 export type UpdateCurrentUserMutationResponse = UpdateCurrentUser200
 
 export type UpdateCurrentUserMutation = {
   Response: UpdateCurrentUser200
   Request: UpdateCurrentUserMutationRequest
-  Errors: UpdateCurrentUser401 | UpdateCurrentUser422
+  Errors: UpdateCurrentUser400 | UpdateCurrentUser404
 }

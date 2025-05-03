@@ -1,5 +1,7 @@
 package ditod.conduit.web.request;
 
-public record UpdateUserRequest(Params user) {
-    public record Params(String email, String username, String password, String bio, String image) {}
+import jakarta.validation.constraints.NotNull;
+
+public record UpdateUserRequest(@NotNull UpdateUserDto user) {
+    public record UpdateUserDto(@NotNull String email, @NotNull String username, @NotNull String password, @NotNull String bio, String image) {}
 }

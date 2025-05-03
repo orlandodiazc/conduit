@@ -6,34 +6,32 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  DeleteArticle401,
-  DeleteArticle422,
   DeleteArticleMutationResponse,
   DeleteArticlePathParams,
+  DeleteArticle400,
+  DeleteArticle404,
 } from '../types/DeleteArticle.ts'
 
-function getDeleteArticleUrl(slug: DeleteArticlePathParams['slug']) {
-  return `http://localhost:8080/articles/${slug}` as const
+function getDeleteArticleUrl(id: DeleteArticlePathParams['id']) {
+  return `http://localhost:8080/articles/${id}` as const
 }
 
 /**
- * @description Delete an article. Auth is required
- * @summary Delete an article
- * {@link /articles/:slug}
+ * {@link /articles/:id}
  */
 export async function deleteArticle(
-  slug: DeleteArticlePathParams['slug'],
+  id: DeleteArticlePathParams['id'],
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
   const { client: request = client, ...requestConfig } = config
 
   const res = await request<
     DeleteArticleMutationResponse,
-    ResponseErrorConfig<DeleteArticle401 | DeleteArticle422>,
+    ResponseErrorConfig<DeleteArticle400 | DeleteArticle404>,
     unknown
   >({
     method: 'DELETE',
-    url: getDeleteArticleUrl(slug).toString(),
+    url: getDeleteArticleUrl(id).toString(),
     ...requestConfig,
   })
   return res.data

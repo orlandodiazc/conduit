@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  CreateArticle401,
-  CreateArticle422,
   CreateArticleMutationRequest,
   CreateArticleMutationResponse,
+  CreateArticle400,
+  CreateArticle404,
 } from '../types/CreateArticle.ts'
 
 function getCreateArticleUrl() {
@@ -17,8 +17,6 @@ function getCreateArticleUrl() {
 }
 
 /**
- * @description Create an article. Auth is required
- * @summary Create an article
  * {@link /articles}
  */
 export async function createArticle(
@@ -31,7 +29,7 @@ export async function createArticle(
 
   const res = await request<
     CreateArticleMutationResponse,
-    ResponseErrorConfig<CreateArticle401 | CreateArticle422>,
+    ResponseErrorConfig<CreateArticle400 | CreateArticle404>,
     CreateArticleMutationRequest
   >({
     method: 'POST',

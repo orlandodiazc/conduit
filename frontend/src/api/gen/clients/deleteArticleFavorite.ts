@@ -6,36 +6,34 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  DeleteArticleFavorite401,
-  DeleteArticleFavorite422,
   DeleteArticleFavoriteMutationResponse,
   DeleteArticleFavoritePathParams,
+  DeleteArticleFavorite400,
+  DeleteArticleFavorite404,
 } from '../types/DeleteArticleFavorite.ts'
 
 function getDeleteArticleFavoriteUrl(
-  slug: DeleteArticleFavoritePathParams['slug'],
+  id: DeleteArticleFavoritePathParams['id'],
 ) {
-  return `http://localhost:8080/articles/${slug}/favorite` as const
+  return `http://localhost:8080/articles/${id}/favorite` as const
 }
 
 /**
- * @description Unfavorite an article. Auth is required
- * @summary Unfavorite an article
- * {@link /articles/:slug/favorite}
+ * {@link /articles/:id/favorite}
  */
 export async function deleteArticleFavorite(
-  slug: DeleteArticleFavoritePathParams['slug'],
+  id: DeleteArticleFavoritePathParams['id'],
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
   const { client: request = client, ...requestConfig } = config
 
   const res = await request<
     DeleteArticleFavoriteMutationResponse,
-    ResponseErrorConfig<DeleteArticleFavorite401 | DeleteArticleFavorite422>,
+    ResponseErrorConfig<DeleteArticleFavorite400 | DeleteArticleFavorite404>,
     unknown
   >({
     method: 'DELETE',
-    url: getDeleteArticleFavoriteUrl(slug).toString(),
+    url: getDeleteArticleFavoriteUrl(id).toString(),
     ...requestConfig,
   })
   return res.data

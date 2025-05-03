@@ -3,61 +3,33 @@
  * Do not edit manually.
  */
 
-import type { Article } from './Article.ts'
-import type { GenericErrorModel } from './GenericErrorModel.ts'
-
-export type UpdateArticle = {
-  /**
-   * @type string | undefined
-   */
-  title?: string
-  /**
-   * @type string | undefined
-   */
-  description?: string
-  /**
-   * @type string | undefined
-   */
-  body?: string
-}
+import type { ArticleResponse } from './ArticleResponse.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
+import type { UpdateArticleRequest } from './UpdateArticleRequest.ts'
 
 export type UpdateArticlePathParams = {
   /**
-   * @description Slug of the article to update
-   * @type string
+   * @type integer, int32
    */
-  slug: string
+  id: number
 }
 
 /**
- * @description Single article
+ * @description OK
  */
-export type UpdateArticle200 = {
-  /**
-   * @type object
-   */
-  article: Article
-}
+export type UpdateArticle200 = ArticleResponse
 
 /**
- * @description Unauthorized
+ * @description Bad Request
  */
-export type UpdateArticle401 = any
+export type UpdateArticle400 = ProblemDetail
 
 /**
- * @description Unexpected error
+ * @description Not Found
  */
-export type UpdateArticle422 = GenericErrorModel
+export type UpdateArticle404 = ProblemDetail
 
-/**
- * @description Article to update
- */
-export type UpdateArticleMutationRequest = {
-  /**
-   * @type object
-   */
-  article: UpdateArticle
-}
+export type UpdateArticleMutationRequest = UpdateArticleRequest
 
 export type UpdateArticleMutationResponse = UpdateArticle200
 
@@ -65,5 +37,5 @@ export type UpdateArticleMutation = {
   Response: UpdateArticle200
   Request: UpdateArticleMutationRequest
   PathParams: UpdateArticlePathParams
-  Errors: UpdateArticle401 | UpdateArticle422
+  Errors: UpdateArticle400 | UpdateArticle404
 }

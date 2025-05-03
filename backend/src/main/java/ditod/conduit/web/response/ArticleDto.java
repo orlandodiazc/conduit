@@ -2,23 +2,26 @@ package ditod.conduit.web.response;
 
 import ditod.conduit.core.model.article.Article;
 import ditod.conduit.core.model.article.ArticleTag;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.Instant;
 import java.util.List;
 
 public record ArticleDto(
-        String slug,
-        String title,
-        String description,
-        String body,
-        List<String> tagList,
-        Instant createdAt,
-        Instant updatedAt,
-        boolean favorited,
-        long favoritesCount,
-        AuthorDto author) {
+        @NotNull Integer id,
+        @NotNull String slug,
+        @NotNull String title,
+        @NotNull String description,
+        @NotNull String body,
+        @NotNull List<String> tagList,
+        @NotNull Instant createdAt,
+        @NotNull Instant updatedAt,
+        @NotNull boolean favorited,
+        @NotNull long favoritesCount,
+        @NotNull AuthorDto author) {
     public static ArticleDto from(Article article, boolean favorited, long favoritesCount, AuthorDto author) {
         return new ArticleDto(
+                article.getId(),
                 article.getSlug(),
                 article.getTitle(),
                 article.getDescription(),

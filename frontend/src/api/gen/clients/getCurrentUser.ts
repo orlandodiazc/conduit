@@ -6,9 +6,9 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  GetCurrentUser401,
-  GetCurrentUser422,
   GetCurrentUserQueryResponse,
+  GetCurrentUser400,
+  GetCurrentUser404,
 } from '../types/GetCurrentUser.ts'
 
 function getGetCurrentUserUrl() {
@@ -16,8 +16,6 @@ function getGetCurrentUserUrl() {
 }
 
 /**
- * @description Gets the currently logged-in user
- * @summary Get current user
  * {@link /user}
  */
 export async function getCurrentUser(
@@ -27,7 +25,7 @@ export async function getCurrentUser(
 
   const res = await request<
     GetCurrentUserQueryResponse,
-    ResponseErrorConfig<GetCurrentUser401 | GetCurrentUser422>,
+    ResponseErrorConfig<GetCurrentUser400 | GetCurrentUser404>,
     unknown
   >({
     method: 'GET',

@@ -3,43 +3,38 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { updateArticle } from '../clients/updateArticle.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  UpdateArticle401,
-  UpdateArticle422,
   UpdateArticleMutationRequest,
   UpdateArticleMutationResponse,
   UpdateArticlePathParams,
+  UpdateArticle400,
+  UpdateArticle404,
 } from '../types/UpdateArticle.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { updateArticle } from '../clients/updateArticle.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const updateArticleMutationKey = () =>
-  [{ url: '/articles/{slug}' }] as const
+  [{ url: '/articles/{id}' }] as const
 
 export type UpdateArticleMutationKey = ReturnType<
   typeof updateArticleMutationKey
 >
 
 /**
- * @description Update an article. Auth is required
- * @summary Update an article
- * {@link /articles/:slug}
+ * {@link /articles/:id}
  */
 export function useUpdateArticle<TContext>(
   options: {
     mutation?: UseMutationOptions<
       UpdateArticleMutationResponse,
-      ResponseErrorConfig<UpdateArticle401 | UpdateArticle422>,
-      {
-        slug: UpdateArticlePathParams['slug']
-        data: UpdateArticleMutationRequest
-      },
+      ResponseErrorConfig<UpdateArticle400 | UpdateArticle404>,
+      { id: UpdateArticlePathParams['id']; data: UpdateArticleMutationRequest },
       TContext
     > & { client?: QueryClient }
     client?: Partial<RequestConfig<UpdateArticleMutationRequest>> & {
@@ -51,20 +46,17 @@ export function useUpdateArticle<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions.mutationKey ?? updateArticleMutationKey()
+  const mutationKey = mutationOptions?.mutationKey ?? updateArticleMutationKey()
 
   return useMutation<
     UpdateArticleMutationResponse,
-    ResponseErrorConfig<UpdateArticle401 | UpdateArticle422>,
-    {
-      slug: UpdateArticlePathParams['slug']
-      data: UpdateArticleMutationRequest
-    },
+    ResponseErrorConfig<UpdateArticle400 | UpdateArticle404>,
+    { id: UpdateArticlePathParams['id']; data: UpdateArticleMutationRequest },
     TContext
   >(
     {
-      mutationFn: async ({ slug, data }) => {
-        return updateArticle(slug, data, config)
+      mutationFn: async ({ id, data }) => {
+        return updateArticle(id, data, config)
       },
       mutationKey,
       ...mutationOptions,

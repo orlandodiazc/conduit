@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  UpdateCurrentUser401,
-  UpdateCurrentUser422,
   UpdateCurrentUserMutationRequest,
   UpdateCurrentUserMutationResponse,
+  UpdateCurrentUser400,
+  UpdateCurrentUser404,
 } from '../types/UpdateCurrentUser.ts'
 
 function getUpdateCurrentUserUrl() {
@@ -17,8 +17,6 @@ function getUpdateCurrentUserUrl() {
 }
 
 /**
- * @description Updated user information for current user
- * @summary Update current user
  * {@link /user}
  */
 export async function updateCurrentUser(
@@ -31,7 +29,7 @@ export async function updateCurrentUser(
 
   const res = await request<
     UpdateCurrentUserMutationResponse,
-    ResponseErrorConfig<UpdateCurrentUser401 | UpdateCurrentUser422>,
+    ResponseErrorConfig<UpdateCurrentUser400 | UpdateCurrentUser404>,
     UpdateCurrentUserMutationRequest
   >({
     method: 'PUT',

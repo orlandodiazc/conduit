@@ -1,3 +1,5 @@
 package ditod.conduit.web.response;
 
-public record ProfileResponse(AuthorDto profile) {}
+import jakarta.validation.constraints.NotNull;
+
+public record ProfileResponse(@NotNull AuthorDto profile) {}

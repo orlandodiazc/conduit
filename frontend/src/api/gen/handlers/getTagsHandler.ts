@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createGetTagsQueryResponseFakeData } from '../mocks/createGetTags.ts'
 import type { GetTagsQueryResponse } from '../types/GetTags.ts'
+import { generateGetTagsQueryResponseFakeData } from '../mocks/generateGetTags.ts'
+import { http } from 'msw'
 
 export function getTagsHandler(
   data?:
@@ -16,7 +16,7 @@ export function getTagsHandler(
     if (typeof data === 'function') return data(info)
 
     return new Response(
-      JSON.stringify(data || createGetTagsQueryResponseFakeData(data)),
+      JSON.stringify(data || generateGetTagsQueryResponseFakeData(data)),
       {
         headers: {
           'Content-Type': 'application/json',

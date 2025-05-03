@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { updateCurrentUser } from '../clients/updateCurrentUser.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  UpdateCurrentUser401,
-  UpdateCurrentUser422,
   UpdateCurrentUserMutationRequest,
   UpdateCurrentUserMutationResponse,
+  UpdateCurrentUser400,
+  UpdateCurrentUser404,
 } from '../types/UpdateCurrentUser.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { updateCurrentUser } from '../clients/updateCurrentUser.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const updateCurrentUserMutationKey = () => [{ url: '/user' }] as const
 
@@ -25,15 +25,13 @@ export type UpdateCurrentUserMutationKey = ReturnType<
 >
 
 /**
- * @description Updated user information for current user
- * @summary Update current user
  * {@link /user}
  */
 export function useUpdateCurrentUser<TContext>(
   options: {
     mutation?: UseMutationOptions<
       UpdateCurrentUserMutationResponse,
-      ResponseErrorConfig<UpdateCurrentUser401 | UpdateCurrentUser422>,
+      ResponseErrorConfig<UpdateCurrentUser400 | UpdateCurrentUser404>,
       { data: UpdateCurrentUserMutationRequest },
       TContext
     > & { client?: QueryClient }
@@ -47,11 +45,11 @@ export function useUpdateCurrentUser<TContext>(
     client: config = {},
   } = options ?? {}
   const mutationKey =
-    mutationOptions.mutationKey ?? updateCurrentUserMutationKey()
+    mutationOptions?.mutationKey ?? updateCurrentUserMutationKey()
 
   return useMutation<
     UpdateCurrentUserMutationResponse,
-    ResponseErrorConfig<UpdateCurrentUser401 | UpdateCurrentUser422>,
+    ResponseErrorConfig<UpdateCurrentUser400 | UpdateCurrentUser404>,
     { data: UpdateCurrentUserMutationRequest },
     TContext
   >(

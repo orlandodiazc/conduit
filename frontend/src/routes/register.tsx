@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
 import { useAppForm } from '@/hooks/form'
 import { useAuth } from '@/auth'
-import { useCreateUser } from '@/api/gen'
+import { useRegister } from '@/api/gen'
 
 export const Route = createFileRoute('/register')({
   component: RouteComponent,
@@ -15,7 +15,7 @@ const schema = z.object({
 })
 
 function RouteComponent() {
-  const { mutate } = useCreateUser()
+  const { mutate } = useRegister()
   const navigate = Route.useNavigate()
   const { setTokenValue } = useAuth()
 

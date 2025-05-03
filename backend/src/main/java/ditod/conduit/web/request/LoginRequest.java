@@ -3,10 +3,10 @@ package ditod.conduit.web.request;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-public record LoginRequest(@Valid Params user) {
+public record LoginRequest(@Valid LoginUserDto user) {
     public LoginRequest(String email, String password) {
-        this(new Params(email, password));
+        this(new LoginUserDto(email, password));
     }
 
-    public record Params(@NotNull String email, @NotNull String password) {}
+    public record LoginUserDto(@NotNull String email, @NotNull String password) {}
 }

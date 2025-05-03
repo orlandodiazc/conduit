@@ -3,26 +3,27 @@
  * Do not edit manually.
  */
 
-import type { GenericErrorModel } from './GenericErrorModel.ts'
+import type { ProblemDetail } from './ProblemDetail.ts'
+import type { TagsResponse } from './TagsResponse.ts'
 
 /**
- * @description Tags
+ * @description OK
  */
-export type GetTags200 = {
-  /**
-   * @type array
-   */
-  tags: Array<string>
-}
+export type GetTags200 = TagsResponse
 
 /**
- * @description Unexpected error
+ * @description Bad Request
  */
-export type GetTags422 = GenericErrorModel
+export type GetTags400 = ProblemDetail
+
+/**
+ * @description Not Found
+ */
+export type GetTags404 = ProblemDetail
 
 export type GetTagsQueryResponse = GetTags200
 
 export type GetTagsQuery = {
   Response: GetTags200
-  Errors: GetTags422
+  Errors: GetTags400 | GetTags404
 }

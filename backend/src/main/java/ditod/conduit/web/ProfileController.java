@@ -33,7 +33,7 @@ public class ProfileController {
     }
 
     @PostMapping("/{username}/follow")
-    ProfileResponse saveUserFollow(@PathVariable String username, Authentication auth) {
+    ProfileResponse createUserFollow(@PathVariable String username, Authentication auth) {
         var userToFollow = userService.getUserByUsername(username);
         var me = userService.getUserByEmail(auth.getName());
         userFollowService.follow(me, userToFollow);

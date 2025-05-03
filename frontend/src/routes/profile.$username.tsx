@@ -1,83 +1,115 @@
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
+import { useAuth } from '@/auth'
 import { Button } from '@/components/ui/button'
 import UserAvatar from '@/components/UserAvatar'
 import {
-  getArticlesQueryOptions,
-  getProfileByUsernameQueryOptions,
-  useFollowUserByUsername,
-  useUnfollowUserByUsername,
+  getProfileQueryOptions,
+  useCreateUserFollow,
+  useDeleteUserFollow,
 } from '@/api/gen'
-import { useAuth } from '@/auth'
 
 export const Route = createFileRoute('/profile/$username')({
   component: RouteComponent,
-  loader: async ({ context, params: { username } }) => {
-    const profilePromise = context.queryClient.ensureQueryData(
-      getProfileByUsernameQueryOptions(username),
-    )
-    const userArticles = context.queryClient.ensureQueryData(
-      getArticlesQueryOptions({ author: username }),
-    )
-    return await Promise.all([profilePromise, userArticles])
-  },
+  loader: async ({ context, params: { username } }) =>
+    context.queryClient.ensureQueryData(getProfileQueryOptions(username)),
 })
 
 function RouteComponent() {
+  const { user, isAuthenticated } = useAuth()
   const { username } = Route.useParams()
-  const { user } = useAuth()
   const queryClient = useQueryClient()
   const {
     data: { profile },
-  } = useSuspenseQuery(getProfileByUsernameQueryOptions(username))
+  } = useSuspenseQuery(getProfileQueryOptions(username))
+  const navigate = Route.useNavigate()
 
-  const { data: articlesPage } = useSuspenseQuery(
-    getArticlesQueryOptions({ author: username }),
-  )
+  const followMutation = useCreateUserFollow()
+  const unfollowMutation = useDeleteUserFollow()
 
-  const followMutation = useFollowUserByUsername({
-    mutation: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: getProfileByUsernameQueryOptions(username).queryKey,
-        })
+  function handleFollowToggle() {
+    if (!isAuthenticated) {
+      navigate({ to: '/login' })
+      return
+    }
+    const mutation = profile.following ? unfollowMutation : followMutation
+
+    mutation.mutate(
+      { username },
+      {
+        onSuccess: (data) => {
+          queryClient.setQueryData(
+            getProfileQueryOptions(username).queryKey,
+            data,
+          )
+          navigate({
+            to: '/profile/$username',
+            params: { username },
+          })
+        },
       },
-    },
-  })
-  const unfollowMutation = useUnfollowUserByUsername({
-    mutation: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: getProfileByUsernameQueryOptions(username).queryKey,
-        })
-      },
-    },
-  })
+    )
+  }
   return (
-    <div>
-      <UserAvatar src={profile.image} fallbackName={profile.username} />
-      {JSON.stringify(profile)}
-      {user?.username !== profile.username &&
-        (!profile.following ? (
+    <div className="py-10 max-w-4xl m-auto">
+      <div className="flex flex-col items-center gap-3">
+        <div>
+          <UserAvatar
+            src={profile.image}
+            fallbackName={profile.username}
+            className="size-20"
+          />
+        </div>
+        <h1 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          {profile.username}
+        </h1>
+        <p className="text-muted-foreground">{profile.bio}</p>
+
+        <div className="self-end flex gap-2">
+          {user?.username === profile.username && (
+            <Button asChild variant="outline">
+              <Link to="/settings">Edit profile settings</Link>
+            </Button>
+          )}
+
           <Button
-            onClick={() => followMutation.mutate({ username })}
-            disabled={followMutation.isPending}
+            variant={profile.following ? 'destructive' : 'secondary'}
+            disabled={followMutation.isPending || unfollowMutation.isPending}
+            onClick={handleFollowToggle}
           >
-            Follow
+            {profile.following
+              ? `Unfollow ${profile.username}`
+              : `Follow ${profile.username}`}
           </Button>
-        ) : (
-          <Button
-            onClick={() => unfollowMutation.mutate({ username })}
-            disabled={unfollowMutation.isPending}
-          >
-            Unfollow
-          </Button>
-        ))}
-      <br />
-      {user?.username !== profile.username && (
-        <Link to="/settings">Edit profile settings</Link>
-      )}
-      {JSON.stringify(articlesPage.articles)}
+        </div>
+      </div>
+      <div className="grid grid-flow-col grid-cols-1 gap-6 mt-10">
+        <div>
+          <div className="text-muted-foreground border-b flex">
+            <div className="p-2">
+              <Link
+                to="/profile/$username"
+                params={{ username }}
+                activeOptions={{ exact: true }}
+                className="[&.active]:text-foreground"
+              >
+                My Articles
+              </Link>
+            </div>
+
+            <div className="p-2">
+              <Link
+                to="/profile/$username/favorites"
+                params={{ username }}
+                className="[&.active]:text-foreground"
+              >
+                My Favorites
+              </Link>
+            </div>
+          </div>
+          <Outlet />
+        </div>
+      </div>
     </div>
   )
 }

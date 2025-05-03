@@ -3,52 +3,15 @@
  * Do not edit manually.
  */
 
-import type { Profile } from './Profile.ts'
+import type { ArticleDto } from './ArticleDto.ts'
 
 export type MultipleArticlesResponse = {
   /**
    * @type array
    */
-  articles: Array<{
-    /**
-     * @type string
-     */
-    slug: string
-    /**
-     * @type string
-     */
-    title: string
-    /**
-     * @type string
-     */
-    description: string
-    /**
-     * @type array
-     */
-    tagList: Array<string>
-    /**
-     * @type string, date-time
-     */
-    createdAt: string
-    /**
-     * @type string, date-time
-     */
-    updatedAt: string
-    /**
-     * @type boolean
-     */
-    favorited: boolean
-    /**
-     * @type integer
-     */
-    favoritesCount: number
-    /**
-     * @type object
-     */
-    author: Profile
-  }>
+  articles: ArticleDto[]
   /**
-   * @type integer
+   * @type integer, int32
    */
   articlesCount: number
 }

@@ -3,11 +3,11 @@
  * Do not edit manually.
  */
 
-import type { Profile } from './Profile.ts'
+import type { AuthorDto } from './AuthorDto.ts'
 
 export type ProfileResponse = {
   /**
    * @type object
    */
-  profile: Profile
+  profile: AuthorDto
 }

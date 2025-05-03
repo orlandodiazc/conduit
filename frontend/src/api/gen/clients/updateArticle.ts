@@ -6,24 +6,22 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  UpdateArticle401,
-  UpdateArticle422,
   UpdateArticleMutationRequest,
   UpdateArticleMutationResponse,
   UpdateArticlePathParams,
+  UpdateArticle400,
+  UpdateArticle404,
 } from '../types/UpdateArticle.ts'
 
-function getUpdateArticleUrl(slug: UpdateArticlePathParams['slug']) {
-  return `http://localhost:8080/articles/${slug}` as const
+function getUpdateArticleUrl(id: UpdateArticlePathParams['id']) {
+  return `http://localhost:8080/articles/${id}` as const
 }
 
 /**
- * @description Update an article. Auth is required
- * @summary Update an article
- * {@link /articles/:slug}
+ * {@link /articles/:id}
  */
 export async function updateArticle(
-  slug: UpdateArticlePathParams['slug'],
+  id: UpdateArticlePathParams['id'],
   data: UpdateArticleMutationRequest,
   config: Partial<RequestConfig<UpdateArticleMutationRequest>> & {
     client?: typeof client
@@ -33,11 +31,11 @@ export async function updateArticle(
 
   const res = await request<
     UpdateArticleMutationResponse,
-    ResponseErrorConfig<UpdateArticle401 | UpdateArticle422>,
+    ResponseErrorConfig<UpdateArticle400 | UpdateArticle404>,
     UpdateArticleMutationRequest
   >({
     method: 'PUT',
-    url: getUpdateArticleUrl(slug).toString(),
+    url: getUpdateArticleUrl(id).toString(),
     data,
     ...requestConfig,
   })

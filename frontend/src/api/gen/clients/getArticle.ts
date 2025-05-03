@@ -6,33 +6,32 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  GetArticle422,
-  GetArticlePathParams,
   GetArticleQueryResponse,
+  GetArticlePathParams,
+  GetArticle400,
+  GetArticle404,
 } from '../types/GetArticle.ts'
 
-function getGetArticleUrl(slug: GetArticlePathParams['slug']) {
-  return `http://localhost:8080/articles/${slug}` as const
+function getGetArticleUrl(id: GetArticlePathParams['id']) {
+  return `http://localhost:8080/articles/${id}` as const
 }
 
 /**
- * @description Get an article. Auth not required
- * @summary Get an article
- * {@link /articles/:slug}
+ * {@link /articles/:id}
  */
 export async function getArticle(
-  slug: GetArticlePathParams['slug'],
+  id: GetArticlePathParams['id'],
   config: Partial<RequestConfig> & { client?: typeof client } = {},
 ) {
   const { client: request = client, ...requestConfig } = config
 
   const res = await request<
     GetArticleQueryResponse,
-    ResponseErrorConfig<GetArticle422>,
+    ResponseErrorConfig<GetArticle400 | GetArticle404>,
     unknown
   >({
     method: 'GET',
-    url: getGetArticleUrl(slug).toString(),
+    url: getGetArticleUrl(id).toString(),
     ...requestConfig,
   })
   return res.data

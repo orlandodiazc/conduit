@@ -1,174 +1,176 @@
-export type { Article } from './Article.ts'
-export type { Comment } from './Comment.ts'
+export type { ArticleDto } from './ArticleDto.ts'
+export type { ArticleResponse } from './ArticleResponse.ts'
+export type { AuthorDto } from './AuthorDto.ts'
+export type { CommentDto } from './CommentDto.ts'
+export type { CommentResponse } from './CommentResponse.ts'
 export type {
-  CreateArticle201,
-  CreateArticle401,
-  CreateArticle422,
+  CreateArticle200,
+  CreateArticle400,
+  CreateArticle404,
   CreateArticleMutationRequest,
   CreateArticleMutationResponse,
   CreateArticleMutation,
 } from './CreateArticle.ts'
+export type { CreateArticleDto } from './CreateArticleDto.ts'
+export type { CreateArticleRequest } from './CreateArticleRequest.ts'
 export type {
-  CreateArticleCommentPathParams,
-  CreateArticleComment200,
-  CreateArticleComment401,
-  CreateArticleComment422,
-  CreateArticleCommentMutationRequest,
-  CreateArticleCommentMutationResponse,
-  CreateArticleCommentMutation,
-} from './CreateArticleComment.ts'
+  CreateCommentPathParams,
+  CreateComment200,
+  CreateComment400,
+  CreateComment404,
+  CreateCommentMutationRequest,
+  CreateCommentMutationResponse,
+  CreateCommentMutation,
+} from './CreateComment.ts'
+export type { CreateCommentDto } from './CreateCommentDto.ts'
+export type { CreateCommentRequest } from './CreateCommentRequest.ts'
 export type {
-  CreateArticleFavoritePathParams,
-  CreateArticleFavorite200,
-  CreateArticleFavorite401,
-  CreateArticleFavorite422,
-  CreateArticleFavoriteMutationResponse,
-  CreateArticleFavoriteMutation,
-} from './CreateArticleFavorite.ts'
-export type {
-  CreateUser201,
-  CreateUser422,
-  CreateUserMutationRequest,
-  CreateUserMutationResponse,
-  CreateUserMutation,
-} from './CreateUser.ts'
+  CreateUserFollowPathParams,
+  CreateUserFollow200,
+  CreateUserFollow400,
+  CreateUserFollow404,
+  CreateUserFollowMutationResponse,
+  CreateUserFollowMutation,
+} from './CreateUserFollow.ts'
+export type { CurrentUserDto } from './CurrentUserDto.ts'
+export type { CurrentUserResponse } from './CurrentUserResponse.ts'
 export type {
   DeleteArticlePathParams,
   DeleteArticle200,
-  DeleteArticle401,
-  DeleteArticle422,
+  DeleteArticle400,
+  DeleteArticle404,
   DeleteArticleMutationResponse,
   DeleteArticleMutation,
 } from './DeleteArticle.ts'
 export type {
-  DeleteArticleCommentPathParams,
-  DeleteArticleComment200,
-  DeleteArticleComment401,
-  DeleteArticleComment422,
-  DeleteArticleCommentMutationResponse,
-  DeleteArticleCommentMutation,
-} from './DeleteArticleComment.ts'
-export type {
   DeleteArticleFavoritePathParams,
   DeleteArticleFavorite200,
-  DeleteArticleFavorite401,
-  DeleteArticleFavorite422,
+  DeleteArticleFavorite400,
+  DeleteArticleFavorite404,
   DeleteArticleFavoriteMutationResponse,
   DeleteArticleFavoriteMutation,
 } from './DeleteArticleFavorite.ts'
 export type {
-  FollowUserByUsernamePathParams,
-  FollowUserByUsername200,
-  FollowUserByUsername401,
-  FollowUserByUsername422,
-  FollowUserByUsernameMutationResponse,
-  FollowUserByUsernameMutation,
-} from './FollowUserByUsername.ts'
-export type { GenericError } from './GenericError.ts'
-export type { GenericErrorModel } from './GenericErrorModel.ts'
+  DeleteCommentPathParams,
+  DeleteComment200,
+  DeleteComment400,
+  DeleteComment404,
+  DeleteCommentMutationResponse,
+  DeleteCommentMutation,
+} from './DeleteComment.ts'
+export type {
+  DeleteUserFollowPathParams,
+  DeleteUserFollow200,
+  DeleteUserFollow400,
+  DeleteUserFollow404,
+  DeleteUserFollowMutationResponse,
+  DeleteUserFollowMutation,
+} from './DeleteUserFollow.ts'
+export type {
+  FavoriteArticlePathParams,
+  FavoriteArticle200,
+  FavoriteArticle400,
+  FavoriteArticle404,
+  FavoriteArticleMutationResponse,
+  FavoriteArticleMutation,
+} from './FavoriteArticle.ts'
 export type {
   GetArticlePathParams,
   GetArticle200,
-  GetArticle422,
+  GetArticle400,
+  GetArticle404,
   GetArticleQueryResponse,
   GetArticleQuery,
 } from './GetArticle.ts'
 export type {
-  GetArticleCommentsPathParams,
-  GetArticleComments200,
-  GetArticleComments401,
-  GetArticleComments422,
-  GetArticleCommentsQueryResponse,
-  GetArticleCommentsQuery,
-} from './GetArticleComments.ts'
-export type {
-  GetArticlesQueryParams,
-  GetArticles200,
-  GetArticles401,
-  GetArticles422,
-  GetArticlesQueryResponse,
-  GetArticlesQuery,
-} from './GetArticles.ts'
-export type {
-  GetArticlesFeedQueryParams,
-  GetArticlesFeed200,
-  GetArticlesFeed401,
-  GetArticlesFeed422,
-  GetArticlesFeedQueryResponse,
-  GetArticlesFeedQuery,
-} from './GetArticlesFeed.ts'
+  GetCommentsPathParams,
+  GetComments200,
+  GetComments400,
+  GetComments404,
+  GetCommentsQueryResponse,
+  GetCommentsQuery,
+} from './GetComments.ts'
 export type {
   GetCurrentUser200,
-  GetCurrentUser401,
-  GetCurrentUser422,
+  GetCurrentUser400,
+  GetCurrentUser404,
   GetCurrentUserQueryResponse,
   GetCurrentUserQuery,
 } from './GetCurrentUser.ts'
 export type {
-  GetProfileByUsernamePathParams,
-  GetProfileByUsername200,
-  GetProfileByUsername401,
-  GetProfileByUsername422,
-  GetProfileByUsernameQueryResponse,
-  GetProfileByUsernameQuery,
-} from './GetProfileByUsername.ts'
+  GetProfilePathParams,
+  GetProfile200,
+  GetProfile400,
+  GetProfile404,
+  GetProfileQueryResponse,
+  GetProfileQuery,
+} from './GetProfile.ts'
 export type {
   GetTags200,
-  GetTags422,
+  GetTags400,
+  GetTags404,
   GetTagsQueryResponse,
   GetTagsQuery,
 } from './GetTags.ts'
 export type {
+  ListArticleFeedQueryParams,
+  ListArticleFeed200,
+  ListArticleFeed400,
+  ListArticleFeed404,
+  ListArticleFeedQueryResponse,
+  ListArticleFeedQuery,
+} from './ListArticleFeed.ts'
+export type {
+  ListArticlesQueryParams,
+  ListArticles200,
+  ListArticles400,
+  ListArticles404,
+  ListArticlesQueryResponse,
+  ListArticlesQuery,
+} from './ListArticles.ts'
+export type {
   Login200,
-  Login401,
-  Login422,
+  Login400,
+  Login404,
   LoginMutationRequest,
   LoginMutationResponse,
   LoginMutation,
 } from './Login.ts'
-export type { LoginUser } from './LoginUser.ts'
-export type { LoginUserRequest } from './LoginUserRequest.ts'
+export type { LoginRequest } from './LoginRequest.ts'
+export type { LoginUserDto } from './LoginUserDto.ts'
 export type { MultipleArticlesResponse } from './MultipleArticlesResponse.ts'
 export type { MultipleCommentsResponse } from './MultipleCommentsResponse.ts'
-export type { NewArticle } from './NewArticle.ts'
-export type { NewArticleRequest } from './NewArticleRequest.ts'
-export type { NewComment } from './NewComment.ts'
-export type { NewCommentRequest } from './NewCommentRequest.ts'
-export type { NewUser } from './NewUser.ts'
-export type { NewUserRequest } from './NewUserRequest.ts'
-export type { Profile } from './Profile.ts'
+export type { ProblemDetail } from './ProblemDetail.ts'
 export type { ProfileResponse } from './ProfileResponse.ts'
-export type { SingleArticleResponse } from './SingleArticleResponse.ts'
-export type { SingleCommentResponse } from './SingleCommentResponse.ts'
+export type {
+  Register200,
+  Register400,
+  Register404,
+  RegisterMutationRequest,
+  RegisterMutationResponse,
+  RegisterMutation,
+} from './Register.ts'
+export type { RegisterRequest } from './RegisterRequest.ts'
+export type { RegisterUserDto } from './RegisterUserDto.ts'
 export type { TagsResponse } from './TagsResponse.ts'
 export type {
-  UnfollowUserByUsernamePathParams,
-  UnfollowUserByUsername200,
-  UnfollowUserByUsername401,
-  UnfollowUserByUsername422,
-  UnfollowUserByUsernameMutationResponse,
-  UnfollowUserByUsernameMutation,
-} from './UnfollowUserByUsername.ts'
-export type {
-  UpdateArticle,
   UpdateArticlePathParams,
   UpdateArticle200,
-  UpdateArticle401,
-  UpdateArticle422,
+  UpdateArticle400,
+  UpdateArticle404,
   UpdateArticleMutationRequest,
   UpdateArticleMutationResponse,
   UpdateArticleMutation,
 } from './UpdateArticle.ts'
+export type { UpdateArticleDto } from './UpdateArticleDto.ts'
 export type { UpdateArticleRequest } from './UpdateArticleRequest.ts'
 export type {
   UpdateCurrentUser200,
-  UpdateCurrentUser401,
-  UpdateCurrentUser422,
+  UpdateCurrentUser400,
+  UpdateCurrentUser404,
   UpdateCurrentUserMutationRequest,
   UpdateCurrentUserMutationResponse,
   UpdateCurrentUserMutation,
 } from './UpdateCurrentUser.ts'
-export type { UpdateUser } from './UpdateUser.ts'
+export type { UpdateUserDto } from './UpdateUserDto.ts'
 export type { UpdateUserRequest } from './UpdateUserRequest.ts'
-export type { User } from './User.ts'
-export type { UserResponse } from './UserResponse.ts'

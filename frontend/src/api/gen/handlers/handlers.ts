@@ -3,44 +3,44 @@
  * Do not edit manually.
  */
 
-import { createArticleCommentHandler } from './createArticleCommentHandler.ts'
-import { createArticleFavoriteHandler } from './createArticleFavoriteHandler.ts'
 import { createArticleHandler } from './createArticleHandler.ts'
-import { createUserHandler } from './createUserHandler.ts'
-import { deleteArticleCommentHandler } from './deleteArticleCommentHandler.ts'
+import { createCommentHandler } from './createCommentHandler.ts'
+import { createUserFollowHandler } from './createUserFollowHandler.ts'
 import { deleteArticleFavoriteHandler } from './deleteArticleFavoriteHandler.ts'
 import { deleteArticleHandler } from './deleteArticleHandler.ts'
-import { followUserByUsernameHandler } from './followUserByUsernameHandler.ts'
-import { getArticleCommentsHandler } from './getArticleCommentsHandler.ts'
+import { deleteCommentHandler } from './deleteCommentHandler.ts'
+import { deleteUserFollowHandler } from './deleteUserFollowHandler.ts'
+import { favoriteArticleHandler } from './favoriteArticleHandler.ts'
 import { getArticleHandler } from './getArticleHandler.ts'
-import { getArticlesFeedHandler } from './getArticlesFeedHandler.ts'
-import { getArticlesHandler } from './getArticlesHandler.ts'
+import { getCommentsHandler } from './getCommentsHandler.ts'
 import { getCurrentUserHandler } from './getCurrentUserHandler.ts'
-import { getProfileByUsernameHandler } from './getProfileByUsernameHandler.ts'
+import { getProfileHandler } from './getProfileHandler.ts'
 import { getTagsHandler } from './getTagsHandler.ts'
+import { listArticleFeedHandler } from './listArticleFeedHandler.ts'
+import { listArticlesHandler } from './listArticlesHandler.ts'
 import { loginHandler } from './loginHandler.ts'
-import { unfollowUserByUsernameHandler } from './unfollowUserByUsernameHandler.ts'
+import { registerHandler } from './registerHandler.ts'
 import { updateArticleHandler } from './updateArticleHandler.ts'
 import { updateCurrentUserHandler } from './updateCurrentUserHandler.ts'
 
 export const handlers = [
-  loginHandler(),
-  createUserHandler(),
   getCurrentUserHandler(),
   updateCurrentUserHandler(),
-  getProfileByUsernameHandler(),
-  followUserByUsernameHandler(),
-  unfollowUserByUsernameHandler(),
-  getArticlesFeedHandler(),
-  getArticlesHandler(),
-  createArticleHandler(),
   getArticleHandler(),
   updateArticleHandler(),
   deleteArticleHandler(),
-  getArticleCommentsHandler(),
-  createArticleCommentHandler(),
-  deleteArticleCommentHandler(),
-  createArticleFavoriteHandler(),
+  registerHandler(),
+  loginHandler(),
+  createUserFollowHandler(),
+  deleteUserFollowHandler(),
+  listArticlesHandler(),
+  createArticleHandler(),
+  favoriteArticleHandler(),
   deleteArticleFavoriteHandler(),
+  getCommentsHandler(),
+  createCommentHandler(),
   getTagsHandler(),
+  getProfileHandler(),
+  listArticleFeedHandler(),
+  deleteCommentHandler(),
 ] as const

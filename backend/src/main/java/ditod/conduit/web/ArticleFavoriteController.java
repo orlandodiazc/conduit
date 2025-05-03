@@ -9,7 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/articles/{slug}/favorite")
+@RequestMapping("/articles/{id}/favorite")
 public class ArticleFavoriteController {
     private final UserService userService;
     private final ArticleFavoriteRepository articleFavoriteRepository;
@@ -25,17 +25,17 @@ public class ArticleFavoriteController {
     }
 
     @PostMapping
-    ArticleResponse favoriteArticle(@PathVariable String slug, Authentication auth) {
+    ArticleResponse favoriteArticle(@PathVariable Integer id, Authentication auth) {
         var me = userService.getUserByEmail(auth.getName());
-        var article = articleService.getArticleBySlug(slug);
+        var article = articleService.getArticleById(id);
         articleFavoriteRepository.save(new ArticleFavorite(me, article));
         return new ArticleResponse(articleService.getArticleDetails(article, me, true));
     }
 
     @DeleteMapping
-    ArticleResponse unfavoriteArticle(@PathVariable String slug, Authentication auth) {
+    ArticleResponse deleteArticleFavorite(@PathVariable Integer id, Authentication auth) {
         var me = userService.getUserByEmail(auth.getName());
-        var article = articleService.getArticleBySlug(slug);
+        var article = articleService.getArticleById(id);
         articleFavoriteRepository.deleteByUserAndArticle(me, article);
         return new ArticleResponse(articleService.getArticleDetails(article, me, false));
     }

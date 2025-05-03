@@ -1,17 +1,14 @@
-import {
-  getArticlesQueryOptions,
-  useCreateArticle,
-  type CreateArticleMutationRequest,
-} from '@/api/gen'
+import { useQueryClient } from '@tanstack/react-query'
+import { createFileRoute } from '@tanstack/react-router'
+import { Plus, X } from 'lucide-react'
+import { useState } from 'react'
+import type { CreateArticleMutationRequest } from '@/api/gen'
+import { listArticlesQueryOptions, useCreateArticle } from '@/api/gen'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useAppForm } from '@/hooks/form'
-import { useQueryClient } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
-import { Plus, X } from 'lucide-react'
-import { useState } from 'react'
 
 export const Route = createFileRoute('/_auth/articles/create')({
   component: RouteComponent,
@@ -33,7 +30,7 @@ function RouteComponent() {
       const data = await createArticle({ data: { article: value } })
       const username = data.article.author.username
       queryClient.invalidateQueries({
-        queryKey: getArticlesQueryOptions({
+        queryKey: listArticlesQueryOptions({
           author: username,
         }).queryKey,
       })

@@ -20,6 +20,7 @@ public class User extends BaseEntity {
     private String image;
     private String bio;
 
+
     public String getEmail() {
         return email;
     }

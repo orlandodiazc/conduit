@@ -17,13 +17,14 @@ import { Route as HomeLayoutImport } from './routes/_homeLayout'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as HomeLayoutIndexImport } from './routes/_homeLayout/index'
 import { Route as ProfileUsernameImport } from './routes/profile.$username'
-import { Route as ArticlesSlugImport } from './routes/articles.$slug'
 import { Route as AuthSettingsImport } from './routes/_auth/settings'
+import { Route as ProfileUsernameIndexImport } from './routes/profile.$username.index'
 import { Route as ProfileUsernameFavoritesImport } from './routes/profile.$username.favorites'
+import { Route as ArticlesIdSlugImport } from './routes/articles.$id.$slug'
 import { Route as HomeLayoutTagFeedTagImport } from './routes/_homeLayout/tag-feed.$tag'
 import { Route as HomeLayoutAuthYourFeedImport } from './routes/_homeLayout._auth.your-feed'
 import { Route as AuthArticlesCreateImport } from './routes/_auth/articles.create'
-import { Route as AuthArticlesSlugEditImport } from './routes/_auth/articles.$slug.edit'
+import { Route as AuthArticlesIdSlugEditImport } from './routes/_auth/articles.$id.$slug.edit'
 
 // Create/Update Routes
 
@@ -61,22 +62,28 @@ const ProfileUsernameRoute = ProfileUsernameImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const ArticlesSlugRoute = ArticlesSlugImport.update({
-  id: '/articles/$slug',
-  path: '/articles/$slug',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const AuthSettingsRoute = AuthSettingsImport.update({
   id: '/settings',
   path: '/settings',
   getParentRoute: () => AuthRoute,
 } as any)
 
+const ProfileUsernameIndexRoute = ProfileUsernameIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfileUsernameRoute,
+} as any)
+
 const ProfileUsernameFavoritesRoute = ProfileUsernameFavoritesImport.update({
   id: '/favorites',
   path: '/favorites',
   getParentRoute: () => ProfileUsernameRoute,
+} as any)
+
+const ArticlesIdSlugRoute = ArticlesIdSlugImport.update({
+  id: '/articles/$id/$slug',
+  path: '/articles/$id/$slug',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const HomeLayoutTagFeedTagRoute = HomeLayoutTagFeedTagImport.update({
@@ -97,9 +104,9 @@ const AuthArticlesCreateRoute = AuthArticlesCreateImport.update({
   getParentRoute: () => AuthRoute,
 } as any)
 
-const AuthArticlesSlugEditRoute = AuthArticlesSlugEditImport.update({
-  id: '/articles/$slug/edit',
-  path: '/articles/$slug/edit',
+const AuthArticlesIdSlugEditRoute = AuthArticlesIdSlugEditImport.update({
+  id: '/articles/$id/$slug/edit',
+  path: '/articles/$id/$slug/edit',
   getParentRoute: () => AuthRoute,
 } as any)
 
@@ -142,13 +149,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSettingsImport
       parentRoute: typeof AuthImport
     }
-    '/articles/$slug': {
-      id: '/articles/$slug'
-      path: '/articles/$slug'
-      fullPath: '/articles/$slug'
-      preLoaderRoute: typeof ArticlesSlugImport
-      parentRoute: typeof rootRoute
-    }
     '/profile/$username': {
       id: '/profile/$username'
       path: '/profile/$username'
@@ -184,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HomeLayoutTagFeedTagImport
       parentRoute: typeof HomeLayoutImport
     }
+    '/articles/$id/$slug': {
+      id: '/articles/$id/$slug'
+      path: '/articles/$id/$slug'
+      fullPath: '/articles/$id/$slug'
+      preLoaderRoute: typeof ArticlesIdSlugImport
+      parentRoute: typeof rootRoute
+    }
     '/profile/$username/favorites': {
       id: '/profile/$username/favorites'
       path: '/favorites'
@@ -191,11 +198,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileUsernameFavoritesImport
       parentRoute: typeof ProfileUsernameImport
     }
-    '/_auth/articles/$slug/edit': {
-      id: '/_auth/articles/$slug/edit'
-      path: '/articles/$slug/edit'
-      fullPath: '/articles/$slug/edit'
-      preLoaderRoute: typeof AuthArticlesSlugEditImport
+    '/profile/$username/': {
+      id: '/profile/$username/'
+      path: '/'
+      fullPath: '/profile/$username/'
+      preLoaderRoute: typeof ProfileUsernameIndexImport
+      parentRoute: typeof ProfileUsernameImport
+    }
+    '/_auth/articles/$id/$slug/edit': {
+      id: '/_auth/articles/$id/$slug/edit'
+      path: '/articles/$id/$slug/edit'
+      fullPath: '/articles/$id/$slug/edit'
+      preLoaderRoute: typeof AuthArticlesIdSlugEditImport
       parentRoute: typeof AuthImport
     }
   }
@@ -206,13 +220,13 @@ declare module '@tanstack/react-router' {
 interface AuthRouteChildren {
   AuthSettingsRoute: typeof AuthSettingsRoute
   AuthArticlesCreateRoute: typeof AuthArticlesCreateRoute
-  AuthArticlesSlugEditRoute: typeof AuthArticlesSlugEditRoute
+  AuthArticlesIdSlugEditRoute: typeof AuthArticlesIdSlugEditRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthSettingsRoute: AuthSettingsRoute,
   AuthArticlesCreateRoute: AuthArticlesCreateRoute,
-  AuthArticlesSlugEditRoute: AuthArticlesSlugEditRoute,
+  AuthArticlesIdSlugEditRoute: AuthArticlesIdSlugEditRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
@@ -235,10 +249,12 @@ const HomeLayoutRouteWithChildren = HomeLayoutRoute._addFileChildren(
 
 interface ProfileUsernameRouteChildren {
   ProfileUsernameFavoritesRoute: typeof ProfileUsernameFavoritesRoute
+  ProfileUsernameIndexRoute: typeof ProfileUsernameIndexRoute
 }
 
 const ProfileUsernameRouteChildren: ProfileUsernameRouteChildren = {
   ProfileUsernameFavoritesRoute: ProfileUsernameFavoritesRoute,
+  ProfileUsernameIndexRoute: ProfileUsernameIndexRoute,
 }
 
 const ProfileUsernameRouteWithChildren = ProfileUsernameRoute._addFileChildren(
@@ -250,14 +266,15 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/settings': typeof AuthSettingsRoute
-  '/articles/$slug': typeof ArticlesSlugRoute
   '/profile/$username': typeof ProfileUsernameRouteWithChildren
   '/': typeof HomeLayoutIndexRoute
   '/articles/create': typeof AuthArticlesCreateRoute
   '/your-feed': typeof HomeLayoutAuthYourFeedRoute
   '/tag-feed/$tag': typeof HomeLayoutTagFeedTagRoute
+  '/articles/$id/$slug': typeof ArticlesIdSlugRoute
   '/profile/$username/favorites': typeof ProfileUsernameFavoritesRoute
-  '/articles/$slug/edit': typeof AuthArticlesSlugEditRoute
+  '/profile/$username/': typeof ProfileUsernameIndexRoute
+  '/articles/$id/$slug/edit': typeof AuthArticlesIdSlugEditRoute
 }
 
 export interface FileRoutesByTo {
@@ -265,14 +282,14 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/settings': typeof AuthSettingsRoute
-  '/articles/$slug': typeof ArticlesSlugRoute
-  '/profile/$username': typeof ProfileUsernameRouteWithChildren
   '/': typeof HomeLayoutIndexRoute
   '/articles/create': typeof AuthArticlesCreateRoute
   '/your-feed': typeof HomeLayoutAuthYourFeedRoute
   '/tag-feed/$tag': typeof HomeLayoutTagFeedTagRoute
+  '/articles/$id/$slug': typeof ArticlesIdSlugRoute
   '/profile/$username/favorites': typeof ProfileUsernameFavoritesRoute
-  '/articles/$slug/edit': typeof AuthArticlesSlugEditRoute
+  '/profile/$username': typeof ProfileUsernameIndexRoute
+  '/articles/$id/$slug/edit': typeof AuthArticlesIdSlugEditRoute
 }
 
 export interface FileRoutesById {
@@ -282,14 +299,15 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_auth/settings': typeof AuthSettingsRoute
-  '/articles/$slug': typeof ArticlesSlugRoute
   '/profile/$username': typeof ProfileUsernameRouteWithChildren
   '/_homeLayout/': typeof HomeLayoutIndexRoute
   '/_auth/articles/create': typeof AuthArticlesCreateRoute
   '/_homeLayout/_auth/your-feed': typeof HomeLayoutAuthYourFeedRoute
   '/_homeLayout/tag-feed/$tag': typeof HomeLayoutTagFeedTagRoute
+  '/articles/$id/$slug': typeof ArticlesIdSlugRoute
   '/profile/$username/favorites': typeof ProfileUsernameFavoritesRoute
-  '/_auth/articles/$slug/edit': typeof AuthArticlesSlugEditRoute
+  '/profile/$username/': typeof ProfileUsernameIndexRoute
+  '/_auth/articles/$id/$slug/edit': typeof AuthArticlesIdSlugEditRoute
 }
 
 export interface FileRouteTypes {
@@ -299,28 +317,29 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/settings'
-    | '/articles/$slug'
     | '/profile/$username'
     | '/'
     | '/articles/create'
     | '/your-feed'
     | '/tag-feed/$tag'
+    | '/articles/$id/$slug'
     | '/profile/$username/favorites'
-    | '/articles/$slug/edit'
+    | '/profile/$username/'
+    | '/articles/$id/$slug/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
     | '/login'
     | '/register'
     | '/settings'
-    | '/articles/$slug'
-    | '/profile/$username'
     | '/'
     | '/articles/create'
     | '/your-feed'
     | '/tag-feed/$tag'
+    | '/articles/$id/$slug'
     | '/profile/$username/favorites'
-    | '/articles/$slug/edit'
+    | '/profile/$username'
+    | '/articles/$id/$slug/edit'
   id:
     | '__root__'
     | '/_auth'
@@ -328,14 +347,15 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/_auth/settings'
-    | '/articles/$slug'
     | '/profile/$username'
     | '/_homeLayout/'
     | '/_auth/articles/create'
     | '/_homeLayout/_auth/your-feed'
     | '/_homeLayout/tag-feed/$tag'
+    | '/articles/$id/$slug'
     | '/profile/$username/favorites'
-    | '/_auth/articles/$slug/edit'
+    | '/profile/$username/'
+    | '/_auth/articles/$id/$slug/edit'
   fileRoutesById: FileRoutesById
 }
 
@@ -344,8 +364,8 @@ export interface RootRouteChildren {
   HomeLayoutRoute: typeof HomeLayoutRouteWithChildren
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
-  ArticlesSlugRoute: typeof ArticlesSlugRoute
   ProfileUsernameRoute: typeof ProfileUsernameRouteWithChildren
+  ArticlesIdSlugRoute: typeof ArticlesIdSlugRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -353,8 +373,8 @@ const rootRouteChildren: RootRouteChildren = {
   HomeLayoutRoute: HomeLayoutRouteWithChildren,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
-  ArticlesSlugRoute: ArticlesSlugRoute,
   ProfileUsernameRoute: ProfileUsernameRouteWithChildren,
+  ArticlesIdSlugRoute: ArticlesIdSlugRoute,
 }
 
 export const routeTree = rootRoute
@@ -371,8 +391,8 @@ export const routeTree = rootRoute
         "/_homeLayout",
         "/login",
         "/register",
-        "/articles/$slug",
-        "/profile/$username"
+        "/profile/$username",
+        "/articles/$id/$slug"
       ]
     },
     "/_auth": {
@@ -380,7 +400,7 @@ export const routeTree = rootRoute
       "children": [
         "/_auth/settings",
         "/_auth/articles/create",
-        "/_auth/articles/$slug/edit"
+        "/_auth/articles/$id/$slug/edit"
       ]
     },
     "/_homeLayout": {
@@ -401,13 +421,11 @@ export const routeTree = rootRoute
       "filePath": "_auth/settings.tsx",
       "parent": "/_auth"
     },
-    "/articles/$slug": {
-      "filePath": "articles.$slug.tsx"
-    },
     "/profile/$username": {
       "filePath": "profile.$username.tsx",
       "children": [
-        "/profile/$username/favorites"
+        "/profile/$username/favorites",
+        "/profile/$username/"
       ]
     },
     "/_homeLayout/": {
@@ -426,12 +444,19 @@ export const routeTree = rootRoute
       "filePath": "_homeLayout/tag-feed.$tag.tsx",
       "parent": "/_homeLayout"
     },
+    "/articles/$id/$slug": {
+      "filePath": "articles.$id.$slug.tsx"
+    },
     "/profile/$username/favorites": {
       "filePath": "profile.$username.favorites.tsx",
       "parent": "/profile/$username"
     },
-    "/_auth/articles/$slug/edit": {
-      "filePath": "_auth/articles.$slug.edit.tsx",
+    "/profile/$username/": {
+      "filePath": "profile.$username.index.tsx",
+      "parent": "/profile/$username"
+    },
+    "/_auth/articles/$id/$slug/edit": {
+      "filePath": "_auth/articles.$id.$slug.edit.tsx",
       "parent": "/_auth"
     }
   }

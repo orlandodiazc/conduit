@@ -10,7 +10,7 @@ export default defineConfig(() => {
   return {
     root: '.',
     input: {
-      path: './openapi.yaml',
+      path: 'http://localhost:8080/v3/api-docs',
     },
     output: {
       path: './src/api/gen',
@@ -24,7 +24,11 @@ export default defineConfig(() => {
         transformers: {
           name(name, type) {
             if (type == 'function') {
-              return name + 'FakeData'
+              return name.replace(/^[^A-Z]*/, 'generate') + 'FakeData'
+            }
+
+            if (type == 'file') {
+              return name.replace(/^[^A-Z]*/, 'generate')
             }
             return name
           },
@@ -46,6 +50,7 @@ export default defineConfig(() => {
       pluginReactQuery({
         query: false,
         suspense: false,
+        infinite: false,
       }),
     ],
   }

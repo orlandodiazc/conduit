@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { createCreateArticleMutationResponseFakeData } from '../mocks/createCreateArticle.ts'
 import type { CreateArticleMutationResponse } from '../types/CreateArticle.ts'
+import { generateCreateArticleMutationResponseFakeData } from '../mocks/generateCreateArticle.ts'
+import { http } from 'msw'
 
 export function createArticleHandler(
   data?:
@@ -16,7 +16,9 @@ export function createArticleHandler(
     if (typeof data === 'function') return data(info)
 
     return new Response(
-      JSON.stringify(data || createCreateArticleMutationResponseFakeData(data)),
+      JSON.stringify(
+        data || generateCreateArticleMutationResponseFakeData(data),
+      ),
       {
         headers: {
           'Content-Type': 'application/json',

@@ -22,7 +22,7 @@ function RouteComponent() {
   const { tag } = useParams({ strict: false })
   const { isAuthenticated } = useAuth()
   return (
-    <div>
+    <div className="py-8 px-10">
       <h1 className="text-h1 mb-6">Browse</h1>
       <div className="grid grid-flow-col grid-cols-1 gap-6">
         <div>
