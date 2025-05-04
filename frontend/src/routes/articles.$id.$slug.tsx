@@ -9,6 +9,7 @@ import {
   useCreateUserFollow,
   useDeleteArticle,
   useDeleteArticleFavorite,
+  useDeleteUserFollow,
   useFavoriteArticle,
   type CreateCommentMutationRequest,
   type GetCommentsQueryResponse,
@@ -45,6 +46,7 @@ function RouteComponent() {
     data: { comments },
   } = useSuspenseQuery(getCommentsQueryOptions(Number(id)))
   const { isAuthenticated, user } = useAuth()
+
   const form = useAppForm({
     defaultValues: {
       body: '',
@@ -207,7 +209,8 @@ function ArticleMetaActions({
   })
   const favoriteArticleMutation = useFavoriteArticle()
   const deleteArticleFavoriteMutation = useDeleteArticleFavorite()
-  const followAuthorMutation = useCreateUserFollow()
+  const createUserFollowMutation = useCreateUserFollow()
+  const deleteUserFollowMutation = useDeleteUserFollow()
   const queryClient = useQueryClient()
   function handleDeleteArticle() {
     deleteArticleMutation.mutate({ id: Number(article.id) })
@@ -244,7 +247,24 @@ function ArticleMetaActions({
       navigate({ to: '/login' })
       return
     }
-    followAuthorMutation.mutate({ username: article.author.username })
+    const mutation = article.author.following
+      ? deleteUserFollowMutation
+      : createUserFollowMutation
+
+    mutation.mutate(
+      { username: article.author.username },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: getArticleQueryOptions(article.id).queryKey,
+          })
+          navigate({
+            to: '/articles/$id/$slug',
+            params: { id: String(article.id), slug: article.slug },
+          })
+        },
+      },
+    )
   }
   return (
     <div className="flex gap-10">
@@ -253,8 +273,8 @@ function ArticleMetaActions({
         <Button
           variant={article.author.following ? 'destructive' : 'secondary'}
           disabled={
-            followAuthorMutation.isPending ||
-            deleteArticleFavoriteMutation.isPending
+            createUserFollowMutation.isPending ||
+            deleteUserFollowMutation.isPending
           }
           onClick={handleFollowAuthor}
         >

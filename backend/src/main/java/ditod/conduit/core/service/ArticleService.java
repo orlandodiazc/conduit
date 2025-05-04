@@ -55,7 +55,7 @@ public class ArticleService {
     public ArticleDto getArticleDetails(Article article, User me, boolean isFavorited) {
         var favoritesCount = articleFavoriteRepository.countByArticle(article);
         var isMeAFollower = userFollowService.isFollowing(me, article.getAuthor());
-        return ArticleDto.from(article, isFavorited, favoritesCount, AuthorDto.from(me, isMeAFollower));
+        return ArticleDto.from(article, isFavorited, favoritesCount, AuthorDto.from(article.getAuthor(), isMeAFollower));
     }
 
     public ArticleDto getArticleDetails(Article article) {
