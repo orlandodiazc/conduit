@@ -1,3 +1,6 @@
+import { useLogin } from '@/api/gen'
+import { removeStoredToken, useAuth } from '@/auth'
+import { useAppForm } from '@/hooks/form'
 import {
   Link,
   createFileRoute,
@@ -6,9 +9,6 @@ import {
   useRouter,
 } from '@tanstack/react-router'
 import { z } from 'zod'
-import { useLogin } from '@/api/gen'
-import { removeStoredToken, setStoredToken, useAuth } from '@/auth'
-import { useAppForm } from '@/hooks/form'
 
 export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -45,7 +45,6 @@ function RouteComponent() {
         { data: { user: value } },
         {
           onSuccess: (data) => {
-            setStoredToken(data.user.token)
             setUser(data.user)
             router.invalidate().then(() => {
               navigate({ to: search.redirect || '/' })

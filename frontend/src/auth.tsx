@@ -1,6 +1,5 @@
+import { queryOptions, useQuery, useQueryClient } from '@tanstack/react-query'
 import * as React from 'react'
-import { queryOptions, useQuery } from '@tanstack/react-query'
-import { flushSync } from 'react-dom'
 import type { CurrentUserResponse } from './api/gen'
 
 type AuthUser = CurrentUserResponse['user'] | null | undefined
@@ -39,19 +38,20 @@ export const currentUserQueryOptions = queryOptions({
 })
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const currentUserQuery = useQuery(currentUserQueryOptions)
-  const [data, setData] = React.useState<CurrentUserResponse | null>()
-  const isAuthenticated = !!data
+  const { data } = useQuery(currentUserQueryOptions)
+  const queryClient = useQueryClient()
   function setUser(user: AuthUser) {
-    flushSync(() => {
-      setData(user ? { user } : null)
-    })
+    queryClient.setQueryData(
+      currentUserQueryOptions.queryKey,
+      user ? { user } : null,
+    )
+    if (user) {
+      setStoredToken(user.token)
+    } else {
+      removeStoredToken()
+    }
   }
-
-  React.useEffect(() => {
-    setData(data)
-  }, [currentUserQuery.data])
-  console.log(data)
+  const isAuthenticated = !!data
   return (
     <AuthContext.Provider
       value={{ user: data?.user, setUser, isAuthenticated }}

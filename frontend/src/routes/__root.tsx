@@ -1,12 +1,11 @@
 import { Outlet, createRootRouteWithContext } from '@tanstack/react-router'
 
-import { TanStackRouterDevtoolsInProd } from '@tanstack/react-router-devtools'
 import Header from '../components/Header'
 
-import type { QueryClient } from '@tanstack/react-query'
 import type { AuthContext } from '@/auth'
-import { currentUserQueryOptions, useAuth } from '@/auth'
+import { currentUserQueryOptions } from '@/auth'
 import ThemeToggle from '@/components/ThemeToggle'
+import type { QueryClient } from '@tanstack/react-query'
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -27,7 +26,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         <span className="text-sm">Built with React and Spring Boot</span>
         <ThemeToggle />
       </footer>
-      <TanStackRouterDevtoolsInProd />
     </div>
   ),
 })

@@ -1,11 +1,10 @@
 import type { UpdateCurrentUserMutationRequest } from '@/api/gen'
 import { useUpdateCurrentUser } from '@/api/gen'
-import { currentUserQueryOptions, removeStoredToken, useAuth } from '@/auth'
+import { useAuth } from '@/auth'
 import { Button } from '@/components/ui/button'
 import { useAppForm } from '@/hooks/form'
 import { Separator } from '@radix-ui/react-select'
-import { useQueryClient } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_auth/settings')({
   component: RouteComponent,
@@ -13,20 +12,17 @@ export const Route = createFileRoute('/_auth/settings')({
 
 function RouteComponent() {
   const { user, setUser } = useAuth()
-  const queryClient = useQueryClient()
   const navigate = Route.useNavigate()
-
+  const router = useRouter()
   const handleLogout = () => {
     setUser(null)
-    removeStoredToken()
+    router.invalidate()
   }
 
   const { mutate } = useUpdateCurrentUser({
     mutation: {
       onSuccess: (data) => {
-        queryClient.invalidateQueries({
-          queryKey: currentUserQueryOptions.queryKey,
-        })
+        setUser(data.user)
         navigate({
           to: '/profile/$username',
           params: { username: data.user.username },

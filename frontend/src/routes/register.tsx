@@ -1,5 +1,5 @@
 import { useRegister } from '@/api/gen'
-import { removeStoredToken, setStoredToken, useAuth } from '@/auth'
+import { removeStoredToken, useAuth } from '@/auth'
 import { useAppForm } from '@/hooks/form'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
@@ -27,8 +27,6 @@ function RouteComponent() {
         {
           onSuccess: (data) => {
             setUser(data.user)
-            setStoredToken(data.user.token)
-
             navigate({ to: '/' })
           },
           onError: () => {
