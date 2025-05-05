@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { CreateCommentRequest } from '../types/CreateCommentRequest.ts'
 import { generateCreateCommentDtoFakeData } from './generateCreateCommentDto.ts'
+import type { CreateCommentRequest } from '../types/CreateCommentRequest.ts'
 
 export function generateCreateCommentRequestFakeData(
   data?: Partial<CreateCommentRequest>,

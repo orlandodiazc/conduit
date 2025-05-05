@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { useMutation } from '@tanstack/react-query'
+import { deleteUserFollow } from '../clients/deleteUserFollow.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
-  DeleteUserFollowMutationResponse,
-  DeleteUserFollowPathParams,
   DeleteUserFollow400,
   DeleteUserFollow404,
+  DeleteUserFollowMutationResponse,
+  DeleteUserFollowPathParams,
 } from '../types/DeleteUserFollow.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
-import { deleteUserFollow } from '../clients/deleteUserFollow.ts'
-import { useMutation } from '@tanstack/react-query'
+import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 
 export const deleteUserFollowMutationKey = () =>
   [{ url: '/profiles/{username}/follow' }] as const
@@ -44,7 +44,7 @@ export function useDeleteUserFollow<TContext>(
     client: config = {},
   } = options ?? {}
   const mutationKey =
-    mutationOptions?.mutationKey ?? deleteUserFollowMutationKey()
+    mutationOptions.mutationKey ?? deleteUserFollowMutationKey()
 
   return useMutation<
     DeleteUserFollowMutationResponse,

@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { useMutation } from '@tanstack/react-query'
+import { updateCurrentUser } from '../clients/updateCurrentUser.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
-  UpdateCurrentUserMutationRequest,
-  UpdateCurrentUserMutationResponse,
   UpdateCurrentUser400,
   UpdateCurrentUser404,
+  UpdateCurrentUserMutationRequest,
+  UpdateCurrentUserMutationResponse,
 } from '../types/UpdateCurrentUser.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
-import { updateCurrentUser } from '../clients/updateCurrentUser.ts'
-import { useMutation } from '@tanstack/react-query'
+import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 
 export const updateCurrentUserMutationKey = () => [{ url: '/user' }] as const
 
@@ -45,7 +45,7 @@ export function useUpdateCurrentUser<TContext>(
     client: config = {},
   } = options ?? {}
   const mutationKey =
-    mutationOptions?.mutationKey ?? updateCurrentUserMutationKey()
+    mutationOptions.mutationKey ?? updateCurrentUserMutationKey()
 
   return useMutation<
     UpdateCurrentUserMutationResponse,

@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { CreateCommentMutationResponse } from '../types/CreateComment.ts'
-import { generateCreateCommentMutationResponseFakeData } from '../mocks/generateCreateComment.ts'
 import { http } from 'msw'
+import { generateCreateCommentMutationResponseFakeData } from '../mocks/generateCreateComment.ts'
+import type { CreateCommentMutationResponse } from '../types/CreateComment.ts'
 
 export function createCommentHandler(
   data?:

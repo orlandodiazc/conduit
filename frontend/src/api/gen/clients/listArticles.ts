@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  ListArticlesQueryResponse,
-  ListArticlesQueryParams,
   ListArticles400,
   ListArticles404,
+  ListArticlesQueryParams,
+  ListArticlesQueryResponse,
 } from '../types/ListArticles.ts'
 
 function getListArticlesUrl() {

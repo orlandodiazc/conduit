@@ -3,19 +3,19 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { queryOptions } from '@tanstack/react-query'
+import { getProfile } from '../clients/getProfile.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
-  GetProfileQueryResponse,
-  GetProfilePathParams,
   GetProfile400,
   GetProfile404,
+  GetProfilePathParams,
+  GetProfileQueryResponse,
 } from '../types/GetProfile.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import { getProfile } from '../clients/getProfile.ts'
-import { queryOptions } from '@tanstack/react-query'
 
 export const getProfileQueryKey = (
   username: GetProfilePathParams['username'],

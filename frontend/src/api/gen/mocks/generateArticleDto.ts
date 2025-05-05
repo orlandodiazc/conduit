@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { ArticleDto } from '../types/ArticleDto.ts'
-import { generateAuthorDtoFakeData } from './generateAuthorDto.ts'
 import { faker } from '@faker-js/faker'
+import { generateAuthorDtoFakeData } from './generateAuthorDto.ts'
+import type { ArticleDto } from '../types/ArticleDto.ts'
 
 export function generateArticleDtoFakeData(
   data?: Partial<ArticleDto>,

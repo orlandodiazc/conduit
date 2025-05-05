@@ -1,16 +1,26 @@
-import { Link, createFileRoute, redirect } from '@tanstack/react-router'
+import {
+  Link,
+  createFileRoute,
+  redirect,
+  useNavigate,
+  useRouter,
+} from '@tanstack/react-router'
 import { z } from 'zod'
-import { useAppForm } from '@/hooks/form'
 import { useLogin } from '@/api/gen'
-import { useAuth } from '@/auth'
+import { removeStoredToken, setStoredToken, useAuth } from '@/auth'
+import { useAppForm } from '@/hooks/form'
+
+export async function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
 
 export const Route = createFileRoute('/login')({
   validateSearch: z.object({
     redirect: z.string().optional().catch(''),
   }),
-  beforeLoad: ({ context, search }) => {
-    if (context.isAuthenticated) {
-      throw redirect({ to: search.redirect || '/' })
+  beforeLoad: ({ context }) => {
+    if (context.auth.isAuthenticated) {
+      throw redirect({ to: '/' })
     }
   },
   component: RouteComponent,
@@ -23,9 +33,10 @@ const schema = z.object({
 
 function RouteComponent() {
   const { mutate } = useLogin()
-  const navigate = Route.useNavigate()
-  const { setTokenValue } = useAuth()
-
+  const navigate = useNavigate()
+  const search = Route.useSearch()
+  const router = useRouter()
+  const { setUser } = useAuth()
   const form = useAppForm({
     defaultValues: { email: '', password: '' },
     validators: { onSubmit: schema, onBlur: schema },
@@ -34,8 +45,14 @@ function RouteComponent() {
         { data: { user: value } },
         {
           onSuccess: (data) => {
-            setTokenValue(data.user.token)
-            navigate({ to: '/' })
+            setStoredToken(data.user.token)
+            setUser(data.user)
+            router.invalidate().then(() => {
+              navigate({ to: search.redirect || '/' })
+            })
+          },
+          onError: () => {
+            removeStoredToken()
           },
         },
       )

@@ -1,6 +1,5 @@
 import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
-import { useAuth } from '@/auth'
 import { Button } from '@/components/ui/button'
 import UserAvatar from '@/components/UserAvatar'
 import {
@@ -8,11 +7,13 @@ import {
   useCreateUserFollow,
   useDeleteUserFollow,
 } from '@/api/gen'
+import { useAuth } from '@/auth'
 
 export const Route = createFileRoute('/profile/$username')({
   component: RouteComponent,
-  loader: async ({ context, params: { username } }) =>
-    context.queryClient.ensureQueryData(getProfileQueryOptions(username)),
+  loader: ({ context, params: { username } }) => {
+    return context.queryClient.ensureQueryData(getProfileQueryOptions(username))
+  },
 })
 
 function RouteComponent() {
@@ -29,7 +30,7 @@ function RouteComponent() {
 
   function handleFollowToggle() {
     if (!isAuthenticated) {
-      navigate({ to: '/login' })
+      navigate({ to: '/login', search: { redirect: location.pathname } })
       return
     }
     const mutation = profile.following ? unfollowMutation : followMutation
@@ -90,7 +91,6 @@ function RouteComponent() {
               <Link
                 to="/profile/$username"
                 params={{ username }}
-                activeOptions={{ exact: true }}
                 className="[&.active]:text-foreground"
               >
                 My Articles

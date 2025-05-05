@@ -3,19 +3,19 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { queryOptions } from '@tanstack/react-query'
+import { getComments } from '../clients/getComments.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
-  GetCommentsQueryResponse,
-  GetCommentsPathParams,
   GetComments400,
   GetComments404,
+  GetCommentsPathParams,
+  GetCommentsQueryResponse,
 } from '../types/GetComments.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import { getComments } from '../clients/getComments.ts'
-import { queryOptions } from '@tanstack/react-query'
 
 export const getCommentsQueryKey = (
   articleId: GetCommentsPathParams['articleId'],

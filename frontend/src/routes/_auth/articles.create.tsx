@@ -89,6 +89,7 @@ function RouteComponent() {
                 {field.state.value?.map((tagName, i) => (
                   <Button
                     asChild
+                    key={tagName}
                     size="xs"
                     className="hover:bg-destructive hover:text-white  dark:hover:bg-destructive/60"
                   >

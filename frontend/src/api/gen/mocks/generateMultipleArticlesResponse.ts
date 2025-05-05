@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { MultipleArticlesResponse } from '../types/MultipleArticlesResponse.ts'
-import { generateArticleDtoFakeData } from './generateArticleDto.ts'
 import { faker } from '@faker-js/faker'
+import { generateArticleDtoFakeData } from './generateArticleDto.ts'
+import type { MultipleArticlesResponse } from '../types/MultipleArticlesResponse.ts'
 
 export function generateMultipleArticlesResponseFakeData(
   data?: Partial<MultipleArticlesResponse>,

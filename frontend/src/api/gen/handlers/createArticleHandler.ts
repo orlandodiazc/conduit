@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { CreateArticleMutationResponse } from '../types/CreateArticle.ts'
-import { generateCreateArticleMutationResponseFakeData } from '../mocks/generateCreateArticle.ts'
 import { http } from 'msw'
+import { generateCreateArticleMutationResponseFakeData } from '../mocks/generateCreateArticle.ts'
+import type { CreateArticleMutationResponse } from '../types/CreateArticle.ts'
 
 export function createArticleHandler(
   data?:

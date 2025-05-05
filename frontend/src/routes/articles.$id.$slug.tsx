@@ -2,18 +2,22 @@ import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 import { Link, createFileRoute, useNavigate } from '@tanstack/react-router'
 import { Edit, Trash, Trash2 } from 'lucide-react'
 
+import type {
+  CreateCommentMutationRequest,
+  GetCommentsQueryResponse,
+  ListArticlesQueryResponse,
+} from '@/api/gen'
 import {
   getArticleQueryOptions,
   getCommentsQueryOptions,
   listArticlesQueryOptions,
+  useCreateComment,
   useCreateUserFollow,
   useDeleteArticle,
   useDeleteArticleFavorite,
+  useDeleteComment,
   useDeleteUserFollow,
   useFavoriteArticle,
-  type CreateCommentMutationRequest,
-  type GetCommentsQueryResponse,
-  type ListArticlesQueryResponse,
 } from '@/api/gen'
 import { useAuth } from '@/auth'
 import { ArticleAuthorInfo } from '@/components/Articles'
@@ -44,13 +48,37 @@ function RouteComponent() {
   } = useSuspenseQuery(getArticleQueryOptions(Number(id)))
   const {
     data: { comments },
+    refetch,
   } = useSuspenseQuery(getCommentsQueryOptions(Number(id)))
+  const navigate = Route.useNavigate()
   const { isAuthenticated, user } = useAuth()
+  const { mutate: createComment } = useCreateComment({
+    mutation: {
+      onSuccess: () => {
+        refetch()
+        form.reset()
+        navigate({})
+      },
+    },
+  })
+
+  const { mutate: deleteComment, isPending: isCommentDeletionPending } =
+    useDeleteComment({
+      mutation: {
+        onSuccess: () => {
+          refetch()
+          navigate({})
+        },
+      },
+    })
 
   const form = useAppForm({
     defaultValues: {
       body: '',
     } as CreateCommentMutationRequest['comment'],
+    onSubmit: ({ value }) => {
+      createComment({ articleId: article.id, data: { comment: value } })
+    },
   })
 
   return (
@@ -123,7 +151,12 @@ function RouteComponent() {
               <CardFooter className="bg-accent py-3 rounded-b-xl flex justify-between items-center">
                 <CommentAuthorInfo comment={comment} />
                 {user?.username === comment.author.username && (
-                  <Button variant="destructive" className="size-8">
+                  <Button
+                    variant="destructive"
+                    className="size-8"
+                    onClick={() => deleteComment({ id: comment.id })}
+                    disabled={isCommentDeletionPending}
+                  >
                     <Trash2 />
                   </Button>
                 )}
@@ -218,7 +251,7 @@ function ArticleMetaActions({
 
   function handleFavoriteArticle() {
     if (!isAuthenticated) {
-      navigate({ to: '/login' })
+      navigate({ to: '/login', search: { redirect: location.pathname } })
       return
     }
     const mutation = article.favorited
@@ -244,7 +277,7 @@ function ArticleMetaActions({
 
   function handleFollowAuthor() {
     if (!isAuthenticated) {
-      navigate({ to: '/login' })
+      navigate({ to: '/login', search: { redirect: location.pathname } })
       return
     }
     const mutation = article.author.following

@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  LoginMutationRequest,
-  LoginMutationResponse,
   Login400,
   Login404,
+  LoginMutationRequest,
+  LoginMutationResponse,
 } from '../types/Login.ts'
 
 function getLoginUrl() {

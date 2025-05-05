@@ -3,14 +3,14 @@
  * Do not edit manually.
  */
 
-import type {
-  UpdateArticlePathParams,
-  UpdateArticleMutationResponse,
-} from '../types/UpdateArticle.ts'
+import { faker } from '@faker-js/faker'
 import { generateArticleResponseFakeData } from './generateArticleResponse.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import { generateUpdateArticleRequestFakeData } from './generateUpdateArticleRequest.ts'
-import { faker } from '@faker-js/faker'
+import type {
+  UpdateArticleMutationResponse,
+  UpdateArticlePathParams,
+} from '../types/UpdateArticle.ts'
 
 export function generateUpdateArticlePathParamsFakeData(
   data?: Partial<UpdateArticlePathParams>,

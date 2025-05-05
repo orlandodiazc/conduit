@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { GetTagsQueryResponse } from '../types/GetTags.ts'
-import { generateGetTagsQueryResponseFakeData } from '../mocks/generateGetTags.ts'
 import { http } from 'msw'
+import { generateGetTagsQueryResponseFakeData } from '../mocks/generateGetTags.ts'
+import type { GetTagsQueryResponse } from '../types/GetTags.ts'
 
 export function getTagsHandler(
   data?:

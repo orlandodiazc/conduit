@@ -51,6 +51,7 @@ export default defineConfig(() => {
         query: false,
         suspense: false,
         infinite: false,
+        exclude: [{ type: 'operationId', pattern: 'getCurrentUser' }],
       }),
     ],
   }

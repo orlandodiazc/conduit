@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { DeleteArticleMutationResponse } from '../types/DeleteArticle.ts'
-import { generateDeleteArticleMutationResponseFakeData } from '../mocks/generateDeleteArticle.ts'
 import { http } from 'msw'
+import { generateDeleteArticleMutationResponseFakeData } from '../mocks/generateDeleteArticle.ts'
+import type { DeleteArticleMutationResponse } from '../types/DeleteArticle.ts'
 
 export function deleteArticleHandler(
   data?:

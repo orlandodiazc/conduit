@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { useMutation } from '@tanstack/react-query'
+import { login } from '../clients/login.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
-  LoginMutationRequest,
-  LoginMutationResponse,
   Login400,
   Login404,
+  LoginMutationRequest,
+  LoginMutationResponse,
 } from '../types/Login.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
-import { login } from '../clients/login.ts'
-import { useMutation } from '@tanstack/react-query'
+import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 
 export const loginMutationKey = () => [{ url: '/users/login' }] as const
 
@@ -44,7 +44,7 @@ export function useLogin<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions?.mutationKey ?? loginMutationKey()
+  const mutationKey = mutationOptions.mutationKey ?? loginMutationKey()
 
   return useMutation<
     LoginMutationResponse,

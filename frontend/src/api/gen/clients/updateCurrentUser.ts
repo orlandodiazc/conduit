@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  UpdateCurrentUserMutationRequest,
-  UpdateCurrentUserMutationResponse,
   UpdateCurrentUser400,
   UpdateCurrentUser404,
+  UpdateCurrentUserMutationRequest,
+  UpdateCurrentUserMutationResponse,
 } from '../types/UpdateCurrentUser.ts'
 
 function getUpdateCurrentUserUrl() {

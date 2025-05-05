@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { UpdateCurrentUserMutationResponse } from '../types/UpdateCurrentUser.ts'
-import { generateUpdateCurrentUserMutationResponseFakeData } from '../mocks/generateUpdateCurrentUser.ts'
 import { http } from 'msw'
+import { generateUpdateCurrentUserMutationResponseFakeData } from '../mocks/generateUpdateCurrentUser.ts'
+import type { UpdateCurrentUserMutationResponse } from '../types/UpdateCurrentUser.ts'
 
 export function updateCurrentUserHandler(
   data?:

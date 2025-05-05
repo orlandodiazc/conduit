@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { ArticleResponse } from '../types/ArticleResponse.ts'
 import { generateArticleDtoFakeData } from './generateArticleDto.ts'
+import type { ArticleResponse } from '../types/ArticleResponse.ts'
 
 export function generateArticleResponseFakeData(
   data?: Partial<ArticleResponse>,

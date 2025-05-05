@@ -6,11 +6,11 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
+  CreateComment400,
+  CreateComment404,
   CreateCommentMutationRequest,
   CreateCommentMutationResponse,
   CreateCommentPathParams,
-  CreateComment400,
-  CreateComment404,
 } from '../types/CreateComment.ts'
 
 function getCreateCommentUrl(articleId: CreateCommentPathParams['articleId']) {

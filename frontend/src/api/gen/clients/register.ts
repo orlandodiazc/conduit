@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  RegisterMutationRequest,
-  RegisterMutationResponse,
   Register400,
   Register404,
+  RegisterMutationRequest,
+  RegisterMutationResponse,
 } from '../types/Register.ts'
 
 function getRegisterUrl() {

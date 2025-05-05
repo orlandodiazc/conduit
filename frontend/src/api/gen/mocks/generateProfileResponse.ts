@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { ProfileResponse } from '../types/ProfileResponse.ts'
 import { generateAuthorDtoFakeData } from './generateAuthorDto.ts'
+import type { ProfileResponse } from '../types/ProfileResponse.ts'
 
 export function generateProfileResponseFakeData(
   data?: Partial<ProfileResponse>,

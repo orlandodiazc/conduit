@@ -19,5 +19,5 @@ export type CreateArticleDto = {
   /**
    * @type array | undefined
    */
-  tagList?: string[]
+  tagList?: Array<string>
 }

@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { RegisterUserDto } from '../types/RegisterUserDto.ts'
 import { faker } from '@faker-js/faker'
+import type { RegisterUserDto } from '../types/RegisterUserDto.ts'
 
 export function generateRegisterUserDtoFakeData(
   data?: Partial<RegisterUserDto>,

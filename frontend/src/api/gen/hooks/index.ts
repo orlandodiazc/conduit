@@ -8,7 +8,6 @@ export type { DeleteUserFollowMutationKey } from './useDeleteUserFollow.ts'
 export type { FavoriteArticleMutationKey } from './useFavoriteArticle.ts'
 export type { GetArticleQueryKey } from './useGetArticle.ts'
 export type { GetCommentsQueryKey } from './useGetComments.ts'
-export type { GetCurrentUserQueryKey } from './useGetCurrentUser.ts'
 export type { GetProfileQueryKey } from './useGetProfile.ts'
 export type { GetTagsQueryKey } from './useGetTags.ts'
 export type { ListArticleFeedQueryKey } from './useListArticleFeed.ts'
@@ -54,10 +53,6 @@ export {
   getCommentsQueryKey,
   getCommentsQueryOptions,
 } from './useGetComments.ts'
-export {
-  getCurrentUserQueryKey,
-  getCurrentUserQueryOptions,
-} from './useGetCurrentUser.ts'
 export { getProfileQueryKey, getProfileQueryOptions } from './useGetProfile.ts'
 export { getTagsQueryKey, getTagsQueryOptions } from './useGetTags.ts'
 export {

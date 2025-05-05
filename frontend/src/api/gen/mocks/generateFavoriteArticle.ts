@@ -3,13 +3,13 @@
  * Do not edit manually.
  */
 
-import type {
-  FavoriteArticlePathParams,
-  FavoriteArticleMutationResponse,
-} from '../types/FavoriteArticle.ts'
+import { faker } from '@faker-js/faker'
 import { generateArticleResponseFakeData } from './generateArticleResponse.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
-import { faker } from '@faker-js/faker'
+import type {
+  FavoriteArticleMutationResponse,
+  FavoriteArticlePathParams,
+} from '../types/FavoriteArticle.ts'
 
 export function generateFavoriteArticlePathParamsFakeData(
   data?: Partial<FavoriteArticlePathParams>,

@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { AuthorDto } from '../types/AuthorDto.ts'
 import { faker } from '@faker-js/faker'
+import type { AuthorDto } from '../types/AuthorDto.ts'
 
 export function generateAuthorDtoFakeData(
   data?: Partial<AuthorDto>,

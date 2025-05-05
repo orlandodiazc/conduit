@@ -3,21 +3,21 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { useMutation } from '@tanstack/react-query'
+import { updateArticle } from '../clients/updateArticle.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
+  UpdateArticle400,
+  UpdateArticle404,
   UpdateArticleMutationRequest,
   UpdateArticleMutationResponse,
   UpdateArticlePathParams,
-  UpdateArticle400,
-  UpdateArticle404,
 } from '../types/UpdateArticle.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
-import { updateArticle } from '../clients/updateArticle.ts'
-import { useMutation } from '@tanstack/react-query'
+import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 
 export const updateArticleMutationKey = () =>
   [{ url: '/articles/{id}' }] as const
@@ -46,7 +46,7 @@ export function useUpdateArticle<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions?.mutationKey ?? updateArticleMutationKey()
+  const mutationKey = mutationOptions.mutationKey ?? updateArticleMutationKey()
 
   return useMutation<
     UpdateArticleMutationResponse,

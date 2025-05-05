@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  DeleteCommentMutationResponse,
-  DeleteCommentPathParams,
   DeleteComment400,
   DeleteComment404,
+  DeleteCommentMutationResponse,
+  DeleteCommentPathParams,
 } from '../types/DeleteComment.ts'
 
 function getDeleteCommentUrl(id: DeleteCommentPathParams['id']) {

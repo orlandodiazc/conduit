@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { FavoriteArticleMutationResponse } from '../types/FavoriteArticle.ts'
-import { generateFavoriteArticleMutationResponseFakeData } from '../mocks/generateFavoriteArticle.ts'
 import { http } from 'msw'
+import { generateFavoriteArticleMutationResponseFakeData } from '../mocks/generateFavoriteArticle.ts'
+import type { FavoriteArticleMutationResponse } from '../types/FavoriteArticle.ts'
 
 export function favoriteArticleHandler(
   data?:

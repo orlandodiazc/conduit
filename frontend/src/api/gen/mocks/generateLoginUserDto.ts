@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { LoginUserDto } from '../types/LoginUserDto.ts'
 import { faker } from '@faker-js/faker'
+import type { LoginUserDto } from '../types/LoginUserDto.ts'
 
 export function generateLoginUserDtoFakeData(
   data?: Partial<LoginUserDto>,

@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { RegisterRequest } from '../types/RegisterRequest.ts'
 import { generateRegisterUserDtoFakeData } from './generateRegisterUserDto.ts'
+import type { RegisterRequest } from '../types/RegisterRequest.ts'
 
 export function generateRegisterRequestFakeData(
   data?: Partial<RegisterRequest>,

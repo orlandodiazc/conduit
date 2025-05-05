@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { UpdateArticleRequest } from '../types/UpdateArticleRequest.ts'
 import { generateUpdateArticleDtoFakeData } from './generateUpdateArticleDto.ts'
+import type { UpdateArticleRequest } from '../types/UpdateArticleRequest.ts'
 
 export function generateUpdateArticleRequestFakeData(
   data?: Partial<UpdateArticleRequest>,

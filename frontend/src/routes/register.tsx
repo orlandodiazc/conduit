@@ -1,8 +1,8 @@
+import { useRegister } from '@/api/gen'
+import { removeStoredToken, setStoredToken, useAuth } from '@/auth'
+import { useAppForm } from '@/hooks/form'
 import { createFileRoute } from '@tanstack/react-router'
 import { z } from 'zod'
-import { useAppForm } from '@/hooks/form'
-import { useAuth } from '@/auth'
-import { useRegister } from '@/api/gen'
 
 export const Route = createFileRoute('/register')({
   component: RouteComponent,
@@ -16,9 +16,8 @@ const schema = z.object({
 
 function RouteComponent() {
   const { mutate } = useRegister()
+  const { setUser } = useAuth()
   const navigate = Route.useNavigate()
-  const { setTokenValue } = useAuth()
-
   const form = useAppForm({
     defaultValues: { email: '', username: '', password: '' },
     validators: { onSubmit: schema, onBlur: schema },
@@ -27,8 +26,13 @@ function RouteComponent() {
         { data: { user: value } },
         {
           onSuccess: (data) => {
-            setTokenValue(data.user.token)
+            setUser(data.user)
+            setStoredToken(data.user.token)
+
             navigate({ to: '/' })
+          },
+          onError: () => {
+            removeStoredToken()
           },
         },
       )

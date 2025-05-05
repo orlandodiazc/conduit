@@ -3,21 +3,21 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { useMutation } from '@tanstack/react-query'
+import { createComment } from '../clients/createComment.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
+  CreateComment400,
+  CreateComment404,
   CreateCommentMutationRequest,
   CreateCommentMutationResponse,
   CreateCommentPathParams,
-  CreateComment400,
-  CreateComment404,
 } from '../types/CreateComment.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
-import { createComment } from '../clients/createComment.ts'
-import { useMutation } from '@tanstack/react-query'
+import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 
 export const createCommentMutationKey = () =>
   [{ url: '/articles/{articleId}/comments' }] as const
@@ -49,7 +49,7 @@ export function useCreateComment<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions?.mutationKey ?? createCommentMutationKey()
+  const mutationKey = mutationOptions.mutationKey ?? createCommentMutationKey()
 
   return useMutation<
     CreateCommentMutationResponse,

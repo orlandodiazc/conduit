@@ -9,7 +9,7 @@ export type MultipleArticlesResponse = {
   /**
    * @type array
    */
-  articles: ArticleDto[]
+  articles: Array<ArticleDto>
   /**
    * @type integer, int32
    */

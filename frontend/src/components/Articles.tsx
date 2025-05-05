@@ -14,7 +14,8 @@ import {
 } from './ui/card'
 import { Separator } from './ui/separator'
 
-import { useFavoriteArticle, type MultipleArticlesResponse } from '@/api/gen'
+import type { MultipleArticlesResponse } from '@/api/gen'
+import { useFavoriteArticle } from '@/api/gen'
 import { useAuth } from '@/auth'
 
 export default function ArticleList({
@@ -82,7 +83,7 @@ function ArticleCard({
   const navigate = useNavigate()
   function handleFavorite() {
     if (!isAuthenticated) {
-      navigate({ to: '/login' })
+      navigate({ to: '/login', search: { redirect: location.pathname } })
     } else {
       mutate({ id: Number(article.id) })
     }

@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  GetCommentsQueryResponse,
-  GetCommentsPathParams,
   GetComments400,
   GetComments404,
+  GetCommentsPathParams,
+  GetCommentsQueryResponse,
 } from '../types/GetComments.ts'
 
 function getGetCommentsUrl(articleId: GetCommentsPathParams['articleId']) {

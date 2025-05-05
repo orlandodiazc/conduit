@@ -3,14 +3,14 @@
  * Do not edit manually.
  */
 
-import type {
-  CreateCommentPathParams,
-  CreateCommentMutationResponse,
-} from '../types/CreateComment.ts'
+import { faker } from '@faker-js/faker'
 import { generateCommentResponseFakeData } from './generateCommentResponse.ts'
 import { generateCreateCommentRequestFakeData } from './generateCreateCommentRequest.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
-import { faker } from '@faker-js/faker'
+import type {
+  CreateCommentMutationResponse,
+  CreateCommentPathParams,
+} from '../types/CreateComment.ts'
 
 export function generateCreateCommentPathParamsFakeData(
   data?: Partial<CreateCommentPathParams>,

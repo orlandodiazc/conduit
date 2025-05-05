@@ -6,8 +6,8 @@ import {
   useParams,
 } from '@tanstack/react-router'
 import { getTagsQueryOptions } from '@/api/gen'
-import { useAuth } from '@/auth'
 import { Badge } from '@/components/ui/badge'
+import { useAuth } from '@/auth'
 
 export const Route = createFileRoute('/_homeLayout')({
   component: RouteComponent,

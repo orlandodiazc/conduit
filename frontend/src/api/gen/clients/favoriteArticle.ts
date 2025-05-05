@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  FavoriteArticleMutationResponse,
-  FavoriteArticlePathParams,
   FavoriteArticle400,
   FavoriteArticle404,
+  FavoriteArticleMutationResponse,
+  FavoriteArticlePathParams,
 } from '../types/FavoriteArticle.ts'
 
 function getFavoriteArticleUrl(id: FavoriteArticlePathParams['id']) {

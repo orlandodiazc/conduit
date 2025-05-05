@@ -1,74 +1,60 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
-import React, { useEffect } from 'react'
-import { getCurrentUserQueryOptions } from './api/gen'
-import type { User } from './api/gen'
+import * as React from 'react'
+import { queryOptions, useQuery } from '@tanstack/react-query'
+import { flushSync } from 'react-dom'
+import type { CurrentUserResponse } from './api/gen'
+
+type AuthUser = CurrentUserResponse['user'] | null | undefined
 
 export interface AuthContext {
   isAuthenticated: boolean
-  setTokenValue: (username: string) => void
-  user?: User
-  logout: () => void
+  user: AuthUser
+  setUser: (user: AuthUser) => void
 }
 
 const AuthContext = React.createContext<AuthContext | null>(null)
 
-const key = 'auth.user'
+export const authKey = 'auth.token'
 
 export function getStoredToken() {
-  return localStorage.getItem(key)
+  return localStorage.getItem(authKey)
 }
 
-export function setStoredToken(token: string | null) {
-  if (token) {
-    localStorage.setItem(key, token)
-  } else {
-    localStorage.removeItem(key)
-  }
+export function removeStoredToken() {
+  localStorage.removeItem(authKey)
 }
+
+export function setStoredToken(token: string) {
+  localStorage.setItem(authKey, token)
+}
+
+export const currentUserQueryOptions = queryOptions({
+  queryKey: [{ url: '/user' }],
+  queryFn: async (): Promise<CurrentUserResponse | null> => {
+    const response = await fetch('http://localhost:8080/user', {
+      headers: { Authorization: 'Bearer ' + getStoredToken() },
+    })
+    if (response.ok) return await response.json()
+    return null
+  },
+})
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [hasToken, setHasToken] = React.useState(!!getStoredToken())
-  const queryClient = useQueryClient()
-  const { data, isLoading, isError, error } = useQuery({
-    ...getCurrentUserQueryOptions(),
-    retry: false,
-    enabled: hasToken,
-    staleTime: 10 * 60 * 1000,
-  })
-
-  function invalidateCurrentUserQuery() {
-    queryClient.invalidateQueries({
-      queryKey: getCurrentUserQueryOptions().queryKey,
+  const currentUserQuery = useQuery(currentUserQueryOptions)
+  const [data, setData] = React.useState<CurrentUserResponse | null>()
+  const isAuthenticated = !!data
+  function setUser(user: AuthUser) {
+    flushSync(() => {
+      setData(user ? { user } : null)
     })
   }
 
-  const logout = React.useCallback(() => {
-    setStoredToken(null)
-    setHasToken(false)
-    invalidateCurrentUserQuery()
-  }, [queryClient])
-
-  const setTokenValue = React.useCallback(
-    (token: string) => {
-      setStoredToken(token)
-      setHasToken(true)
-      invalidateCurrentUserQuery()
-    },
-    [queryClient],
-  )
-
-  useEffect(() => {
-    if (isError && error.status === 401) {
-      logout()
-    }
-  }, [isError])
-
-  if (isLoading) return <h1>Loading...</h1>
-  if (isError) return <h1>Error</h1>
-  const isAuthenticated = hasToken && !!data?.user
+  React.useEffect(() => {
+    setData(data)
+  }, [currentUserQuery.data])
+  console.log(data)
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setTokenValue, logout, user: data?.user }}
+      value={{ user: data?.user, setUser, isAuthenticated }}
     >
       {children}
     </AuthContext.Provider>

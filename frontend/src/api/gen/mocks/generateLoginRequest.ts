@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { LoginRequest } from '../types/LoginRequest.ts'
 import { generateLoginUserDtoFakeData } from './generateLoginUserDto.ts'
+import type { LoginRequest } from '../types/LoginRequest.ts'
 
 export function generateLoginRequestFakeData(
   data?: Partial<LoginRequest>,

@@ -6,9 +6,9 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  GetCurrentUserQueryResponse,
   GetCurrentUser400,
   GetCurrentUser404,
+  GetCurrentUserQueryResponse,
 } from '../types/GetCurrentUser.ts'
 
 function getGetCurrentUserUrl() {

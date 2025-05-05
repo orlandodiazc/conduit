@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import client from '@kubb/plugin-client/clients/axios'
+import { useMutation } from '@tanstack/react-query'
+import { register } from '../clients/register.ts'
+import type client from '@kubb/plugin-client/clients/axios'
 import type {
-  RegisterMutationRequest,
-  RegisterMutationResponse,
   Register400,
   Register404,
+  RegisterMutationRequest,
+  RegisterMutationResponse,
 } from '../types/Register.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
-import { register } from '../clients/register.ts'
-import { useMutation } from '@tanstack/react-query'
+import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
 
 export const registerMutationKey = () => [{ url: '/users' }] as const
 
@@ -44,7 +44,7 @@ export function useRegister<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions?.mutationKey ?? registerMutationKey()
+  const mutationKey = mutationOptions.mutationKey ?? registerMutationKey()
 
   return useMutation<
     RegisterMutationResponse,

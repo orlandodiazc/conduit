@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { GetArticleQueryResponse } from '../types/GetArticle.ts'
-import { generateGetArticleQueryResponseFakeData } from '../mocks/generateGetArticle.ts'
 import { http } from 'msw'
+import { generateGetArticleQueryResponseFakeData } from '../mocks/generateGetArticle.ts'
+import type { GetArticleQueryResponse } from '../types/GetArticle.ts'
 
 export function getArticleHandler(
   data?:

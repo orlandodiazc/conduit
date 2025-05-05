@@ -3,12 +3,12 @@
  * Do not edit manually.
  */
 
-import type {
-  DeleteCommentPathParams,
-  DeleteCommentMutationResponse,
-} from '../types/DeleteComment.ts'
-import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import { faker } from '@faker-js/faker'
+import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
+import type {
+  DeleteCommentMutationResponse,
+  DeleteCommentPathParams,
+} from '../types/DeleteComment.ts'
 
 export function generateDeleteCommentPathParamsFakeData(
   data?: Partial<DeleteCommentPathParams>,

@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { MultipleCommentsResponse } from '../types/MultipleCommentsResponse.ts'
-import { generateCommentDtoFakeData } from './generateCommentDto.ts'
 import { faker } from '@faker-js/faker'
+import { generateCommentDtoFakeData } from './generateCommentDto.ts'
+import type { MultipleCommentsResponse } from '../types/MultipleCommentsResponse.ts'
 
 export function generateMultipleCommentsResponseFakeData(
   data?: Partial<MultipleCommentsResponse>,

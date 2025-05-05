@@ -4,26 +4,35 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // Import the generated route tree
-import { routeTree } from './routeTree.gen'
 
 import './styles.css'
 import reportWebVitals from './reportWebVitals.ts'
-import { AuthProvider, useAuth } from './auth.tsx'
 import ThemeProvider from './components/ThemeProvider.tsx'
+import { AuthProvider, useAuth } from './auth.tsx'
+import { Loader } from 'lucide-react'
 
-const queryClient = new QueryClient()
+import { routeTree } from './routeTree.gen'
+
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+})
 
 // Create a new router instance
 export const router = createRouter({
   routeTree,
   context: {
     queryClient,
-    isAuthenticated: false,
+    auth: undefined!,
   },
   defaultPreload: 'intent',
   scrollRestoration: true,
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
+  defaultPendingComponent: () => (
+    <div className="w-full h-full grid place-content-center">
+      <Loader className="animate-spin" />
+    </div>
+  ),
 })
 
 // Register the router instance for type safety
@@ -31,11 +40,6 @@ declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router
   }
-}
-
-function InnerApp() {
-  const { isAuthenticated } = useAuth()
-  return <RouterProvider router={router} context={{ isAuthenticated }} />
 }
 
 async function enableMocking() {
@@ -49,6 +53,11 @@ async function enableMocking() {
   return worker.start()
 }
 
+function RouteProviderWithAuth() {
+  const auth = useAuth()
+  return <RouterProvider router={router} context={{ auth }} />
+}
+
 const rootElement = document.getElementById('app')
 
 enableMocking().then(() => {
@@ -59,7 +68,7 @@ enableMocking().then(() => {
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <ThemeProvider defaultTheme="dark">
-              <InnerApp />
+              <RouteProviderWithAuth />
             </ThemeProvider>
           </AuthProvider>
         </QueryClientProvider>

@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import type { CurrentUserResponse } from '../types/CurrentUserResponse.ts'
 import { generateCurrentUserDtoFakeData } from './generateCurrentUserDto.ts'
+import type { CurrentUserResponse } from '../types/CurrentUserResponse.ts'
 
 export function generateCurrentUserResponseFakeData(
   data?: Partial<CurrentUserResponse>,

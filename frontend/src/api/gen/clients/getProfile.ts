@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  GetProfileQueryResponse,
-  GetProfilePathParams,
   GetProfile400,
   GetProfile404,
+  GetProfilePathParams,
+  GetProfileQueryResponse,
 } from '../types/GetProfile.ts'
 
 function getGetProfileUrl(username: GetProfilePathParams['username']) {

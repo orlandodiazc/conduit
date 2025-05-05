@@ -1,26 +1,31 @@
-import { useQueryClient } from '@tanstack/react-query'
-import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { Separator } from '@radix-ui/react-select'
+import type { UpdateCurrentUserMutationRequest } from '@/api/gen'
+import { useUpdateCurrentUser } from '@/api/gen'
+import { currentUserQueryOptions, removeStoredToken, useAuth } from '@/auth'
 import { Button } from '@/components/ui/button'
 import { useAppForm } from '@/hooks/form'
-import { getCurrentUserQueryOptions, useUpdateCurrentUser } from '@/api/gen'
-import { useAuth } from '@/auth'
+import { Separator } from '@radix-ui/react-select'
+import { useQueryClient } from '@tanstack/react-query'
+import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_auth/settings')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const { user, logout } = useAuth()
-  const router = useRouter()
+  const { user, setUser } = useAuth()
   const queryClient = useQueryClient()
   const navigate = Route.useNavigate()
+
+  const handleLogout = () => {
+    setUser(null)
+    removeStoredToken()
+  }
 
   const { mutate } = useUpdateCurrentUser({
     mutation: {
       onSuccess: (data) => {
         queryClient.invalidateQueries({
-          queryKey: getCurrentUserQueryOptions().queryKey,
+          queryKey: currentUserQueryOptions.queryKey,
         })
         navigate({
           to: '/profile/$username',
@@ -32,21 +37,15 @@ function RouteComponent() {
 
   const form = useAppForm({
     defaultValues: {
-      email: user?.email,
-      username: user?.username,
+      email: user?.email ?? '',
+      username: user?.username ?? '',
       password: '',
-      bio: user?.bio,
-    },
+      bio: user?.bio ?? '',
+    } as UpdateCurrentUserMutationRequest['user'],
     onSubmit: ({ value }) => {
       mutate({ data: { user: value } })
     },
   })
-
-  function handleLogout() {
-    router.invalidate()
-    logout()
-    navigate({ to: '/' })
-  }
 
   return (
     <div className="max-w-md m-auto py-8">

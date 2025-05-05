@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import type { ListArticleFeedQueryResponse } from '../types/ListArticleFeed.ts'
-import { generateListArticleFeedQueryResponseFakeData } from '../mocks/generateListArticleFeed.ts'
 import { http } from 'msw'
+import { generateListArticleFeedQueryResponseFakeData } from '../mocks/generateListArticleFeed.ts'
+import type { ListArticleFeedQueryResponse } from '../types/ListArticleFeed.ts'
 
 export function listArticleFeedHandler(
   data?:
