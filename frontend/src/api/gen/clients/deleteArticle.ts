@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  DeleteArticle400,
-  DeleteArticle404,
   DeleteArticleMutationResponse,
   DeleteArticlePathParams,
+  DeleteArticle400,
+  DeleteArticle404,
 } from '../types/DeleteArticle.ts'
 
 function getDeleteArticleUrl(id: DeleteArticlePathParams['id']) {

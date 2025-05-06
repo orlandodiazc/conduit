@@ -9,5 +9,5 @@ export type MultipleCommentsResponse = {
   /**
    * @type array
    */
-  comments: Array<CommentDto>
+  comments: CommentDto[]
 }

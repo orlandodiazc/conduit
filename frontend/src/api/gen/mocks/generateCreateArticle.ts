@@ -3,11 +3,11 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
+import type { CreateArticleMutationResponse } from '../types/CreateArticle.ts'
 import { generateArticleResponseFakeData } from './generateArticleResponse.ts'
 import { generateCreateArticleRequestFakeData } from './generateCreateArticleRequest.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
-import type { CreateArticleMutationResponse } from '../types/CreateArticle.ts'
+import { faker } from '@faker-js/faker'
 
 /**
  * @description OK

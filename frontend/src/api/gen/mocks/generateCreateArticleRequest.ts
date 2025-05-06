@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import { generateCreateArticleDtoFakeData } from './generateCreateArticleDto.ts'
 import type { CreateArticleRequest } from '../types/CreateArticleRequest.ts'
+import { generateCreateArticleDtoFakeData } from './generateCreateArticleDto.ts'
 
 export function generateCreateArticleRequestFakeData(
   data?: Partial<CreateArticleRequest>,

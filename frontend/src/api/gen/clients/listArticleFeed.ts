@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
+  ListArticleFeedQueryResponse,
+  ListArticleFeedQueryParams,
   ListArticleFeed400,
   ListArticleFeed404,
-  ListArticleFeedQueryParams,
-  ListArticleFeedQueryResponse,
 } from '../types/ListArticleFeed.ts'
 
 function getListArticleFeedUrl() {

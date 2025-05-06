@@ -7,5 +7,5 @@ export type TagsResponse = {
   /**
    * @type array
    */
-  tags: Array<string>
+  tags: string[]
 }

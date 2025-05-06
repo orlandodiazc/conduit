@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateLoginMutationResponseFakeData } from '../mocks/generateLogin.ts'
 import type { LoginMutationResponse } from '../types/Login.ts'
+import { generateLoginMutationResponseFakeData } from '../mocks/generateLogin.ts'
+import { http } from 'msw'
 
 export function loginHandler(
   data?:

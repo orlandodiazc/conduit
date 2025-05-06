@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateGetProfileQueryResponseFakeData } from '../mocks/generateGetProfile.ts'
 import type { GetProfileQueryResponse } from '../types/GetProfile.ts'
+import { generateGetProfileQueryResponseFakeData } from '../mocks/generateGetProfile.ts'
+import { http } from 'msw'
 
 export function getProfileHandler(
   data?:

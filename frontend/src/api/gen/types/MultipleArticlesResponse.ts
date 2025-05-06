@@ -9,9 +9,9 @@ export type MultipleArticlesResponse = {
   /**
    * @type array
    */
-  articles: Array<ArticleDto>
+  articles: ArticleDto[]
   /**
-   * @type integer, int32
+   * @type integer, int64
    */
-  articlesCount: number
+  totalArticles: number
 }

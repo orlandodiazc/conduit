@@ -3,13 +3,13 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
-import { generateMultipleCommentsResponseFakeData } from './generateMultipleCommentsResponse.ts'
-import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import type {
   GetCommentsPathParams,
   GetCommentsQueryResponse,
 } from '../types/GetComments.ts'
+import { generateMultipleCommentsResponseFakeData } from './generateMultipleCommentsResponse.ts'
+import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateGetCommentsPathParamsFakeData(
   data?: Partial<GetCommentsPathParams>,

@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
 import type { ProblemDetail } from '../types/ProblemDetail.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateProblemDetailFakeData(
   data?: Partial<ProblemDetail>,

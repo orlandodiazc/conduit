@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateDeleteUserFollowMutationResponseFakeData } from '../mocks/generateDeleteUserFollow.ts'
 import type { DeleteUserFollowMutationResponse } from '../types/DeleteUserFollow.ts'
+import { generateDeleteUserFollowMutationResponseFakeData } from '../mocks/generateDeleteUserFollow.ts'
+import { http } from 'msw'
 
 export function deleteUserFollowHandler(
   data?:

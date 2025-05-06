@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
-import { generateArticleDtoFakeData } from './generateArticleDto.ts'
 import type { MultipleArticlesResponse } from '../types/MultipleArticlesResponse.ts'
+import { generateArticleDtoFakeData } from './generateArticleDto.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateMultipleArticlesResponseFakeData(
   data?: Partial<MultipleArticlesResponse>,
@@ -13,7 +13,7 @@ export function generateMultipleArticlesResponseFakeData(
   return {
     ...{
       articles: faker.helpers.multiple(() => generateArticleDtoFakeData()),
-      articlesCount: faker.number.int(),
+      totalArticles: faker.number.int(),
     },
     ...(data || {}),
   }

@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
 import type { UpdateUserDto } from '../types/UpdateUserDto.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateUpdateUserDtoFakeData(
   data?: Partial<UpdateUserDto>,

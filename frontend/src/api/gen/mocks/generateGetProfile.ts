@@ -3,13 +3,13 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
-import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
-import { generateProfileResponseFakeData } from './generateProfileResponse.ts'
 import type {
   GetProfilePathParams,
   GetProfileQueryResponse,
 } from '../types/GetProfile.ts'
+import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
+import { generateProfileResponseFakeData } from './generateProfileResponse.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateGetProfilePathParamsFakeData(
   data?: Partial<GetProfilePathParams>,

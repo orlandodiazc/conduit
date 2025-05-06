@@ -3,12 +3,12 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
-import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import type {
-  DeleteArticleMutationResponse,
   DeleteArticlePathParams,
+  DeleteArticleMutationResponse,
 } from '../types/DeleteArticle.ts'
+import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateDeleteArticlePathParamsFakeData(
   data?: Partial<DeleteArticlePathParams>,

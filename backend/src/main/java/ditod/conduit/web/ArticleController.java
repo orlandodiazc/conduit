@@ -51,12 +51,12 @@ public class ArticleController {
         var articles = articlesPage.getContent();
         if (authService.isAnonymous(auth)) {
             return new MultipleArticlesResponse(
-                    articles.stream().map(articleService::getArticleDetails).toList());
+                    articles.stream().map(articleService::getArticleDetails).toList(), articlesPage.getTotalElements());
         }
         var me = userService.getUserByEmail(auth.getName());
         return new MultipleArticlesResponse(articles.stream()
                 .map(article -> articleService.getArticleDetails(article, me))
-                .toList());
+                .toList(), articlesPage.getTotalElements());
     }
 
     @GetMapping("/feed")
@@ -67,13 +67,13 @@ public class ArticleController {
         var me = userService.getUserByEmail(auth.getName());
         List<User> following = userFollowService.followingByReader(me);
         if (following.isEmpty()) {
-            return new MultipleArticlesResponse(List.of());
+            return new MultipleArticlesResponse(List.of(), 0);
         }
         Page<Article> articlesPage = articleService.findFollowedArticles(
                 following, new OffsetPageRequest(offset, limit, Sort.by("createdAt")));
         return new MultipleArticlesResponse(articlesPage.getContent().stream()
                 .map(article -> articleService.getArticleDetails(article, me))
-                .toList());
+                .toList(), articlesPage.getTotalElements());
     }
 
     @GetMapping("/{id}")

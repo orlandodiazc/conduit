@@ -3,13 +3,13 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
+import type {
+  DeleteUserFollowPathParams,
+  DeleteUserFollowMutationResponse,
+} from '../types/DeleteUserFollow.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import { generateProfileResponseFakeData } from './generateProfileResponse.ts'
-import type {
-  DeleteUserFollowMutationResponse,
-  DeleteUserFollowPathParams,
-} from '../types/DeleteUserFollow.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateDeleteUserFollowPathParamsFakeData(
   data?: Partial<DeleteUserFollowPathParams>,

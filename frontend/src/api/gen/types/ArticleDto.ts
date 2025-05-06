@@ -29,7 +29,7 @@ export type ArticleDto = {
   /**
    * @type array
    */
-  tagList: Array<string>
+  tagList: string[]
   /**
    * @type string, date-time
    */

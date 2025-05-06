@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateDeleteArticleFavoriteMutationResponseFakeData } from '../mocks/generateDeleteArticleFavorite.ts'
 import type { DeleteArticleFavoriteMutationResponse } from '../types/DeleteArticleFavorite.ts'
+import { generateDeleteArticleFavoriteMutationResponseFakeData } from '../mocks/generateDeleteArticleFavorite.ts'
+import { http } from 'msw'
 
 export function deleteArticleFavoriteHandler(
   data?:

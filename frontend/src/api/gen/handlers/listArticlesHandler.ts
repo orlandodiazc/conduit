@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateListArticlesQueryResponseFakeData } from '../mocks/generateListArticles.ts'
 import type { ListArticlesQueryResponse } from '../types/ListArticles.ts'
+import { generateListArticlesQueryResponseFakeData } from '../mocks/generateListArticles.ts'
+import { http } from 'msw'
 
 export function listArticlesHandler(
   data?:

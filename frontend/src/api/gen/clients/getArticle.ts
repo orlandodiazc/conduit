@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
+  GetArticleQueryResponse,
+  GetArticlePathParams,
   GetArticle400,
   GetArticle404,
-  GetArticlePathParams,
-  GetArticleQueryResponse,
 } from '../types/GetArticle.ts'
 
 function getGetArticleUrl(id: GetArticlePathParams['id']) {

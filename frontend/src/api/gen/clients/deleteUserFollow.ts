@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  DeleteUserFollow400,
-  DeleteUserFollow404,
   DeleteUserFollowMutationResponse,
   DeleteUserFollowPathParams,
+  DeleteUserFollow400,
+  DeleteUserFollow404,
 } from '../types/DeleteUserFollow.ts'
 
 function getDeleteUserFollowUrl(

@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { deleteArticleFavorite } from '../clients/deleteArticleFavorite.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  DeleteArticleFavorite400,
-  DeleteArticleFavorite404,
   DeleteArticleFavoriteMutationResponse,
   DeleteArticleFavoritePathParams,
+  DeleteArticleFavorite400,
+  DeleteArticleFavorite404,
 } from '../types/DeleteArticleFavorite.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { deleteArticleFavorite } from '../clients/deleteArticleFavorite.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const deleteArticleFavoriteMutationKey = () =>
   [{ url: '/articles/{id}/favorite' }] as const
@@ -44,7 +44,7 @@ export function useDeleteArticleFavorite<TContext>(
     client: config = {},
   } = options ?? {}
   const mutationKey =
-    mutationOptions.mutationKey ?? deleteArticleFavoriteMutationKey()
+    mutationOptions?.mutationKey ?? deleteArticleFavoriteMutationKey()
 
   return useMutation<
     DeleteArticleFavoriteMutationResponse,

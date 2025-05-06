@@ -3,10 +3,10 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
+import type { GetTagsQueryResponse } from '../types/GetTags.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import { generateTagsResponseFakeData } from './generateTagsResponse.ts'
-import type { GetTagsQueryResponse } from '../types/GetTags.ts'
+import { faker } from '@faker-js/faker'
 
 /**
  * @description OK

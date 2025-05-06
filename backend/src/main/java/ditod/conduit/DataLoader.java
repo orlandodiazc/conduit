@@ -84,7 +84,7 @@ public class DataLoader implements ApplicationRunner {
 
     private Set<ArticleTag> generateRandomTags(Article article) {
         List<String> tagNames = List.of(
-                faker.hipster().word(), faker.hipster().word(), faker.hipster().word());
+                faker.hipster().word());
 
         return tagNames.stream()
                 .map(this::findOrCreateTag)
@@ -119,7 +119,7 @@ public class DataLoader implements ApplicationRunner {
         // 2. Create articles for each user
         List<Article> allArticles = new ArrayList<>();
         for (User user : users) {
-            int articlesPerUser = random.nextInt(3) + 1; // 1–3 articles per user
+            int articlesPerUser = random.nextInt(10) + 15; // 1–3 articles per user
             for (int i = 0; i < articlesPerUser; i++) {
                 Article article = this.createFakeArticle(user);
                 articleRepository.save(article);

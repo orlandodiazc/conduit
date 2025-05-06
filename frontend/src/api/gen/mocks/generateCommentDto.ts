@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
-import { generateAuthorDtoFakeData } from './generateAuthorDto.ts'
 import type { CommentDto } from '../types/CommentDto.ts'
+import { generateAuthorDtoFakeData } from './generateAuthorDto.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateCommentDtoFakeData(
   data?: Partial<CommentDto>,

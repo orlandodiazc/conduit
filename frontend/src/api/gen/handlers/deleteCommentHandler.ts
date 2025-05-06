@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateDeleteCommentMutationResponseFakeData } from '../mocks/generateDeleteComment.ts'
 import type { DeleteCommentMutationResponse } from '../types/DeleteComment.ts'
+import { generateDeleteCommentMutationResponseFakeData } from '../mocks/generateDeleteComment.ts'
+import { http } from 'msw'
 
 export function deleteCommentHandler(
   data?:

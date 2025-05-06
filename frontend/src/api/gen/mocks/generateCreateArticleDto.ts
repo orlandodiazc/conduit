@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
 import type { CreateArticleDto } from '../types/CreateArticleDto.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateCreateArticleDtoFakeData(
   data?: Partial<CreateArticleDto>,

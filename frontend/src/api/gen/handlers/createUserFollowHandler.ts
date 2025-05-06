@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateCreateUserFollowMutationResponseFakeData } from '../mocks/generateCreateUserFollow.ts'
 import type { CreateUserFollowMutationResponse } from '../types/CreateUserFollow.ts'
+import { generateCreateUserFollowMutationResponseFakeData } from '../mocks/generateCreateUserFollow.ts'
+import { http } from 'msw'
 
 export function createUserFollowHandler(
   data?:

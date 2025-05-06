@@ -3,13 +3,13 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
-import { generateArticleResponseFakeData } from './generateArticleResponse.ts'
-import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import type {
   GetArticlePathParams,
   GetArticleQueryResponse,
 } from '../types/GetArticle.ts'
+import { generateArticleResponseFakeData } from './generateArticleResponse.ts'
+import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateGetArticlePathParamsFakeData(
   data?: Partial<GetArticlePathParams>,

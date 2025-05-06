@@ -3,13 +3,13 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
+import type {
+  DeleteArticleFavoritePathParams,
+  DeleteArticleFavoriteMutationResponse,
+} from '../types/DeleteArticleFavorite.ts'
 import { generateArticleResponseFakeData } from './generateArticleResponse.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
-import type {
-  DeleteArticleFavoriteMutationResponse,
-  DeleteArticleFavoritePathParams,
-} from '../types/DeleteArticleFavorite.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateDeleteArticleFavoritePathParamsFakeData(
   data?: Partial<DeleteArticleFavoritePathParams>,

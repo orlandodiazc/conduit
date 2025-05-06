@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { deleteComment } from '../clients/deleteComment.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  DeleteComment400,
-  DeleteComment404,
   DeleteCommentMutationResponse,
   DeleteCommentPathParams,
+  DeleteComment400,
+  DeleteComment404,
 } from '../types/DeleteComment.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { deleteComment } from '../clients/deleteComment.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const deleteCommentMutationKey = () =>
   [{ url: '/comments/{id}' }] as const
@@ -43,7 +43,7 @@ export function useDeleteComment<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions.mutationKey ?? deleteCommentMutationKey()
+  const mutationKey = mutationOptions?.mutationKey ?? deleteCommentMutationKey()
 
   return useMutation<
     DeleteCommentMutationResponse,

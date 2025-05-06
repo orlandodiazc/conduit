@@ -3,11 +3,11 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
+import type { RegisterMutationResponse } from '../types/Register.ts'
 import { generateCurrentUserResponseFakeData } from './generateCurrentUserResponse.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import { generateRegisterRequestFakeData } from './generateRegisterRequest.ts'
-import type { RegisterMutationResponse } from '../types/Register.ts'
+import { faker } from '@faker-js/faker'
 
 /**
  * @description OK

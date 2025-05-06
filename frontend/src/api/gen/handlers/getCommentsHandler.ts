@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateGetCommentsQueryResponseFakeData } from '../mocks/generateGetComments.ts'
 import type { GetCommentsQueryResponse } from '../types/GetComments.ts'
+import { generateGetCommentsQueryResponseFakeData } from '../mocks/generateGetComments.ts'
+import { http } from 'msw'
 
 export function getCommentsHandler(
   data?:

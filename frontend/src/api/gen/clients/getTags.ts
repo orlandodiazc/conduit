@@ -6,9 +6,9 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
+  GetTagsQueryResponse,
   GetTags400,
   GetTags404,
-  GetTagsQueryResponse,
 } from '../types/GetTags.ts'
 
 function getGetTagsUrl() {

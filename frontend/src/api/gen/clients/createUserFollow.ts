@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  CreateUserFollow400,
-  CreateUserFollow404,
   CreateUserFollowMutationResponse,
   CreateUserFollowPathParams,
+  CreateUserFollow400,
+  CreateUserFollow404,
 } from '../types/CreateUserFollow.ts'
 
 function getCreateUserFollowUrl(

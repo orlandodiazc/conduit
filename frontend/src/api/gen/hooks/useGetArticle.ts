@@ -3,19 +3,19 @@
  * Do not edit manually.
  */
 
-import { queryOptions } from '@tanstack/react-query'
-import { getArticle } from '../clients/getArticle.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
+  GetArticleQueryResponse,
+  GetArticlePathParams,
   GetArticle400,
   GetArticle404,
-  GetArticlePathParams,
-  GetArticleQueryResponse,
 } from '../types/GetArticle.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
+import { getArticle } from '../clients/getArticle.ts'
+import { queryOptions } from '@tanstack/react-query'
 
 export const getArticleQueryKey = (id: GetArticlePathParams['id']) =>
   [{ url: '/articles/:id', params: { id: id } }] as const

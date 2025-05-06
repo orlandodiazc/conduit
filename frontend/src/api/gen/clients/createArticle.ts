@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  CreateArticle400,
-  CreateArticle404,
   CreateArticleMutationRequest,
   CreateArticleMutationResponse,
+  CreateArticle400,
+  CreateArticle404,
 } from '../types/CreateArticle.ts'
 
 function getCreateArticleUrl() {

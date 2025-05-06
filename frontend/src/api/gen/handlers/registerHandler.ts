@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateRegisterMutationResponseFakeData } from '../mocks/generateRegister.ts'
 import type { RegisterMutationResponse } from '../types/Register.ts'
+import { generateRegisterMutationResponseFakeData } from '../mocks/generateRegister.ts'
+import { http } from 'msw'
 
 export function registerHandler(
   data?:

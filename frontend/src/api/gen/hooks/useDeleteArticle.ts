@@ -3,20 +3,20 @@
  * Do not edit manually.
  */
 
-import { useMutation } from '@tanstack/react-query'
-import { deleteArticle } from '../clients/deleteArticle.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
-  DeleteArticle400,
-  DeleteArticle404,
   DeleteArticleMutationResponse,
   DeleteArticlePathParams,
+  DeleteArticle400,
+  DeleteArticle404,
 } from '../types/DeleteArticle.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
-import type { QueryClient, UseMutationOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, QueryClient } from '@tanstack/react-query'
+import { deleteArticle } from '../clients/deleteArticle.ts'
+import { useMutation } from '@tanstack/react-query'
 
 export const deleteArticleMutationKey = () =>
   [{ url: '/articles/{id}' }] as const
@@ -43,7 +43,7 @@ export function useDeleteArticle<TContext>(
     mutation: { client: queryClient, ...mutationOptions } = {},
     client: config = {},
   } = options ?? {}
-  const mutationKey = mutationOptions.mutationKey ?? deleteArticleMutationKey()
+  const mutationKey = mutationOptions?.mutationKey ?? deleteArticleMutationKey()
 
   return useMutation<
     DeleteArticleMutationResponse,

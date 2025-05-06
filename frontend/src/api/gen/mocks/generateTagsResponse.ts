@@ -3,8 +3,8 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
 import type { TagsResponse } from '../types/TagsResponse.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateTagsResponseFakeData(
   data?: Partial<TagsResponse>,

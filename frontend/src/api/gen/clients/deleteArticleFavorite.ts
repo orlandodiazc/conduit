@@ -6,10 +6,10 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  DeleteArticleFavorite400,
-  DeleteArticleFavorite404,
   DeleteArticleFavoriteMutationResponse,
   DeleteArticleFavoritePathParams,
+  DeleteArticleFavorite400,
+  DeleteArticleFavorite404,
 } from '../types/DeleteArticleFavorite.ts'
 
 function getDeleteArticleFavoriteUrl(

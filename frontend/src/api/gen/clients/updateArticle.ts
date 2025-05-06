@@ -6,11 +6,11 @@
 import client from '../../client.ts'
 import type { RequestConfig, ResponseErrorConfig } from '../../client.ts'
 import type {
-  UpdateArticle400,
-  UpdateArticle404,
   UpdateArticleMutationRequest,
   UpdateArticleMutationResponse,
   UpdateArticlePathParams,
+  UpdateArticle400,
+  UpdateArticle404,
 } from '../types/UpdateArticle.ts'
 
 function getUpdateArticleUrl(id: UpdateArticlePathParams['id']) {

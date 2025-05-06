@@ -3,9 +3,9 @@
  * Do not edit manually.
  */
 
-import { http } from 'msw'
-import { generateGetCurrentUserQueryResponseFakeData } from '../mocks/generateGetCurrentUser.ts'
 import type { GetCurrentUserQueryResponse } from '../types/GetCurrentUser.ts'
+import { generateGetCurrentUserQueryResponseFakeData } from '../mocks/generateGetCurrentUser.ts'
+import { http } from 'msw'
 
 export function getCurrentUserHandler(
   data?:

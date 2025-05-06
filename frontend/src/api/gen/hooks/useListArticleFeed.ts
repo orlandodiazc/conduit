@@ -3,19 +3,19 @@
  * Do not edit manually.
  */
 
-import { queryOptions } from '@tanstack/react-query'
-import { listArticleFeed } from '../clients/listArticleFeed.ts'
-import type client from '@kubb/plugin-client/clients/axios'
+import client from '@kubb/plugin-client/clients/axios'
 import type {
+  ListArticleFeedQueryResponse,
+  ListArticleFeedQueryParams,
   ListArticleFeed400,
   ListArticleFeed404,
-  ListArticleFeedQueryParams,
-  ListArticleFeedQueryResponse,
 } from '../types/ListArticleFeed.ts'
 import type {
   RequestConfig,
   ResponseErrorConfig,
 } from '@kubb/plugin-client/clients/axios'
+import { listArticleFeed } from '../clients/listArticleFeed.ts'
+import { queryOptions } from '@tanstack/react-query'
 
 export const listArticleFeedQueryKey = (params?: ListArticleFeedQueryParams) =>
   [{ url: '/articles/feed' }, ...(params ? [params] : [])] as const

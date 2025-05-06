@@ -3,10 +3,10 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
+import type { GetCurrentUserQueryResponse } from '../types/GetCurrentUser.ts'
 import { generateCurrentUserResponseFakeData } from './generateCurrentUserResponse.ts'
 import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
-import type { GetCurrentUserQueryResponse } from '../types/GetCurrentUser.ts'
+import { faker } from '@faker-js/faker'
 
 /**
  * @description OK

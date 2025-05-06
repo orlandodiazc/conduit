@@ -3,13 +3,13 @@
  * Do not edit manually.
  */
 
-import { faker } from '@faker-js/faker'
-import { generateMultipleArticlesResponseFakeData } from './generateMultipleArticlesResponse.ts'
-import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
 import type {
   ListArticlesQueryParams,
   ListArticlesQueryResponse,
 } from '../types/ListArticles.ts'
+import { generateMultipleArticlesResponseFakeData } from './generateMultipleArticlesResponse.ts'
+import { generateProblemDetailFakeData } from './generateProblemDetail.ts'
+import { faker } from '@faker-js/faker'
 
 export function generateListArticlesQueryParamsFakeData(
   data?: Partial<ListArticlesQueryParams>,
